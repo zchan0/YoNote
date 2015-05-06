@@ -10,12 +10,17 @@
 
 @implementation YNSettingsViewController
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self customNavigationItem];
 }
-*/
+
+#pragma mark - Views
+
+- (void)customNavigationItem {
+    UINavigationItem *navItem = self.navigationItem;
+    // custom title attributes
+    navItem.title = @"设置";
+}
 
 @end

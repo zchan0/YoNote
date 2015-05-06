@@ -23,6 +23,9 @@
 		957DC31D1AF99FF600DA8D6A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 957DC31C1AF99FF600DA8D6A /* Images.xcassets */; };
 		957DC3201AF99FF600DA8D6A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 957DC31E1AF99FF600DA8D6A /* LaunchScreen.xib */; };
 		957DC32C1AF99FF600DA8D6A /* YoNoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 957DC32B1AF99FF600DA8D6A /* YoNoteTests.m */; };
+		95895D1A1AFA612200BE7D2E /* YNItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95895D191AFA612200BE7D2E /* YNItemCell.xib */; };
+		95895D1C1AFA612F00BE7D2E /* YNCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95895D1B1AFA612F00BE7D2E /* YNCollectionCell.xib */; };
+		95895D1E1AFA613900BE7D2E /* YNTagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95895D1D1AFA613900BE7D2E /* YNTagCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +72,9 @@
 		957DC32A1AF99FF600DA8D6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		957DC32B1AF99FF600DA8D6A /* YoNoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YoNoteTests.m; sourceTree = "<group>"; };
 		957DC3351AF9A25B00DA8D6A /* YoNote-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YoNote-Prefix.pch"; sourceTree = "<group>"; };
+		95895D191AFA612200BE7D2E /* YNItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YNItemCell.xib; sourceTree = "<group>"; };
+		95895D1B1AFA612F00BE7D2E /* YNCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YNCollectionCell.xib; sourceTree = "<group>"; };
+		95895D1D1AFA613900BE7D2E /* YNTagCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YNTagCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +177,7 @@
 			children = (
 				957DC3131AF99FF600DA8D6A /* AppDelegate.h */,
 				957DC3141AF99FF600DA8D6A /* AppDelegate.m */,
+				95895D181AFA610B00BE7D2E /* Views */,
 				955CF4D71AF9B9D300C8BBE6 /* Controllers */,
 				955CF4D81AF9C00E00C8BBE6 /* Vendor */,
 				955CF4F81AFA103900C8BBE6 /* Util */,
@@ -206,6 +213,16 @@
 				957DC32A1AF99FF600DA8D6A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		95895D181AFA610B00BE7D2E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				95895D191AFA612200BE7D2E /* YNItemCell.xib */,
+				95895D1B1AFA612F00BE7D2E /* YNCollectionCell.xib */,
+				95895D1D1AFA613900BE7D2E /* YNTagCell.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,8 +305,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95895D1C1AFA612F00BE7D2E /* YNCollectionCell.xib in Resources */,
 				957DC3201AF99FF600DA8D6A /* LaunchScreen.xib in Resources */,
 				957DC31D1AF99FF600DA8D6A /* Images.xcassets in Resources */,
+				95895D1A1AFA612200BE7D2E /* YNItemCell.xib in Resources */,
+				95895D1E1AFA613900BE7D2E /* YNTagCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

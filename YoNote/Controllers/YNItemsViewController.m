@@ -17,12 +17,12 @@
     [self customButtonItem];
 }
 
-#pragma mark -Views
+#pragma mark - Views
 
 - (void)customNavigationItem {
     UINavigationItem *navItem = self.navigationItem;
     // custom title attributes
-    navItem.title = @"HOME";
+    navItem.title = @"首页";
 }
 
 - (void)customButtonItem {
@@ -43,6 +43,7 @@
     
 }
 
+
 #pragma mark - IBActions
 
 - (IBAction)addNewItem:(id)sender {
@@ -52,5 +53,6 @@
 - (IBAction)searchItem:(id)sender {
     
 }
+
 
 @end

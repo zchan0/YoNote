@@ -24,7 +24,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     YNRootTabViewController *rootViewController = [[YNRootTabViewController alloc] init];
-    
+        
     self.window.rootViewController = rootViewController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self customNaviBar];
@@ -60,13 +60,14 @@
 - (void)customNaviBar {
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = UIColorFromRGB(0xFFFFFF);
-    shadow.shadowOffset = CGSizeMake(0, 1);
+    shadow.shadowOffset = CGSizeMake(0, 0.5);
     
     UINavigationBar *navigationBarAppearance = [UINavigationBar appearance];
     [navigationBarAppearance setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                    UIColorFromRGB(0xFFFFFF), NSForegroundColorAttributeName,
-                                    shadow, NSShadowAttributeName,
-                                    nil]];
+                    UIColorFromRGB(0xFFFFFF), NSForegroundColorAttributeName,
+                    shadow, NSShadowAttributeName,
+                    [UIFont fontWithName:kBarTitleFontFamily size:20.0], NSFontAttributeName,
+                    nil]];
 
     [navigationBarAppearance setBarTintColor:UIColorFromRGB(0x3CA9D2)];
 
