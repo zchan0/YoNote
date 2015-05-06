@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "YNRootTabViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    //  Return Rect with status bar
+    //  [[UIScreen mainScreen] applicationFrame] return Rect without status bar
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    YNRootTabViewController *rootViewController = [[YNRootTabViewController alloc] init];
+    
+    self.window.rootViewController = rootViewController;
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self customNaviBar];
+    [self.window makeKeyAndVisible];    // Make current window visible
+    
     return YES;
 }
 
@@ -41,5 +54,23 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+#pragma mark - Private Methods
+
+- (void)customNaviBar {
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = UIColorFromRGB(0xFFFFFF);
+    shadow.shadowOffset = CGSizeMake(0, 1);
+    
+    UINavigationBar *navigationBarAppearance = [UINavigationBar appearance];
+    [navigationBarAppearance setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                    UIColorFromRGB(0xFFFFFF), NSForegroundColorAttributeName,
+                                    shadow, NSShadowAttributeName,
+                                    nil]];
+
+    [navigationBarAppearance setBarTintColor:UIColorFromRGB(0x3CA9D2)];
+
+}
+
 
 @end

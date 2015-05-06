@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  YNBaseNavigationController.h
 //  YoNote
 //
 //  Created by Zchan on 15/5/6.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface YNBaseNavigationController : UINavigationController
 
 @end
-

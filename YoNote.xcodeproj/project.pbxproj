@@ -7,10 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		955CF4D61AF9B9CC00C8BBE6 /* YNBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4D51AF9B9CC00C8BBE6 /* YNBaseViewController.m */; };
+		955CF4DF1AF9C06D00C8BBE6 /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4DA1AF9C06D00C8BBE6 /* RDVTabBar.m */; };
+		955CF4E01AF9C06D00C8BBE6 /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4DC1AF9C06D00C8BBE6 /* RDVTabBarController.m */; };
+		955CF4E11AF9C06D00C8BBE6 /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4DE1AF9C06D00C8BBE6 /* RDVTabBarItem.m */; };
+		955CF4E51AF9C0AC00C8BBE6 /* YNRootTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4E41AF9C0AC00C8BBE6 /* YNRootTabViewController.m */; };
+		955CF4E81AF9C21B00C8BBE6 /* YNItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4E71AF9C21B00C8BBE6 /* YNItemsViewController.m */; };
+		955CF4EE1AF9C2B400C8BBE6 /* YNTagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4ED1AF9C2B400C8BBE6 /* YNTagsViewController.m */; };
+		955CF4F11AF9C2CA00C8BBE6 /* YNCollectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4F01AF9C2CA00C8BBE6 /* YNCollectionsViewController.m */; };
+		955CF4F41AF9C2DF00C8BBE6 /* YNSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4F31AF9C2DF00C8BBE6 /* YNSettingsViewController.m */; };
+		955CF4F71AFA038C00C8BBE6 /* YNBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4F61AFA038C00C8BBE6 /* YNBaseNavigationController.m */; };
+		955CF4FC1AFA107500C8BBE6 /* UINavigationController+StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4FB1AFA107500C8BBE6 /* UINavigationController+StatusBar.m */; };
 		957DC3121AF99FF600DA8D6A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 957DC3111AF99FF600DA8D6A /* main.m */; };
 		957DC3151AF99FF600DA8D6A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 957DC3141AF99FF600DA8D6A /* AppDelegate.m */; };
-		957DC3181AF99FF600DA8D6A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957DC3171AF99FF600DA8D6A /* ViewController.m */; };
-		957DC31B1AF99FF600DA8D6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 957DC3191AF99FF600DA8D6A /* Main.storyboard */; };
 		957DC31D1AF99FF600DA8D6A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 957DC31C1AF99FF600DA8D6A /* Images.xcassets */; };
 		957DC3201AF99FF600DA8D6A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 957DC31E1AF99FF600DA8D6A /* LaunchScreen.xib */; };
 		957DC32C1AF99FF600DA8D6A /* YoNoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 957DC32B1AF99FF600DA8D6A /* YoNoteTests.m */; };
@@ -27,19 +36,39 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		955CF4D41AF9B9CC00C8BBE6 /* YNBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNBaseViewController.h; path = Controllers/YNBaseViewController.h; sourceTree = "<group>"; };
+		955CF4D51AF9B9CC00C8BBE6 /* YNBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNBaseViewController.m; path = Controllers/YNBaseViewController.m; sourceTree = "<group>"; };
+		955CF4D91AF9C06D00C8BBE6 /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDVTabBar.h; path = Vendor/RDVTabBarController/RDVTabBar.h; sourceTree = "<group>"; };
+		955CF4DA1AF9C06D00C8BBE6 /* RDVTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RDVTabBar.m; path = Vendor/RDVTabBarController/RDVTabBar.m; sourceTree = "<group>"; };
+		955CF4DB1AF9C06D00C8BBE6 /* RDVTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDVTabBarController.h; path = Vendor/RDVTabBarController/RDVTabBarController.h; sourceTree = "<group>"; };
+		955CF4DC1AF9C06D00C8BBE6 /* RDVTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RDVTabBarController.m; path = Vendor/RDVTabBarController/RDVTabBarController.m; sourceTree = "<group>"; };
+		955CF4DD1AF9C06D00C8BBE6 /* RDVTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDVTabBarItem.h; path = Vendor/RDVTabBarController/RDVTabBarItem.h; sourceTree = "<group>"; };
+		955CF4DE1AF9C06D00C8BBE6 /* RDVTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RDVTabBarItem.m; path = Vendor/RDVTabBarController/RDVTabBarItem.m; sourceTree = "<group>"; };
+		955CF4E31AF9C0AC00C8BBE6 /* YNRootTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNRootTabViewController.h; path = Controllers/YNRootTabViewController.h; sourceTree = "<group>"; };
+		955CF4E41AF9C0AC00C8BBE6 /* YNRootTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNRootTabViewController.m; path = Controllers/YNRootTabViewController.m; sourceTree = "<group>"; };
+		955CF4E61AF9C21B00C8BBE6 /* YNItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNItemsViewController.h; path = Controllers/YNItemsViewController.h; sourceTree = "<group>"; };
+		955CF4E71AF9C21B00C8BBE6 /* YNItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemsViewController.m; path = Controllers/YNItemsViewController.m; sourceTree = "<group>"; };
+		955CF4EC1AF9C2B400C8BBE6 /* YNTagsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNTagsViewController.h; path = Controllers/YNTagsViewController.h; sourceTree = "<group>"; };
+		955CF4ED1AF9C2B400C8BBE6 /* YNTagsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNTagsViewController.m; path = Controllers/YNTagsViewController.m; sourceTree = "<group>"; };
+		955CF4EF1AF9C2CA00C8BBE6 /* YNCollectionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNCollectionsViewController.h; path = Controllers/YNCollectionsViewController.h; sourceTree = "<group>"; };
+		955CF4F01AF9C2CA00C8BBE6 /* YNCollectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNCollectionsViewController.m; path = Controllers/YNCollectionsViewController.m; sourceTree = "<group>"; };
+		955CF4F21AF9C2DF00C8BBE6 /* YNSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNSettingsViewController.h; path = Controllers/YNSettingsViewController.h; sourceTree = "<group>"; };
+		955CF4F31AF9C2DF00C8BBE6 /* YNSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNSettingsViewController.m; path = Controllers/YNSettingsViewController.m; sourceTree = "<group>"; };
+		955CF4F51AFA038C00C8BBE6 /* YNBaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNBaseNavigationController.h; path = Controllers/YNBaseNavigationController.h; sourceTree = "<group>"; };
+		955CF4F61AFA038C00C8BBE6 /* YNBaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNBaseNavigationController.m; path = Controllers/YNBaseNavigationController.m; sourceTree = "<group>"; };
+		955CF4FA1AFA107500C8BBE6 /* UINavigationController+StatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+StatusBar.h"; path = "Util/Category/UINavigationController+StatusBar.h"; sourceTree = "<group>"; };
+		955CF4FB1AFA107500C8BBE6 /* UINavigationController+StatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+StatusBar.m"; path = "Util/Category/UINavigationController+StatusBar.m"; sourceTree = "<group>"; };
 		957DC30C1AF99FF600DA8D6A /* YoNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		957DC3101AF99FF600DA8D6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		957DC3111AF99FF600DA8D6A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		957DC3131AF99FF600DA8D6A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		957DC3141AF99FF600DA8D6A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		957DC3161AF99FF600DA8D6A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		957DC3171AF99FF600DA8D6A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		957DC31A1AF99FF600DA8D6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		957DC31C1AF99FF600DA8D6A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		957DC31F1AF99FF600DA8D6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		957DC3251AF99FF600DA8D6A /* YoNoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YoNoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		957DC32A1AF99FF600DA8D6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		957DC32B1AF99FF600DA8D6A /* YoNoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YoNoteTests.m; sourceTree = "<group>"; };
+		957DC3351AF9A25B00DA8D6A /* YoNote-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YoNote-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +89,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		955CF4D71AF9B9D300C8BBE6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				955CF4D41AF9B9CC00C8BBE6 /* YNBaseViewController.h */,
+				955CF4D51AF9B9CC00C8BBE6 /* YNBaseViewController.m */,
+				955CF4F51AFA038C00C8BBE6 /* YNBaseNavigationController.h */,
+				955CF4F61AFA038C00C8BBE6 /* YNBaseNavigationController.m */,
+				955CF4E31AF9C0AC00C8BBE6 /* YNRootTabViewController.h */,
+				955CF4E41AF9C0AC00C8BBE6 /* YNRootTabViewController.m */,
+				955CF4E61AF9C21B00C8BBE6 /* YNItemsViewController.h */,
+				955CF4E71AF9C21B00C8BBE6 /* YNItemsViewController.m */,
+				955CF4EF1AF9C2CA00C8BBE6 /* YNCollectionsViewController.h */,
+				955CF4F01AF9C2CA00C8BBE6 /* YNCollectionsViewController.m */,
+				955CF4EC1AF9C2B400C8BBE6 /* YNTagsViewController.h */,
+				955CF4ED1AF9C2B400C8BBE6 /* YNTagsViewController.m */,
+				955CF4F21AF9C2DF00C8BBE6 /* YNSettingsViewController.h */,
+				955CF4F31AF9C2DF00C8BBE6 /* YNSettingsViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		955CF4D81AF9C00E00C8BBE6 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				955CF4E21AF9C07600C8BBE6 /* RDVTabController */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
+		955CF4E21AF9C07600C8BBE6 /* RDVTabController */ = {
+			isa = PBXGroup;
+			children = (
+				955CF4D91AF9C06D00C8BBE6 /* RDVTabBar.h */,
+				955CF4DA1AF9C06D00C8BBE6 /* RDVTabBar.m */,
+				955CF4DB1AF9C06D00C8BBE6 /* RDVTabBarController.h */,
+				955CF4DC1AF9C06D00C8BBE6 /* RDVTabBarController.m */,
+				955CF4DD1AF9C06D00C8BBE6 /* RDVTabBarItem.h */,
+				955CF4DE1AF9C06D00C8BBE6 /* RDVTabBarItem.m */,
+			);
+			name = RDVTabController;
+			sourceTree = "<group>";
+		};
+		955CF4F81AFA103900C8BBE6 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				955CF4F91AFA104400C8BBE6 /* OC_Category */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		955CF4F91AFA104400C8BBE6 /* OC_Category */ = {
+			isa = PBXGroup;
+			children = (
+				955CF4FA1AFA107500C8BBE6 /* UINavigationController+StatusBar.h */,
+				955CF4FB1AFA107500C8BBE6 /* UINavigationController+StatusBar.m */,
+			);
+			name = OC_Category;
+			sourceTree = "<group>";
+		};
 		957DC3031AF99FF600DA8D6A = {
 			isa = PBXGroup;
 			children = (
@@ -83,11 +171,9 @@
 			children = (
 				957DC3131AF99FF600DA8D6A /* AppDelegate.h */,
 				957DC3141AF99FF600DA8D6A /* AppDelegate.m */,
-				957DC3161AF99FF600DA8D6A /* ViewController.h */,
-				957DC3171AF99FF600DA8D6A /* ViewController.m */,
-				957DC3191AF99FF600DA8D6A /* Main.storyboard */,
-				957DC31C1AF99FF600DA8D6A /* Images.xcassets */,
-				957DC31E1AF99FF600DA8D6A /* LaunchScreen.xib */,
+				955CF4D71AF9B9D300C8BBE6 /* Controllers */,
+				955CF4D81AF9C00E00C8BBE6 /* Vendor */,
+				955CF4F81AFA103900C8BBE6 /* Util */,
 				957DC30F1AF99FF600DA8D6A /* Supporting Files */,
 			);
 			path = YoNote;
@@ -96,8 +182,11 @@
 		957DC30F1AF99FF600DA8D6A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				957DC31C1AF99FF600DA8D6A /* Images.xcassets */,
+				957DC31E1AF99FF600DA8D6A /* LaunchScreen.xib */,
 				957DC3101AF99FF600DA8D6A /* Info.plist */,
 				957DC3111AF99FF600DA8D6A /* main.m */,
+				957DC3351AF9A25B00DA8D6A /* YoNote-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -199,7 +288,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				957DC31B1AF99FF600DA8D6A /* Main.storyboard in Resources */,
 				957DC3201AF99FF600DA8D6A /* LaunchScreen.xib in Resources */,
 				957DC31D1AF99FF600DA8D6A /* Images.xcassets in Resources */,
 			);
@@ -219,9 +307,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				957DC3181AF99FF600DA8D6A /* ViewController.m in Sources */,
+				955CF4F41AF9C2DF00C8BBE6 /* YNSettingsViewController.m in Sources */,
+				955CF4FC1AFA107500C8BBE6 /* UINavigationController+StatusBar.m in Sources */,
 				957DC3151AF99FF600DA8D6A /* AppDelegate.m in Sources */,
+				955CF4E01AF9C06D00C8BBE6 /* RDVTabBarController.m in Sources */,
+				955CF4E81AF9C21B00C8BBE6 /* YNItemsViewController.m in Sources */,
+				955CF4D61AF9B9CC00C8BBE6 /* YNBaseViewController.m in Sources */,
+				955CF4E51AF9C0AC00C8BBE6 /* YNRootTabViewController.m in Sources */,
+				955CF4DF1AF9C06D00C8BBE6 /* RDVTabBar.m in Sources */,
+				955CF4EE1AF9C2B400C8BBE6 /* YNTagsViewController.m in Sources */,
+				955CF4F11AF9C2CA00C8BBE6 /* YNCollectionsViewController.m in Sources */,
+				955CF4F71AFA038C00C8BBE6 /* YNBaseNavigationController.m in Sources */,
 				957DC3121AF99FF600DA8D6A /* main.m in Sources */,
+				955CF4E11AF9C06D00C8BBE6 /* RDVTabBarItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,14 +342,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		957DC3191AF99FF600DA8D6A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				957DC31A1AF99FF600DA8D6A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		957DC31E1AF99FF600DA8D6A /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -349,6 +439,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "YoNote/YoNote-Prefix.pch";
 				INFOPLIST_FILE = YoNote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -359,6 +450,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "YoNote/YoNote-Prefix.pch";
 				INFOPLIST_FILE = YoNote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -418,6 +510,7 @@
 				957DC3311AF99FF600DA8D6A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		957DC3321AF99FF600DA8D6A /* Build configuration list for PBXNativeTarget "YoNoteTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +519,7 @@
 				957DC3341AF99FF600DA8D6A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
