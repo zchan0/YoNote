@@ -24,7 +24,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     YNRootTabViewController *rootViewController = [[YNRootTabViewController alloc] init];
-        
+    
     self.window.rootViewController = rootViewController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self customNaviBar];
