@@ -21,18 +21,15 @@
     /*** collection label ***/
     self.collectionNameLabel = [UILabel newAutoLayoutView];
     [self.collectionNameLabel setTextColor:UIColorFromRGB(0x3CA9D2)];
-    self.collectionNameLabel.backgroundColor = UIColorFromRGB(0xFFFFFF);
     
     /*** memo label ***/
     self.memoLabel = [UILabel newAutoLayoutView];
     [self.memoLabel setNumberOfLines:2];
     [self.memoLabel setTextColor:UIColorFromRGB(0x9B9B9B)];
-    self.memoLabel.backgroundColor = UIColorFromRGB(0xFFFFFF);
     
     /*** tag label ***/
     self.tagLabel  = [UILabel newAutoLayoutView];
     [self.tagLabel setTextColor:UIColorFromRGB(0x3CA9D2)];
-    self.tagLabel.backgroundColor = UIColorFromRGB(0xFFFFFF);
     
     self.contentView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
     
@@ -40,6 +37,7 @@
     [self.contentView addSubview:self.memoLabel];
     [self.contentView addSubview:self.tagLabel];
     
+    [self.contentView sendSubviewToBack:self.iv];
     [self updateFonts];
     
 }
@@ -49,8 +47,9 @@
     
     /*** imageview holdplacor ***/
     self.iv = [[UIImageView alloc]initForAutoLayout];
-    self.iv.frame = CGRectMake(0, 0, 152, 125);
+    self.iv.frame = kItemImageRect;
     [self.contentView addSubview:self.iv];
+    
     
     self.iv.image = self.imageView.image;
 
@@ -61,8 +60,9 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if (self) {
+        [self setupImageViews];
         [self setupLabelViews];
-        //[self setupImageViews];
+        
     }
     
     return self;
@@ -72,17 +72,24 @@
 
 - (void)updateConstraints {
     if (!self.didSetupConstraints) {
-        //self.contentView.bounds = CGRectMake(0.0f, 0.0f, 99999.0f, 99999.0f);
+        // To Superview Edge
+        [self.iv autoPinEdgesToSuperviewEdgesWithInsets:ALEdgeInsetsMake(0, 0, 0, kLabelHorizontalInsets) excludingEdge:ALEdgeTrailing];
         
-        ALEdgeInsets defInsets = ALEdgeInsetsMake(kLabelVerticalInsets, kLabelHorizontalInsets, kLabelVerticalInsets, kLabelHorizontalInsets);
+        [self.collectionNameLabel autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:kLabelVerticalInsets];
+        [self.collectionNameLabel autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:kLabelHorizontalInsets];
         
-        //[self.iv autoPinEdgesToSuperviewEdgesWithInsets:defInsets excludingEdge:ALEdgeTrailing];
+        [self.memoLabel autoSetDimension:ALDimensionWidth toSize:130.0];
+        [self.memoLabel autoSetDimension:ALDimensionHeight toSize:60.0];
+        //[self.memoLabel autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:kLabelHorizontalInsets];
         
-        [self.collectionNameLabel autoPinEdgesToSuperviewEdgesWithInsets:defInsets excludingEdge:ALEdgeBottom];
-        [self.memoLabel autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:kLabelHorizontalInsets];
-        [self.memoLabel autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:kLabelHorizontalInsets];
+        //  To Other View Edge
+        [self.iv autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:self.collectionNameLabel withOffset:kLabelHorizontalInsets];
+        [self.iv autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:self.memoLabel withOffset:kLabelHorizontalInsets];
+        [self.iv autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:self.tagLabel withOffset:kLabelHorizontalInsets];
+        
         [self.memoLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.collectionNameLabel withOffset:kLabelVerticalInsets];
-        [self.tagLabel autoPinEdgesToSuperviewEdgesWithInsets:defInsets excludingEdge:ALEdgeTop];
+        [self.tagLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.memoLabel withOffset:kLabelVerticalInsets];
+
         
         self.didSetupConstraints = YES;
     }

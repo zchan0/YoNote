@@ -22,6 +22,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     [self customButtonItem];
     
     [self.tableView registerClass:[YNItemCell class] forCellReuseIdentifier:YNItemCellIndentifier];
+    
 }
 
 #pragma mark - Views
@@ -75,10 +76,12 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     cell.collectionNameLabel.text = @"Collection Name";
     cell.memoLabel.text = @"Memo Memo Memo";
     cell.tagLabel.text = @"Tag";
-    /*
+    
     NSString *path = [NSString stringWithFormat:@"img_%d.jpg", ((int)indexPath.row)+1];
     UIImage *image = [[YNImageStore sharedStore]imageForKey:path];
-    cell.imageView.image = image;*/
+    UIImage *thumbnail = [[YNImageStore sharedStore]setThumbnailFromImage:image];
+    cell.imageView.image = thumbnail;
+    cell.separatorInset = ALEdgeInsetsZero; // make separator below imageview visible
     
     // Make sure the constraints have been added to this cell, since it may have just been created from scratch
     [cell setNeedsUpdateConstraints];
