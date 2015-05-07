@@ -7,6 +7,11 @@
 //
 
 #import "YNItemsViewController.h"
+#import "YNItemCell.h"
+#import "YNImageStore.h"
+
+static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
+
 
 @implementation YNItemsViewController
 
@@ -15,6 +20,8 @@
     [super viewDidLoad];
     [self customNavigationItem];
     [self customButtonItem];
+    
+    [self.tableView registerClass:[YNItemCell class] forCellReuseIdentifier:YNItemCellIndentifier];
 }
 
 #pragma mark - Views
@@ -52,6 +59,37 @@
 
 - (IBAction)searchItem:(id)sender {
     
+}
+
+#pragma mark -Table
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 3;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    YNItemCell *cell = [tableView dequeueReusableCellWithIdentifier:YNItemCellIndentifier];
+    [cell updateFonts];
+    cell.collectionNameLabel.text = @"Collection Name";
+    cell.memoLabel.text = @"Memo Memo Memo";
+    cell.tagLabel.text = @"Tag";
+    /*
+    NSString *path = [NSString stringWithFormat:@"img_%d.jpg", ((int)indexPath.row)+1];
+    UIImage *image = [[YNImageStore sharedStore]imageForKey:path];
+    cell.imageView.image = image;*/
+    
+    // Make sure the constraints have been added to this cell, since it may have just been created from scratch
+    [cell setNeedsUpdateConstraints];
+    [cell updateConstraintsIfNeeded];
+    
+    return cell;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return kTableCellHeight;
 }
 
 

@@ -53,19 +53,14 @@
     
     UIImage *backgroundImage = [UIImage imageNamed:@"tabbar_background"];
     NSArray *tabBarItemImages = @[@"home", @"collection", @"tag", @"settings"];
-    //NSArray *tabBarItemTitles = @[@"首页", @"图片集", @"标签", @"设置"];
     
     NSInteger index = 0;
     for (RDVTabBarItem *item in [[self tabBar] items]) {
         [item setBackgroundSelectedImage:backgroundImage withUnselectedImage:backgroundImage];
         
-        UIImage *selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_selected",
-                                                      [tabBarItemImages objectAtIndex:index]]];
-        UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",
-                                                        [tabBarItemImages objectAtIndex:index]]];
+        UIImage *selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_selected", [tabBarItemImages objectAtIndex:index]]];
+        UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_normal", [tabBarItemImages objectAtIndex:index]]];
         [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
-        
-        //[item setTitle:[tabBarItemTitles objectAtIndex:index]];
         
         index++;
     }

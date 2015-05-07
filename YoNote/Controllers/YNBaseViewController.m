@@ -24,7 +24,6 @@
     NSLog(@"\ntabBarItemClicked : %@", NSStringFromClass([self class]));
 }
 
-#pragma mark - Private Methods
 
 
 
