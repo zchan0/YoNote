@@ -17,8 +17,24 @@
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 // variables
-#define  kBarTitleFontSize 18.0
+
+/*** TabBar ***/
+//#define  kBarTitleFontSize 18.0
 #define  kBarTitleFontFamily @"HelveticaNeue-Medium"
-#define  kTabBarHeight  56.0    
+//#define  kTabBarHeight  56.0
+//#define  kUnelectedTitleAttributes [NSDictionary dictionaryWithObjectsAndKeys:UIColorFromRGB(0x929292), NSForegroundColorAttributeName,[UIFont fontWithName:kBarTitleFontFamily size:kBarTitleFontSize], NSFontAttributeName,nil]
+//#define  kSelectedTitleAttributes [NSDictionary dictionaryWithObjectsAndKeys:UIColorFromRGB(0x3CA9D2), NSForegroundColorAttributeName,[UIFont fontWithName:kBarTitleFontFamily size:kBarTitleFontSize], NSFontAttributeName, @(NSUnderlineStyleSingle), NSUnderlineStyleAttributeName,nil]
+
+
+
+
+
+
+
+
+
+
+
+
 
 #endif

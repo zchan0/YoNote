@@ -20,7 +20,7 @@
 - (void)customNavigationItem {
     UINavigationItem *navItem = self.navigationItem;
     // custom title attributes
-    navItem.title = @"文件";
+    navItem.title = @"图片集";
 }
 
 @end
