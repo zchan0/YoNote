@@ -22,13 +22,13 @@
 
 // variables
 
-#define kItemImageRect CGRectMake(0, 0, 170, 120)
+#define kItemImageRect CGRectMake(0, 0, 160, 130)
 
 /*** Table ***/
 #define kTableCellHeight 140.0
 
-#define kLabelHorizontalInsets      5.0f
-#define kLabelVerticalInsets        10.0f
+#define kLabelHorizontalInsets      11.0f
+#define kLabelVerticalInsets        5.0f
 
 /*** Font ***/
 #define kTitleFontSize 18.0

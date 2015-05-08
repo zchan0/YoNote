@@ -10,7 +10,8 @@
 
 @interface YNItemCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet UIImageView *itemImageView;
+//@property (strong, nonatomic) IBOutlet UIImageView *itemImageView;
+@property (strong, nonatomic) UIImageView *iv;
 @property (strong, nonatomic) IBOutlet UILabel *collectionNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *memoLabel;
 @property (strong, nonatomic) IBOutlet UILabel *tagLabel;

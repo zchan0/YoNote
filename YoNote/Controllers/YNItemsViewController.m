@@ -73,14 +73,14 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     
     YNItemCell *cell = [tableView dequeueReusableCellWithIdentifier:YNItemCellIndentifier];
     [cell updateFonts];
-    cell.collectionNameLabel.text = @"Collection Name";
-    cell.memoLabel.text = @"Memo Memo Memo";
-    cell.tagLabel.text = @"Tag";
+    cell.collectionNameLabel.text = @"高级数据库";
+    cell.memoLabel.text = @"概念模型，从用户角度建模，有利于实现数据";
+    cell.tagLabel.text = @"笔记";
     
     NSString *path = [NSString stringWithFormat:@"img_%d.jpg", ((int)indexPath.row)+1];
     UIImage *image = [[YNImageStore sharedStore]imageForKey:path];
     UIImage *thumbnail = [[YNImageStore sharedStore]setThumbnailFromImage:image];
-    cell.imageView.image = thumbnail;
+    cell.iv.image = thumbnail;
     cell.separatorInset = ALEdgeInsetsZero; // make separator below imageview visible
     
     // Make sure the constraints have been added to this cell, since it may have just been created from scratch

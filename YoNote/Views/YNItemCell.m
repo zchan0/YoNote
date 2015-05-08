@@ -11,13 +11,12 @@
 @interface YNItemCell ()
 
 @property (nonatomic, assign) BOOL didSetupConstraints;
-@property (nonatomic, strong) UIImageView *iv;
 
 @end
 
 @implementation YNItemCell
 
-- (void)setupLabelViews {
+- (void)setupViews {
     /*** collection label ***/
     self.collectionNameLabel = [UILabel newAutoLayoutView];
     [self.collectionNameLabel setTextColor:UIColorFromRGB(0x3CA9D2)];
@@ -26,33 +25,27 @@
     self.memoLabel = [UILabel newAutoLayoutView];
     [self.memoLabel setNumberOfLines:2];
     [self.memoLabel setTextColor:UIColorFromRGB(0x9B9B9B)];
+    self.memoLabel.contentMode = UIViewContentModeScaleAspectFit;
     
     /*** tag label ***/
     self.tagLabel  = [UILabel newAutoLayoutView];
     [self.tagLabel setTextColor:UIColorFromRGB(0x3CA9D2)];
     
+    /*** imageview ***/
+    self.iv = [[UIImageView alloc]initForAutoLayout];
+    self.iv.contentMode = UIViewContentModeScaleAspectFit;
+    self.iv.contentMode = UIViewContentModeLeft;
+    //self.iv.frame = kItemImageRect;
+    
     self.contentView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
     
+    [self.contentView addSubview:self.iv];
     [self.contentView addSubview:self.collectionNameLabel];
     [self.contentView addSubview:self.memoLabel];
     [self.contentView addSubview:self.tagLabel];
     
-    [self.contentView sendSubviewToBack:self.iv];
     [self updateFonts];
     
-}
-
-
-- (void)setupImageViews {
-    
-    /*** imageview holdplacor ***/
-    self.iv = [[UIImageView alloc]initForAutoLayout];
-    self.iv.frame = kItemImageRect;
-    [self.contentView addSubview:self.iv];
-    
-    
-    self.iv.image = self.imageView.image;
-
 }
 
 
@@ -60,8 +53,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if (self) {
-        [self setupImageViews];
-        [self setupLabelViews];
+        [self setupViews];
         
     }
     
@@ -73,19 +65,19 @@
 - (void)updateConstraints {
     if (!self.didSetupConstraints) {
         // To Superview Edge
-        [self.iv autoPinEdgesToSuperviewEdgesWithInsets:ALEdgeInsetsMake(0, 0, 0, kLabelHorizontalInsets) excludingEdge:ALEdgeTrailing];
+        [self.iv autoPinEdgesToSuperviewEdgesWithInsets:ALEdgeInsetsMake(kLabelVerticalInsets, kLabelHorizontalInsets, kLabelVerticalInsets, kLabelHorizontalInsets) excludingEdge:ALEdgeTrailing];
         
         [self.collectionNameLabel autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:kLabelVerticalInsets];
         [self.collectionNameLabel autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:kLabelHorizontalInsets];
         
-        [self.memoLabel autoSetDimension:ALDimensionWidth toSize:130.0];
-        [self.memoLabel autoSetDimension:ALDimensionHeight toSize:60.0];
+        [self.memoLabel autoSetDimension:ALDimensionWidth toSize:184.0];
+        [self.memoLabel autoSetDimension:ALDimensionHeight toSize:78.0];
         //[self.memoLabel autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:kLabelHorizontalInsets];
         
         //  To Other View Edge
-        [self.iv autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:self.collectionNameLabel withOffset:kLabelHorizontalInsets];
-        [self.iv autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:self.memoLabel withOffset:kLabelHorizontalInsets];
-        [self.iv autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:self.tagLabel withOffset:kLabelHorizontalInsets];
+        [self.iv autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:self.collectionNameLabel withOffset:-kLabelHorizontalInsets];
+        [self.iv autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:self.memoLabel withOffset:-kLabelHorizontalInsets];
+        [self.iv autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:self.tagLabel withOffset:-kLabelHorizontalInsets];
         
         [self.memoLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.collectionNameLabel withOffset:kLabelVerticalInsets];
         [self.tagLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.memoLabel withOffset:kLabelVerticalInsets];
