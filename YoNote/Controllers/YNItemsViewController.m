@@ -65,7 +65,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 #pragma mark -Table
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 4;
 }
 
 
@@ -74,7 +74,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     YNItemCell *cell = [tableView dequeueReusableCellWithIdentifier:YNItemCellIndentifier];
     [cell updateFonts];
     cell.collectionNameLabel.text = @"高级数据库";
-    cell.memoLabel.text = @"概念模型，从用户角度建模，有利于实现数据";
+    cell.memoLabel.text = @"概念模型，从用户角度建模，有利于实现数据库的, 概念模型，从用户角度建模，有利于实现数据库的";
     cell.tagLabel.text = @"笔记";
     
     NSString *path = [NSString stringWithFormat:@"img_%d.jpg", ((int)indexPath.row)+1];

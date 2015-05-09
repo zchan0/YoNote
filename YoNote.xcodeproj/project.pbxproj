@@ -23,11 +23,11 @@
 		957DC31D1AF99FF600DA8D6A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 957DC31C1AF99FF600DA8D6A /* Images.xcassets */; };
 		957DC3201AF99FF600DA8D6A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 957DC31E1AF99FF600DA8D6A /* LaunchScreen.xib */; };
 		957DC32C1AF99FF600DA8D6A /* YoNoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 957DC32B1AF99FF600DA8D6A /* YoNoteTests.m */; };
+		95863CAA1AFDA83C00C31E2D /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 95863CA41AFDA83C00C31E2D /* NSLayoutConstraint+PureLayout.m */; };
+		95863CAB1AFDA83C00C31E2D /* NSArray+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 95863CA61AFDA83C00C31E2D /* NSArray+PureLayout.m */; };
+		95863CAC1AFDA83C00C31E2D /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 95863CA81AFDA83C00C31E2D /* ALView+PureLayout.m */; };
 		95895D211AFB04E500BE7D2E /* YNItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95895D201AFB04E500BE7D2E /* YNItemCell.m */; };
 		95895D271AFB0F6100BE7D2E /* YNImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 95895D261AFB0F6100BE7D2E /* YNImageStore.m */; };
-		95895D321AFB1AD100BE7D2E /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 95895D2A1AFB1AD100BE7D2E /* ALView+PureLayout.m */; };
-		95895D331AFB1AD100BE7D2E /* NSArray+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 95895D2C1AFB1AD100BE7D2E /* NSArray+PureLayout.m */; };
-		95895D341AFB1AD100BE7D2E /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 95895D2E1AFB1AD100BE7D2E /* NSLayoutConstraint+PureLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,19 +74,19 @@
 		957DC32A1AF99FF600DA8D6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		957DC32B1AF99FF600DA8D6A /* YoNoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YoNoteTests.m; sourceTree = "<group>"; };
 		957DC3351AF9A25B00DA8D6A /* YoNote-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YoNote-Prefix.pch"; sourceTree = "<group>"; };
+		95863CA11AFDA83C00C31E2D /* PureLayoutDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PureLayoutDefines.h; path = Vendor/PureLayout/PureLayoutDefines.h; sourceTree = "<group>"; };
+		95863CA21AFDA83C00C31E2D /* PureLayout+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PureLayout+Internal.h"; path = "Vendor/PureLayout/PureLayout+Internal.h"; sourceTree = "<group>"; };
+		95863CA31AFDA83C00C31E2D /* PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PureLayout.h; path = Vendor/PureLayout/PureLayout.h; sourceTree = "<group>"; };
+		95863CA41AFDA83C00C31E2D /* NSLayoutConstraint+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSLayoutConstraint+PureLayout.m"; path = "Vendor/PureLayout/NSLayoutConstraint+PureLayout.m"; sourceTree = "<group>"; };
+		95863CA51AFDA83C00C31E2D /* NSLayoutConstraint+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSLayoutConstraint+PureLayout.h"; path = "Vendor/PureLayout/NSLayoutConstraint+PureLayout.h"; sourceTree = "<group>"; };
+		95863CA61AFDA83C00C31E2D /* NSArray+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+PureLayout.m"; path = "Vendor/PureLayout/NSArray+PureLayout.m"; sourceTree = "<group>"; };
+		95863CA71AFDA83C00C31E2D /* NSArray+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+PureLayout.h"; path = "Vendor/PureLayout/NSArray+PureLayout.h"; sourceTree = "<group>"; };
+		95863CA81AFDA83C00C31E2D /* ALView+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ALView+PureLayout.m"; path = "Vendor/PureLayout/ALView+PureLayout.m"; sourceTree = "<group>"; };
+		95863CA91AFDA83C00C31E2D /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ALView+PureLayout.h"; path = "Vendor/PureLayout/ALView+PureLayout.h"; sourceTree = "<group>"; };
 		95895D1F1AFB04E500BE7D2E /* YNItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNItemCell.h; path = Views/YNItemCell.h; sourceTree = "<group>"; };
 		95895D201AFB04E500BE7D2E /* YNItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemCell.m; path = Views/YNItemCell.m; sourceTree = "<group>"; };
 		95895D251AFB0F6100BE7D2E /* YNImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNImageStore.h; path = Model/YNImageStore.h; sourceTree = "<group>"; };
 		95895D261AFB0F6100BE7D2E /* YNImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNImageStore.m; path = Model/YNImageStore.m; sourceTree = "<group>"; };
-		95895D291AFB1AD100BE7D2E /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
-		95895D2A1AFB1AD100BE7D2E /* ALView+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALView+PureLayout.m"; sourceTree = "<group>"; };
-		95895D2B1AFB1AD100BE7D2E /* NSArray+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PureLayout.h"; sourceTree = "<group>"; };
-		95895D2C1AFB1AD100BE7D2E /* NSArray+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PureLayout.m"; sourceTree = "<group>"; };
-		95895D2D1AFB1AD100BE7D2E /* NSLayoutConstraint+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+PureLayout.h"; sourceTree = "<group>"; };
-		95895D2E1AFB1AD100BE7D2E /* NSLayoutConstraint+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+PureLayout.m"; sourceTree = "<group>"; };
-		95895D2F1AFB1AD100BE7D2E /* PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayout.h; sourceTree = "<group>"; };
-		95895D301AFB1AD100BE7D2E /* PureLayout+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PureLayout+Internal.h"; sourceTree = "<group>"; };
-		95895D311AFB1AD100BE7D2E /* PureLayoutDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayoutDefines.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,15 +250,15 @@
 		95895D281AFB1ABD00BE7D2E /* PureLayout */ = {
 			isa = PBXGroup;
 			children = (
-				95895D291AFB1AD100BE7D2E /* ALView+PureLayout.h */,
-				95895D2A1AFB1AD100BE7D2E /* ALView+PureLayout.m */,
-				95895D2B1AFB1AD100BE7D2E /* NSArray+PureLayout.h */,
-				95895D2C1AFB1AD100BE7D2E /* NSArray+PureLayout.m */,
-				95895D2D1AFB1AD100BE7D2E /* NSLayoutConstraint+PureLayout.h */,
-				95895D2E1AFB1AD100BE7D2E /* NSLayoutConstraint+PureLayout.m */,
-				95895D2F1AFB1AD100BE7D2E /* PureLayout.h */,
-				95895D301AFB1AD100BE7D2E /* PureLayout+Internal.h */,
-				95895D311AFB1AD100BE7D2E /* PureLayoutDefines.h */,
+				95863CA11AFDA83C00C31E2D /* PureLayoutDefines.h */,
+				95863CA21AFDA83C00C31E2D /* PureLayout+Internal.h */,
+				95863CA31AFDA83C00C31E2D /* PureLayout.h */,
+				95863CA41AFDA83C00C31E2D /* NSLayoutConstraint+PureLayout.m */,
+				95863CA51AFDA83C00C31E2D /* NSLayoutConstraint+PureLayout.h */,
+				95863CA61AFDA83C00C31E2D /* NSArray+PureLayout.m */,
+				95863CA71AFDA83C00C31E2D /* NSArray+PureLayout.h */,
+				95863CA81AFDA83C00C31E2D /* ALView+PureLayout.m */,
+				95863CA91AFDA83C00C31E2D /* ALView+PureLayout.h */,
 			);
 			name = PureLayout;
 			sourceTree = "<group>";
@@ -365,17 +365,17 @@
 				955CF4F41AF9C2DF00C8BBE6 /* YNSettingsViewController.m in Sources */,
 				955CF4FC1AFA107500C8BBE6 /* UINavigationController+StatusBar.m in Sources */,
 				957DC3151AF99FF600DA8D6A /* AppDelegate.m in Sources */,
+				95863CAA1AFDA83C00C31E2D /* NSLayoutConstraint+PureLayout.m in Sources */,
 				955CF4E01AF9C06D00C8BBE6 /* RDVTabBarController.m in Sources */,
 				955CF4E81AF9C21B00C8BBE6 /* YNItemsViewController.m in Sources */,
-				95895D341AFB1AD100BE7D2E /* NSLayoutConstraint+PureLayout.m in Sources */,
 				955CF4D61AF9B9CC00C8BBE6 /* YNBaseViewController.m in Sources */,
+				95863CAB1AFDA83C00C31E2D /* NSArray+PureLayout.m in Sources */,
 				955CF4E51AF9C0AC00C8BBE6 /* YNRootTabViewController.m in Sources */,
-				95895D331AFB1AD100BE7D2E /* NSArray+PureLayout.m in Sources */,
 				95895D211AFB04E500BE7D2E /* YNItemCell.m in Sources */,
 				955CF4DF1AF9C06D00C8BBE6 /* RDVTabBar.m in Sources */,
 				955CF4EE1AF9C2B400C8BBE6 /* YNTagsViewController.m in Sources */,
 				955CF4F11AF9C2CA00C8BBE6 /* YNCollectionsViewController.m in Sources */,
-				95895D321AFB1AD100BE7D2E /* ALView+PureLayout.m in Sources */,
+				95863CAC1AFDA83C00C31E2D /* ALView+PureLayout.m in Sources */,
 				955CF4F71AFA038C00C8BBE6 /* YNBaseNavigationController.m in Sources */,
 				957DC3121AF99FF600DA8D6A /* main.m in Sources */,
 				95895D271AFB0F6100BE7D2E /* YNImageStore.m in Sources */,

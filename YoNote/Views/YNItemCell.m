@@ -11,6 +11,7 @@
 @interface YNItemCell ()
 
 @property (nonatomic, assign) BOOL didSetupConstraints;
+@property (nonatomic, strong) IBOutlet UIButton *tagButton;
 
 @end
 
@@ -23,19 +24,19 @@
     
     /*** memo label ***/
     self.memoLabel = [UILabel newAutoLayoutView];
-    [self.memoLabel setNumberOfLines:2];
-    [self.memoLabel setTextColor:UIColorFromRGB(0x9B9B9B)];
+    [self.memoLabel setNumberOfLines:3];
+    [self.memoLabel setTextColor:UIColorFromRGB(0x4A4A4A)];
     self.memoLabel.contentMode = UIViewContentModeScaleAspectFit;
     
     /*** tag label ***/
     self.tagLabel  = [UILabel newAutoLayoutView];
-    [self.tagLabel setTextColor:UIColorFromRGB(0x3CA9D2)];
+    [self.tagLabel setTextColor:UIColorFromRGB(0xffffff)];
+    [self.tagLabel setBackgroundColor:UIColorFromRGB(0x3CA9D2)];
     
     /*** imageview ***/
     self.iv = [[UIImageView alloc]initForAutoLayout];
     self.iv.contentMode = UIViewContentModeScaleAspectFit;
     self.iv.contentMode = UIViewContentModeLeft;
-    //self.iv.frame = kItemImageRect;
     
     self.contentView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
     
@@ -65,22 +66,26 @@
 - (void)updateConstraints {
     if (!self.didSetupConstraints) {
         // To Superview Edge
-        [self.iv autoPinEdgesToSuperviewEdgesWithInsets:ALEdgeInsetsMake(kLabelVerticalInsets, kLabelHorizontalInsets, kLabelVerticalInsets, kLabelHorizontalInsets) excludingEdge:ALEdgeTrailing];
+        [self.iv autoPinEdgesToSuperviewEdgesWithInsets:ALEdgeInsetsMake(kLabelVerticalInsets, kLabelHorizontalInsets, kLabelVerticalInsets, kLabelHorizontalInsets) excludingEdge:ALEdgeLeading];
         
-        [self.collectionNameLabel autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:kLabelVerticalInsets];
-        [self.collectionNameLabel autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:kLabelHorizontalInsets];
+        [self.memoLabel autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:kLabelVerticalInsets];
+        [self.memoLabel autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:kLabelHorizontalInsets];
         
-        [self.memoLabel autoSetDimension:ALDimensionWidth toSize:184.0];
-        [self.memoLabel autoSetDimension:ALDimensionHeight toSize:78.0];
-        //[self.memoLabel autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:kLabelHorizontalInsets];
+        [self.collectionNameLabel autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:kLabelHorizontalInsets];
+        
+        [self.tagLabel autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:kLabelHorizontalInsets];
+        
+        
+        //  Fixed Size
+        [self.iv autoSetDimension:ALDimensionWidth toSize:kImageViewWidthToSize];
+        [self.iv autoSetDimension:ALDimensionHeight toSize:kImageViewHeightToSize];
+        
+        [self.memoLabel autoSetDimension:ALDimensionWidth toSize:kMemoLabelWidthToSize];
+        [self.memoLabel autoSetDimension:ALDimensionHeight toSize:kMemoLabelHeightToSize];
         
         //  To Other View Edge
-        [self.iv autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:self.collectionNameLabel withOffset:-kLabelHorizontalInsets];
-        [self.iv autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:self.memoLabel withOffset:-kLabelHorizontalInsets];
-        [self.iv autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:self.tagLabel withOffset:-kLabelHorizontalInsets];
-        
-        [self.memoLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.collectionNameLabel withOffset:kLabelVerticalInsets];
-        [self.tagLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.memoLabel withOffset:kLabelVerticalInsets];
+        [self.collectionNameLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.memoLabel withOffset:kLabelVerticalInsets];
+        [self.collectionNameLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:self.tagLabel withOffset:-kLabelVerticalInsets];
 
         
         self.didSetupConstraints = YES;
@@ -104,9 +109,9 @@
 
 
 - (void)updateFonts {
-    self.collectionNameLabel.font = [UIFont fontWithName:kBarTitleFontFamily size:kTitleFontSize];
-    self.memoLabel.font = [UIFont fontWithName:kBarTitleFontFamily size:kBodyFontSize];
-    self.tagLabel.font = [UIFont fontWithName:kBarTitleFontFamily size:kCaptionFontSize];
+    self.collectionNameLabel.font = [UIFont systemFontOfSize:kCaptionFontSize];
+    self.memoLabel.font = [UIFont systemFontOfSize:kTitleFontSize];
+    self.tagLabel.font = [UIFont systemFontOfSize:kCaptionFontSize];
 }
 
 

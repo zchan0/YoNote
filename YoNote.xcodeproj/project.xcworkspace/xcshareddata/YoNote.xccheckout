@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>FD787A80-F390-4454-BA00-F80CE1FAA7AC</string>
 	<key>IDESourceControlProjectName</key>
-	<string>YoNote</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>B87663EA234C91B5764C697BB80A3F8247580409</key>
 		<string>https://github.com/zchan0/YoNote.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>YoNote.xcodeproj</string>
+	<string>YoNote.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>B87663EA234C91B5764C697BB80A3F8247580409</key>
