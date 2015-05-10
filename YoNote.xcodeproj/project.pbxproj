@@ -30,6 +30,7 @@
 		95895D271AFB0F6100BE7D2E /* YNImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 95895D261AFB0F6100BE7D2E /* YNImageStore.m */; };
 		958B29801AFEE9CC00815154 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958B297F1AFEE9CC00815154 /* FXBlurView.m */; };
 		95A6E55D1AFDBBC500071561 /* YNCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A6E55C1AFDBBC500071561 /* YNCollectionCell.m */; };
+		95EC8A911AFF69CE00C68D2B /* YNItemEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95EC8A901AFF69CE00C68D2B /* YNItemEditViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,8 @@
 		958B297F1AFEE9CC00815154 /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FXBlurView.m; path = Vendor/FXBlurView/FXBlurView.m; sourceTree = "<group>"; };
 		95A6E55B1AFDBBC500071561 /* YNCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNCollectionCell.h; path = Views/YNCollectionCell.h; sourceTree = "<group>"; };
 		95A6E55C1AFDBBC500071561 /* YNCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNCollectionCell.m; path = Views/YNCollectionCell.m; sourceTree = "<group>"; };
+		95EC8A8F1AFF69CE00C68D2B /* YNItemEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNItemEditViewController.h; path = Controllers/YNItemEditViewController.h; sourceTree = "<group>"; };
+		95EC8A901AFF69CE00C68D2B /* YNItemEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemEditViewController.m; path = Controllers/YNItemEditViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,20 +119,9 @@
 		955CF4D71AF9B9D300C8BBE6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				955CF4D41AF9B9CC00C8BBE6 /* YNBaseViewController.h */,
-				955CF4D51AF9B9CC00C8BBE6 /* YNBaseViewController.m */,
-				955CF4F51AFA038C00C8BBE6 /* YNBaseNavigationController.h */,
-				955CF4F61AFA038C00C8BBE6 /* YNBaseNavigationController.m */,
-				955CF4E31AF9C0AC00C8BBE6 /* YNRootTabViewController.h */,
-				955CF4E41AF9C0AC00C8BBE6 /* YNRootTabViewController.m */,
-				955CF4E61AF9C21B00C8BBE6 /* YNItemsViewController.h */,
-				955CF4E71AF9C21B00C8BBE6 /* YNItemsViewController.m */,
-				955CF4EF1AF9C2CA00C8BBE6 /* YNCollectionsViewController.h */,
-				955CF4F01AF9C2CA00C8BBE6 /* YNCollectionsViewController.m */,
-				955CF4EC1AF9C2B400C8BBE6 /* YNTagsViewController.h */,
-				955CF4ED1AF9C2B400C8BBE6 /* YNTagsViewController.m */,
-				955CF4F21AF9C2DF00C8BBE6 /* YNSettingsViewController.h */,
-				955CF4F31AF9C2DF00C8BBE6 /* YNSettingsViewController.m */,
+				95EC8A8E1AFF697A00C68D2B /* TabBar */,
+				95EC8A8F1AFF69CE00C68D2B /* YNItemEditViewController.h */,
+				95EC8A901AFF69CE00C68D2B /* YNItemEditViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -281,6 +273,27 @@
 			name = FXBlurView;
 			sourceTree = "<group>";
 		};
+		95EC8A8E1AFF697A00C68D2B /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				955CF4D41AF9B9CC00C8BBE6 /* YNBaseViewController.h */,
+				955CF4D51AF9B9CC00C8BBE6 /* YNBaseViewController.m */,
+				955CF4F51AFA038C00C8BBE6 /* YNBaseNavigationController.h */,
+				955CF4F61AFA038C00C8BBE6 /* YNBaseNavigationController.m */,
+				955CF4E31AF9C0AC00C8BBE6 /* YNRootTabViewController.h */,
+				955CF4E41AF9C0AC00C8BBE6 /* YNRootTabViewController.m */,
+				955CF4E61AF9C21B00C8BBE6 /* YNItemsViewController.h */,
+				955CF4E71AF9C21B00C8BBE6 /* YNItemsViewController.m */,
+				955CF4EF1AF9C2CA00C8BBE6 /* YNCollectionsViewController.h */,
+				955CF4F01AF9C2CA00C8BBE6 /* YNCollectionsViewController.m */,
+				955CF4EC1AF9C2B400C8BBE6 /* YNTagsViewController.h */,
+				955CF4ED1AF9C2B400C8BBE6 /* YNTagsViewController.m */,
+				955CF4F21AF9C2DF00C8BBE6 /* YNSettingsViewController.h */,
+				955CF4F31AF9C2DF00C8BBE6 /* YNSettingsViewController.m */,
+			);
+			name = TabBar;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -395,6 +408,7 @@
 				955CF4F11AF9C2CA00C8BBE6 /* YNCollectionsViewController.m in Sources */,
 				95863CAC1AFDA83C00C31E2D /* ALView+PureLayout.m in Sources */,
 				955CF4F71AFA038C00C8BBE6 /* YNBaseNavigationController.m in Sources */,
+				95EC8A911AFF69CE00C68D2B /* YNItemEditViewController.m in Sources */,
 				957DC3121AF99FF600DA8D6A /* main.m in Sources */,
 				95895D271AFB0F6100BE7D2E /* YNImageStore.m in Sources */,
 				958B29801AFEE9CC00815154 /* FXBlurView.m in Sources */,

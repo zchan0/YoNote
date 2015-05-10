@@ -9,9 +9,9 @@
 #import "YNItemsViewController.h"
 #import "YNItemCell.h"
 #import "YNImageStore.h"
+#import "YNItemEditViewController.h"
 
 static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
-
 
 @implementation YNItemsViewController
 
@@ -55,6 +55,11 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 #pragma mark - IBActions
 
 - (IBAction)addNewItem:(id)sender {
+    YNItemEditViewController *editViewController = [[YNItemEditViewController alloc]initForNewItem:YES];
+    
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:editViewController];
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:navController animated:YES completion:nil];
     
 }
 

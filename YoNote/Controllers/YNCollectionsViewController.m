@@ -10,6 +10,9 @@
 #import "YNCollectionCell.h"
 #import "YNImageStore.h"
 
+#define kCollectionImageRect        CGRectMake(0, 0, 320, 120)
+#define kCollectionTableCellHeight  160.0
+
 static NSString *YNCollectionCellIndentifier = @"YNCollectionCellIndentifier";
 
 

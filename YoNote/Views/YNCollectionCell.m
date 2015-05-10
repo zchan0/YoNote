@@ -9,6 +9,9 @@
 #import "YNCollectionCell.h"
 #import "FXBlurView.h"
 
+#define kCollectionImageViewWidth       320.0f
+#define kCollectionImageViewHeight      127.5f
+
 @interface YNCollectionCell ()
 
 @property (nonatomic, assign) BOOL didSetupConstraints;
