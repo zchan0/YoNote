@@ -41,10 +41,11 @@
 
 /*** Table ***/
 #define kItemTableCellHeight 120.0
-#define kCollectionTableCellHeight 140.0
+#define kCollectionTableCellHeight 160.0
 
 
 /*** Font ***/
+#define kHeaderFontSize 24.0
 #define kTitleFontSize 18.0
 #define kBodyFontSize  16.0
 #define kCaptionFontSize 14.0

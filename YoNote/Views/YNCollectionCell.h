@@ -10,9 +10,8 @@
 
 @interface YNCollectionCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet UIImageView *iv;
+@property (strong, nonatomic) UIImageView *iv;
 @property (strong, nonatomic) IBOutlet UILabel *collectionNameLabel;
-@property (strong, nonatomic) IBOutlet UILabel *collectionImageCountLabel;
 
 - (void)updateFonts;
 

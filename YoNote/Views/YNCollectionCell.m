@@ -28,18 +28,17 @@
     /*** imageview ***/
     self.iv = [[UIImageView alloc]initForAutoLayout];
     self.iv.frame = CGRectMake(0, 0, kCollectionImageViewWidth, kCollectionImageViewHeight);
-    self.iv.contentMode = UIViewContentModeScaleAspectFill;
+    self.iv.contentMode = UIViewContentModeScaleToFill;
     
     self.fxView = [[FXBlurView alloc]init];
-    self.fxView.blurRadius = 10;
+    self.fxView.blurRadius = 17;
     self.fxView.tintColor = [UIColor blackColor];
-    
+
     self.contentView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0];
     
     [self.contentView addSubview:self.iv];
     [self.contentView addSubview:self.fxView];
     [self.contentView addSubview:self.collectionNameLabel];
-
     
     [self updateFonts];
     
@@ -63,17 +62,13 @@
     if (!self.didSetupConstraints) {
         // To Superview Edge
         [self.iv autoPinEdgesToSuperviewEdgesWithInsets:ALEdgeInsetsMake(kLabelVerticalInsets, kLabelHorizontalInsets, kLabelVerticalInsets, kLabelHorizontalInsets)];
-        //[self.collectionNameLabel autoPinEdgesToSuperviewEdgesWithInsets:ALEdgeInsetsMake(kLabelVerticalInsets, kLabelHorizontalInsets, kLabelVerticalInsets, kLabelHorizontalInsets)];
-
         
         //  Fixed Size
         [self.collectionNameLabel autoSetDimension:ALDimensionHeight toSize:kCollectionImageViewHeight];
         
-        
         //  Margins
         self.iv.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
         [self.collectionNameLabel autoPinEdgesToSuperviewMarginsExcludingEdge:ALEdgeBottom];
-
         
         self.didSetupConstraints = YES;
     }
@@ -96,8 +91,7 @@
 
 
 - (void)updateFonts {
-    self.collectionNameLabel.font = [UIFont boldSystemFontOfSize:kTitleFontSize];
-    
+    self.collectionNameLabel.font = [UIFont boldSystemFontOfSize:kHeaderFontSize];
 }
 
 - (void)awakeFromNib {
