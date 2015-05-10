@@ -7,12 +7,20 @@
 //
 
 #import "YNCollectionsViewController.h"
+#import "YNCollectionCell.h"
+#import "YNImageStore.h"
+
+static NSString *YNCollectionCellIndentifier = @"YNCollectionCellIndentifier";
+
 
 @implementation YNCollectionsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self customNavigationItem];
+    
+    [self.tableView registerClass:[YNCollectionCell class] forCellReuseIdentifier:YNCollectionCellIndentifier];
+    
 }
 
 #pragma mark - Views
@@ -22,5 +30,38 @@
     // custom title attributes
     navItem.title = @"图片集";
 }
+
+#pragma mark -Table
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 4;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    YNCollectionCell *cell = [tableView dequeueReusableCellWithIdentifier:YNCollectionCellIndentifier];
+    
+    [cell updateFonts];
+    cell.collectionNameLabel.text = @"高级数据库";
+        
+    NSString *path = [NSString stringWithFormat:@"img_%d.jpg", ((int)indexPath.row)+1];
+    UIImage *image = [[YNImageStore sharedStore]imageForKey:path];
+    UIImage *thumbnail = [[YNImageStore sharedStore]setThumbnailFromImage:image newRect:kCollectionImageRect];
+    cell.iv.image = thumbnail;
+    cell.separatorInset = ALEdgeInsetsZero; // make separator below imageview visible
+    
+    // Make sure the constraints have been added to this cell, since it may have just been created from scratch
+    [cell setNeedsUpdateConstraints];
+    [cell updateConstraintsIfNeeded];
+    
+    return cell;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return kCollectionTableCellHeight;
+}
+
 
 @end

@@ -28,6 +28,8 @@
 		95863CAC1AFDA83C00C31E2D /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 95863CA81AFDA83C00C31E2D /* ALView+PureLayout.m */; };
 		95895D211AFB04E500BE7D2E /* YNItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95895D201AFB04E500BE7D2E /* YNItemCell.m */; };
 		95895D271AFB0F6100BE7D2E /* YNImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 95895D261AFB0F6100BE7D2E /* YNImageStore.m */; };
+		958B29801AFEE9CC00815154 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958B297F1AFEE9CC00815154 /* FXBlurView.m */; };
+		95A6E55D1AFDBBC500071561 /* YNCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A6E55C1AFDBBC500071561 /* YNCollectionCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,10 @@
 		95895D201AFB04E500BE7D2E /* YNItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemCell.m; path = Views/YNItemCell.m; sourceTree = "<group>"; };
 		95895D251AFB0F6100BE7D2E /* YNImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNImageStore.h; path = Model/YNImageStore.h; sourceTree = "<group>"; };
 		95895D261AFB0F6100BE7D2E /* YNImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNImageStore.m; path = Model/YNImageStore.m; sourceTree = "<group>"; };
+		958B297E1AFEE9CC00815154 /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FXBlurView.h; path = Vendor/FXBlurView/FXBlurView.h; sourceTree = "<group>"; };
+		958B297F1AFEE9CC00815154 /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FXBlurView.m; path = Vendor/FXBlurView/FXBlurView.m; sourceTree = "<group>"; };
+		95A6E55B1AFDBBC500071561 /* YNCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNCollectionCell.h; path = Views/YNCollectionCell.h; sourceTree = "<group>"; };
+		95A6E55C1AFDBBC500071561 /* YNCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNCollectionCell.m; path = Views/YNCollectionCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +137,7 @@
 		955CF4D81AF9C00E00C8BBE6 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				958B29811AFEE9D700815154 /* FXBlurView */,
 				95895D281AFB1ABD00BE7D2E /* PureLayout */,
 				955CF4E21AF9C07600C8BBE6 /* RDVTabController */,
 			);
@@ -234,6 +241,8 @@
 			children = (
 				95895D1F1AFB04E500BE7D2E /* YNItemCell.h */,
 				95895D201AFB04E500BE7D2E /* YNItemCell.m */,
+				95A6E55B1AFDBBC500071561 /* YNCollectionCell.h */,
+				95A6E55C1AFDBBC500071561 /* YNCollectionCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -261,6 +270,15 @@
 				95863CA91AFDA83C00C31E2D /* ALView+PureLayout.h */,
 			);
 			name = PureLayout;
+			sourceTree = "<group>";
+		};
+		958B29811AFEE9D700815154 /* FXBlurView */ = {
+			isa = PBXGroup;
+			children = (
+				958B297E1AFEE9CC00815154 /* FXBlurView.h */,
+				958B297F1AFEE9CC00815154 /* FXBlurView.m */,
+			);
+			name = FXBlurView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,6 +397,8 @@
 				955CF4F71AFA038C00C8BBE6 /* YNBaseNavigationController.m in Sources */,
 				957DC3121AF99FF600DA8D6A /* main.m in Sources */,
 				95895D271AFB0F6100BE7D2E /* YNImageStore.m in Sources */,
+				958B29801AFEE9CC00815154 /* FXBlurView.m in Sources */,
+				95A6E55D1AFDBBC500071561 /* YNCollectionCell.m in Sources */,
 				955CF4E11AF9C06D00C8BBE6 /* RDVTabBarItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

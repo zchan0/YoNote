@@ -22,19 +22,27 @@
 
 // variables
 
-#define kItemImageRect CGRectMake(0, 0, 140, 110)
 
-/*** Table ***/
-#define kTableCellHeight 120.0
-
+/*** ItemCell ***/
 #define kLabelHorizontalInsets      11.0f
-#define kLabelVerticalInsets        6.0f
+#define kLabelVerticalInsets        5.0f
 
-#define kMemoLabelWidthToSize       210.0f
+#define kMemoLabelWidthToSize       200.0f
 #define kMemoLabelHeightToSize      61.0f
 
 #define kImageViewWidthToSize       140.0f
 #define kImageViewHeightToSize      110.0f
+#define kItemImageRect CGRectMake(0, 0, 140, 110)
+
+/*** CollectionCell ***/
+#define kCollectionImageViewWidth       320.0f
+#define kCollectionImageViewHeight      127.5f
+#define kCollectionImageRect CGRectMake(0, 0, 320, 120)
+
+/*** Table ***/
+#define kItemTableCellHeight 120.0
+#define kCollectionTableCellHeight 140.0
+
 
 /*** Font ***/
 #define kTitleFontSize 18.0

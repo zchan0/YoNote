@@ -112,12 +112,12 @@
                                                error:NULL];
 }
 
-- (UIImage *)setThumbnailFromImage:(UIImage *)image
+- (UIImage *)setThumbnailFromImage:(UIImage *)image newRect:(CGRect)newRect
 {
     CGSize origImageSize = image.size;
     
     // Set thumbnail's size
-    CGRect newRect = kItemImageRect;
+    //CGRect newRect = kItemImageRect;
     
     float ratio = MAX(newRect.size.width / origImageSize.width,
                       newRect.size.height / origImageSize.height);

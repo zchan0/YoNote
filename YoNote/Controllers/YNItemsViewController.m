@@ -79,7 +79,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     
     NSString *path = [NSString stringWithFormat:@"img_%d.jpg", ((int)indexPath.row)+1];
     UIImage *image = [[YNImageStore sharedStore]imageForKey:path];
-    UIImage *thumbnail = [[YNImageStore sharedStore]setThumbnailFromImage:image];
+    UIImage *thumbnail = [[YNImageStore sharedStore]setThumbnailFromImage:image newRect:kItemImageRect];
     cell.iv.image = thumbnail;
     cell.separatorInset = ALEdgeInsetsZero; // make separator below imageview visible
     
@@ -92,7 +92,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return kTableCellHeight;
+    return kItemTableCellHeight;
 }
 
 

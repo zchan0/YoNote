@@ -11,7 +11,6 @@
 @interface YNItemCell ()
 
 @property (nonatomic, assign) BOOL didSetupConstraints;
-@property (nonatomic, strong) IBOutlet UIButton *tagButton;
 
 @end
 
@@ -24,9 +23,10 @@
     
     /*** memo label ***/
     self.memoLabel = [UILabel newAutoLayoutView];
-    [self.memoLabel setNumberOfLines:3];
+    [self.memoLabel setNumberOfLines:2];
     [self.memoLabel setTextColor:UIColorFromRGB(0x4A4A4A)];
     self.memoLabel.contentMode = UIViewContentModeScaleAspectFit;
+    //[self.memoLabel setPreferredMaxLayoutWidth:kMemoLabelWidthToSize];
     
     /*** tag label ***/
     self.tagLabel  = [UILabel newAutoLayoutView];
@@ -35,7 +35,8 @@
     
     /*** imageview ***/
     self.iv = [[UIImageView alloc]initForAutoLayout];
-    self.iv.contentMode = UIViewContentModeScaleAspectFit;
+    self.iv.frame = kItemImageRect;
+    self.iv.contentMode = UIViewContentModeScaleAspectFill;
     self.iv.contentMode = UIViewContentModeLeft;
     
     self.contentView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
@@ -77,13 +78,10 @@
         
         
         //  Fixed Size
-        [self.iv autoSetDimension:ALDimensionWidth toSize:kImageViewWidthToSize];
-        [self.iv autoSetDimension:ALDimensionHeight toSize:kImageViewHeightToSize];
-        
-        [self.memoLabel autoSetDimension:ALDimensionWidth toSize:kMemoLabelWidthToSize];
         [self.memoLabel autoSetDimension:ALDimensionHeight toSize:kMemoLabelHeightToSize];
         
         //  To Other View Edge
+        [self.memoLabel autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:self.iv withOffset:-kLabelHorizontalInsets relation:NSLayoutRelationLessThanOrEqual];
         [self.collectionNameLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.memoLabel withOffset:kLabelVerticalInsets];
         [self.collectionNameLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:self.tagLabel withOffset:-kLabelVerticalInsets];
 
@@ -110,7 +108,7 @@
 
 - (void)updateFonts {
     self.collectionNameLabel.font = [UIFont systemFontOfSize:kCaptionFontSize];
-    self.memoLabel.font = [UIFont systemFontOfSize:kTitleFontSize];
+    self.memoLabel.font = [UIFont systemFontOfSize:kBodyFontSize];
     self.tagLabel.font = [UIFont systemFontOfSize:kCaptionFontSize];
 }
 
