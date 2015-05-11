@@ -7,6 +7,7 @@
 //
 
 #import "YNItemEditViewController.h"
+#import "YNItemEditView.h"
 
 @interface YNItemEditViewController ()
 
@@ -19,7 +20,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.inputTextView becomeFirstResponder];
 }
 
 - (instancetype)initForNewItem:(BOOL)isNew
@@ -43,14 +43,11 @@
 
 - (void)loadView {
     [super loadView];
-    self.view = [[UIView alloc]initWithFrame:[UIScreen mainScreen].applicationFrame];
+    //self.view = [[UIView alloc]initWithFrame:[UIScreen mainScreen].applicationFrame];
+    self.view = [[YNItemEditView alloc]init];
     self.view.backgroundColor = [UIColor redColor];
     [self customBarItem];
     
-    CGFloat width = self.view.frame.size.width;
-    self.inputTextView = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, width, 170)];
-    self.inputTextView.delegate = self;
-    [self.view addSubview:self.inputTextView];
 }
 
 - (void)customBarItem {

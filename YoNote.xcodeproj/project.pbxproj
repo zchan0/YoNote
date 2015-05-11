@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9534383C1B002726001859D7 /* YNItemEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9534383B1B002726001859D7 /* YNItemEditView.m */; };
 		955CF4D61AF9B9CC00C8BBE6 /* YNBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4D51AF9B9CC00C8BBE6 /* YNBaseViewController.m */; };
 		955CF4DF1AF9C06D00C8BBE6 /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4DA1AF9C06D00C8BBE6 /* RDVTabBar.m */; };
 		955CF4E01AF9C06D00C8BBE6 /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4DC1AF9C06D00C8BBE6 /* RDVTabBarController.m */; };
@@ -44,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9534383A1B002726001859D7 /* YNItemEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNItemEditView.h; path = Views/YNItemEditView.h; sourceTree = "<group>"; };
+		9534383B1B002726001859D7 /* YNItemEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemEditView.m; path = Views/YNItemEditView.m; sourceTree = "<group>"; };
 		955CF4D41AF9B9CC00C8BBE6 /* YNBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNBaseViewController.h; path = Controllers/YNBaseViewController.h; sourceTree = "<group>"; };
 		955CF4D51AF9B9CC00C8BBE6 /* YNBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNBaseViewController.m; path = Controllers/YNBaseViewController.m; sourceTree = "<group>"; };
 		955CF4D91AF9C06D00C8BBE6 /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDVTabBar.h; path = Vendor/RDVTabBarController/RDVTabBar.h; sourceTree = "<group>"; };
@@ -235,6 +238,8 @@
 				95895D201AFB04E500BE7D2E /* YNItemCell.m */,
 				95A6E55B1AFDBBC500071561 /* YNCollectionCell.h */,
 				95A6E55C1AFDBBC500071561 /* YNCollectionCell.m */,
+				9534383A1B002726001859D7 /* YNItemEditView.h */,
+				9534383B1B002726001859D7 /* YNItemEditView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -410,6 +415,7 @@
 				955CF4F71AFA038C00C8BBE6 /* YNBaseNavigationController.m in Sources */,
 				95EC8A911AFF69CE00C68D2B /* YNItemEditViewController.m in Sources */,
 				957DC3121AF99FF600DA8D6A /* main.m in Sources */,
+				9534383C1B002726001859D7 /* YNItemEditView.m in Sources */,
 				95895D271AFB0F6100BE7D2E /* YNImageStore.m in Sources */,
 				958B29801AFEE9CC00815154 /* FXBlurView.m in Sources */,
 				95A6E55D1AFDBBC500071561 /* YNCollectionCell.m in Sources */,
