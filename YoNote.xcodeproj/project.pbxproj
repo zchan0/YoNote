@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9534383C1B002726001859D7 /* YNItemEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9534383B1B002726001859D7 /* YNItemEditView.m */; };
+		953438401B01EF74001859D7 /* YNItemEditToolbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9534383F1B01EF74001859D7 /* YNItemEditToolbar.xib */; };
 		955CF4D61AF9B9CC00C8BBE6 /* YNBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4D51AF9B9CC00C8BBE6 /* YNBaseViewController.m */; };
 		955CF4DF1AF9C06D00C8BBE6 /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4DA1AF9C06D00C8BBE6 /* RDVTabBar.m */; };
 		955CF4E01AF9C06D00C8BBE6 /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4DC1AF9C06D00C8BBE6 /* RDVTabBarController.m */; };
@@ -47,6 +48,7 @@
 /* Begin PBXFileReference section */
 		9534383A1B002726001859D7 /* YNItemEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNItemEditView.h; path = Views/YNItemEditView.h; sourceTree = "<group>"; };
 		9534383B1B002726001859D7 /* YNItemEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemEditView.m; path = Views/YNItemEditView.m; sourceTree = "<group>"; };
+		9534383F1B01EF74001859D7 /* YNItemEditToolbar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YNItemEditToolbar.xib; sourceTree = "<group>"; };
 		955CF4D41AF9B9CC00C8BBE6 /* YNBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNBaseViewController.h; path = Controllers/YNBaseViewController.h; sourceTree = "<group>"; };
 		955CF4D51AF9B9CC00C8BBE6 /* YNBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNBaseViewController.m; path = Controllers/YNBaseViewController.m; sourceTree = "<group>"; };
 		955CF4D91AF9C06D00C8BBE6 /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDVTabBar.h; path = Vendor/RDVTabBarController/RDVTabBar.h; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				95A6E55C1AFDBBC500071561 /* YNCollectionCell.m */,
 				9534383A1B002726001859D7 /* YNItemEditView.h */,
 				9534383B1B002726001859D7 /* YNItemEditView.m */,
+				9534383F1B01EF74001859D7 /* YNItemEditToolbar.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				953438401B01EF74001859D7 /* YNItemEditToolbar.xib in Resources */,
 				957DC3201AF99FF600DA8D6A /* LaunchScreen.xib in Resources */,
 				957DC31D1AF99FF600DA8D6A /* Images.xcassets in Resources */,
 			);

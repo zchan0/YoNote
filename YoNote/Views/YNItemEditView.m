@@ -25,11 +25,14 @@
 
 - (void)setupToolViews {
     
+    
 }
 
 - (void)setupViews {
     
     self.frame = [UIScreen mainScreen].applicationFrame;
+    
+    [self setupXibView];
     
     /*** TextView ***/
     CGFloat width = self.frame.size.width;
@@ -39,12 +42,19 @@
     
 }
 
+- (void)setupXibView {
+    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"YNItemEditToolbar" owner:self options:nil];
+    UIView *toolbarView = [subviewArray objectAtIndex:0];
+    NSLog(@"%@", subviewArray);
+    [self addSubview:toolbarView];
+}
+
 - (instancetype)init {
     self = [super init];
     
     if (self) {
         [self setupViews];
-        [self.inputTextView becomeFirstResponder];
+        //[self.inputTextView becomeFirstResponder];
     }
     
     return self;
