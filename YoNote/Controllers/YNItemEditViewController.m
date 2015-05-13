@@ -60,15 +60,19 @@
     self.view = [[UIView alloc]initWithFrame:[UIScreen mainScreen].applicationFrame];
     //self.view.backgroundColor = [UIColor redColor];
     [self customBarItem];
-    
+    [self setupTextView];
+}
+
+- (void)setupTextView {
+
     CGFloat width = self.view.frame.size.width;
     self.editTextView = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, width, 170)];
     self.editTextView.delegate = self;
+    self.editTextView.scrollEnabled = YES;
     [self.view addSubview:self.editTextView];
     
     UIToolbar *toolbar = [[YNItemEditToolbar alloc]init].YNItemEditToolbar;
     self.editTextView.inputAccessoryView = toolbar;
-    
 }
 
 - (void)customBarItem {
@@ -118,14 +122,26 @@
     aRect.size.height -= kbSize.height;
     self.editTextView.frame = aRect;
     
+
 }
 
-/*
- #pragma mark - Navigation
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
+- (void)textViewDidChange:(UITextView *)textView {
+    CGRect line = [textView caretRectForPosition:
+                   textView.selectedTextRange.start];
+    CGFloat overflow = line.origin.y + line.size.height
+    - ( textView.contentOffset.y + textView.bounds.size.height
+       - textView.contentInset.bottom - textView.contentInset.top );
+    if ( overflow > 0 ) {
+        // We are at the bottom of the visible text and introduced a line feed, scroll down (iOS 7 does not do it)
+        // Scroll caret to visible area
+        CGPoint offset = textView.contentOffset;
+        offset.y += overflow + 7; // leave 7 pixels margin
+        // Cannot animate with setContentOffset:animated: or caret will not appear
+        [UIView animateWithDuration:.2 animations:^{
+            [textView setContentOffset:offset];
+        }];
+    }
+}
+
 @end
