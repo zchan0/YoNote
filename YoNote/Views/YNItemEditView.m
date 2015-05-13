@@ -11,6 +11,7 @@
 @interface YNItemEditView ()
 
 @property (nonatomic, assign) BOOL didSetupConstraints;
+@property (weak, nonatomic) IBOutlet UIView *YNItemEditToolbar;
 
 @property (nonatomic, strong) UIButton *imageButton;
 @property (nonatomic, strong) UIButton *dateCreatedButton;
@@ -32,7 +33,6 @@
     
     self.frame = [UIScreen mainScreen].applicationFrame;
     
-    [self setupXibView];
     
     /*** TextView ***/
     CGFloat width = self.frame.size.width;
@@ -40,13 +40,15 @@
     self.inputTextView.delegate = self;
     [self addSubview:self.inputTextView];
     
+    [self setupXibView];
+    
 }
 
 - (void)setupXibView {
     NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"YNItemEditToolbar" owner:self options:nil];
-    UIView *toolbarView = [subviewArray objectAtIndex:0];
-    NSLog(@"%@", subviewArray);
-    [self addSubview:toolbarView];
+    self.YNItemEditToolbar = [subviewArray objectAtIndex:0];
+    NSLog(@"%@", self.YNItemEditToolbar);
+    [self addSubview:self.YNItemEditToolbar];
 }
 
 - (instancetype)init {
