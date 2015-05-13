@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YNItemEditView : UIView<UITextViewDelegate>
+@interface YNItemEditToolbar : UIView<UITextViewDelegate>
 
-@property (nonatomic, strong) IBOutlet UITextView *inputTextView;
 @property (nonatomic, strong) NSString *memo;
 
 @property (nonatomic, strong) UIImage  *image;
@@ -19,6 +18,8 @@
 @property (nonatomic, strong) NSArray  *tags;
 @property (nonatomic, strong) NSString *collection;
 
+@property (weak, nonatomic) IBOutlet UIToolbar *YNItemEditToolbar;
+@property (nonatomic, strong) UITextView *editTextView;
 
 - (void)updateFonts;
 

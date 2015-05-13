@@ -7,10 +7,11 @@
 //
 
 #import "YNItemEditViewController.h"
-#import "YNItemEditView.h"
+#import "YNItemEditToolbar.h"
 
 @interface YNItemEditViewController ()
 
+@property (nonatomic, strong) UITextView *editTextView;
 
 @end
 
@@ -20,6 +21,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self registerForKeyboardNotifications];
+    [self.editTextView becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.editTextView resignFirstResponder];
 }
 
 - (instancetype)initForNewItem:(BOOL)isNew
@@ -33,20 +43,31 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-
 #pragma mark - Views
 
 - (void)loadView {
     [super loadView];
-    //self.view = [[UIView alloc]initWithFrame:[UIScreen mainScreen].applicationFrame];
-    self.view = [[YNItemEditView alloc]init];
-    self.view.backgroundColor = [UIColor redColor];
+    self.view = [[UIView alloc]initWithFrame:[UIScreen mainScreen].applicationFrame];
+    //self.view.backgroundColor = [UIColor redColor];
     [self customBarItem];
+    
+    CGFloat width = self.view.frame.size.width;
+    self.editTextView = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, width, 170)];
+    self.editTextView.delegate = self;
+    [self.view addSubview:self.editTextView];
+    
+    UIToolbar *toolbar = [[YNItemEditToolbar alloc]init].YNItemEditToolbar;
+    self.editTextView.inputAccessoryView = toolbar;
     
 }
 
@@ -75,15 +96,36 @@
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - Notifications
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                          selector:@selector(keyboardFrameDidChange:)
+                                          name:UIKeyboardWillChangeFrameNotification
+                                          object:nil];
+    
+}
+
+- (void)keyboardFrameDidChange:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your app might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    self.editTextView.frame = aRect;
+    
+}
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
+ #pragma mark - Navigation
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 @end
