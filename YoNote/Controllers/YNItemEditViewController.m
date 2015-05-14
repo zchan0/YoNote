@@ -64,15 +64,22 @@
 }
 
 - (void)setupTextView {
-
     CGFloat width = self.view.frame.size.width;
     self.editTextView = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, width, 170)];
     self.editTextView.delegate = self;
     self.editTextView.scrollEnabled = YES;
-    [self.view addSubview:self.editTextView];
     
+    //Appearence
+    [self.editTextView setFont:[UIFont systemFontOfSize:kTitleFontSize]];
+    [self.editTextView setTintColor:UIColorFromRGB(0x3CA9D2)];  // iOS 7.0 later
+    
+    //Toolbar
     UIToolbar *toolbar = [[YNItemEditToolbar alloc]init].YNItemEditToolbar;
     self.editTextView.inputAccessoryView = toolbar;
+    
+    [self.view addSubview:self.editTextView];
+    
+    
 }
 
 - (void)customBarItem {
