@@ -7,41 +7,73 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="YNItemEditToolbar">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <rect key="frame" x="0.0" y="0.0" width="318" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="boy-oJ-b61">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="boy-oJ-b61">
                     <rect key="frame" x="138" y="5" width="44" height="33"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="33" id="ANL-hZ-BIz"/>
+                        <constraint firstAttribute="width" constant="44" id="rZC-Og-ygT"/>
+                    </constraints>
                     <state key="normal" backgroundImage="PhotoPicker">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ald-Qg-nhk">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ald-Qg-nhk">
                     <rect key="frame" x="22" y="5" width="44" height="33"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="RVZ-CG-FXn"/>
+                    </constraints>
                     <state key="normal" backgroundImage="CreatedTime">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PTL-Jf-T1F">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PTL-Jf-T1F">
                     <rect key="frame" x="80" y="5" width="44" height="33"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="utz-p2-eCh"/>
+                    </constraints>
                     <state key="normal" backgroundImage="AlarmedTime">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vWJ-LY-cjU">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vWJ-LY-cjU">
                     <rect key="frame" x="196" y="5" width="44" height="33"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="IVL-Oa-xIy"/>
+                    </constraints>
                     <state key="normal" backgroundImage="Delete">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSj-0R-pV9">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSj-0R-pV9">
                     <rect key="frame" x="254" y="5" width="44" height="33"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="N6r-xi-6cP"/>
+                    </constraints>
                     <state key="normal" backgroundImage="TagTool">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="vWJ-LY-cjU" secondAttribute="bottom" constant="6" id="1Ra-JW-eZp"/>
+                <constraint firstItem="ZSj-0R-pV9" firstAttribute="leading" secondItem="vWJ-LY-cjU" secondAttribute="trailing" constant="14" id="6BZ-Pp-h3p"/>
+                <constraint firstItem="boy-oJ-b61" firstAttribute="leading" secondItem="PTL-Jf-T1F" secondAttribute="trailing" constant="14" id="Dg6-rq-6YS"/>
+                <constraint firstItem="ald-Qg-nhk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="LRy-7q-P2R"/>
+                <constraint firstAttribute="bottom" secondItem="PTL-Jf-T1F" secondAttribute="bottom" constant="6" id="NUh-HR-ecc"/>
+                <constraint firstAttribute="bottom" secondItem="ZSj-0R-pV9" secondAttribute="bottom" constant="6" id="QOJ-76-QuS"/>
+                <constraint firstAttribute="centerX" secondItem="boy-oJ-b61" secondAttribute="centerX" constant="-1" id="W9J-0j-NGR"/>
+                <constraint firstItem="vWJ-LY-cjU" firstAttribute="leading" secondItem="boy-oJ-b61" secondAttribute="trailing" constant="14" id="Z0c-a7-7n7"/>
+                <constraint firstItem="ZSj-0R-pV9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="fcQ-yT-h29"/>
+                <constraint firstItem="vWJ-LY-cjU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="k7y-C8-m0A"/>
+                <constraint firstItem="PTL-Jf-T1F" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="kIz-hW-YE5"/>
+                <constraint firstAttribute="bottom" secondItem="ald-Qg-nhk" secondAttribute="bottom" constant="6" id="qeI-vs-pch"/>
+                <constraint firstItem="PTL-Jf-T1F" firstAttribute="leading" secondItem="ald-Qg-nhk" secondAttribute="trailing" constant="14" id="tSU-Ds-Gwl"/>
+                <constraint firstAttribute="centerY" secondItem="boy-oJ-b61" secondAttribute="centerY" constant="0.5" id="ycA-ew-wmB"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
@@ -54,7 +86,7 @@
                 <outlet property="imageButton" destination="boy-oJ-b61" id="HT4-yl-jrg"/>
                 <outlet property="tagsButton" destination="ZSj-0R-pV9" id="eg2-5f-sqx"/>
             </connections>
-            <point key="canvasLocation" x="305" y="295"/>
+            <point key="canvasLocation" x="304" y="295"/>
         </view>
     </objects>
     <resources>

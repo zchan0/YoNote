@@ -58,7 +58,7 @@
 - (void)loadView {
     [super loadView];
     self.view = [[UIView alloc]initWithFrame:[UIScreen mainScreen].applicationFrame];
-    //self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self customBarItem];
     [self setupTextView];
 }
