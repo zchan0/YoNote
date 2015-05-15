@@ -8,25 +8,14 @@
 
 #import "YNItemEditToolbar.h"
 
-#define kButtonWidth  44.0f
-#define kButtonHeight 33.0f
-
 @interface YNItemEditToolbar ()
 
-@property (nonatomic, assign) BOOL didSetupConstraints;
-
-@property (nonatomic, strong) UIButton *imageButton;
-@property (nonatomic, strong) UIButton *dateCreatedButton;
-@property (nonatomic, strong) UIButton *dateAlarmedButton;
-@property (nonatomic, strong) UIButton *deleteButton;
-@property (nonatomic, strong) UIButton *tagsButton;
 
 @end
 
 @implementation YNItemEditToolbar
 
 - (void)setupViews {
-    
     NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"YNItemEditToolbar" owner:self options:nil];
     self.YNItemEditToolbar = [subviewArray objectAtIndex:0];
 }
@@ -41,8 +30,21 @@
     return self;
 }
 
-- (void)updateFonts {
+- (IBAction)touchDateCreatedButton:(id)sender {
+    if (!_delegate) {
+        NSLog(@"delegate is nil");
+    } else {
+        [_delegate pickDateCreated];
+    }
     
+}
+
+- (IBAction)touchDateAlarmedButton:(id)sender {
+    if (!_delegate) {
+        NSLog(@"delegate is nil");
+    } else {
+        [_delegate pickDateAlarmed];
+    }
 }
 
 

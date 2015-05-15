@@ -8,19 +8,29 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YNItemEditToolbar : UIView<UITextViewDelegate>
+@protocol YNItemEditToolbarDelegate <NSObject>
+
+- (void)pickDateCreated;
+- (void)pickDateAlarmed;
+
+@end
+
+@interface YNItemEditToolbar : UIView
 
 @property (nonatomic, strong) NSString *memo;
-
 @property (nonatomic, strong) UIImage  *image;
-@property (nonatomic, strong) NSString *dateCreated;
-@property (nonatomic, strong) NSString *dateAlarmed;
+@property (nonatomic, strong) NSDate *dateCreated;
+@property (nonatomic, strong) NSDate *dateAlarmed;
 @property (nonatomic, strong) NSArray  *tags;
 @property (nonatomic, strong) NSString *collection;
 
-@property (weak, nonatomic) IBOutlet UIToolbar *YNItemEditToolbar;
-@property (nonatomic, strong) UITextView *editTextView;
+@property (nonatomic, weak) IBOutlet UIButton *imageButton;
+@property (nonatomic, weak) IBOutlet UIButton *dateCreatedButton;
+@property (nonatomic, weak) IBOutlet UIButton *dateAlarmedButton;
+@property (nonatomic, weak) IBOutlet UIButton *tagsButton;
+@property (nonatomic, weak) IBOutlet UIButton *collectionButton;
+@property (nonatomic, weak) IBOutlet YNItemEditToolbar *YNItemEditToolbar;
 
-- (void)updateFonts;
+@property (nonatomic) id<YNItemEditToolbarDelegate> delegate;
 
 @end

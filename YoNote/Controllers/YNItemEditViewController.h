@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YNItemEditViewController : UIViewController<UITextViewDelegate>
+@interface YNItemEditViewController : UIViewController
 
 @property (nonatomic, strong) NSString *memo;
 

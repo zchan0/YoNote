@@ -7,11 +7,15 @@
 //
 
 #import "YNItemEditViewController.h"
+#import "HSDatePickerViewController.h"
 #import "YNItemEditToolbar.h"
 
-@interface YNItemEditViewController ()
+@interface YNItemEditViewController ()<UITextViewDelegate, YNItemEditToolbarDelegate, HSDatePickerViewControllerDelegate>
 
 @property (nonatomic, strong) UITextView *editTextView;
+@property (nonatomic, strong) YNItemEditToolbar *toolbar;
+@property (nonatomic, strong) NSDateFormatter *formatter;
+@property (nonatomic, strong) HSDatePickerViewController *hsdpVC;
 
 @end
 
@@ -21,6 +25,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _formatter = [[NSDateFormatter alloc]init];
+    _formatter.dateFormat = kDateFormat;
+    self.navigationItem.title = [_formatter stringFromDate:[NSDate date]];
+    
+    self.hsdpVC = [HSDatePickerViewController new];
+    self.hsdpVC.delegate = self;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -59,9 +71,20 @@
     [super loadView];
     self.view = [[UIView alloc]initWithFrame:[UIScreen mainScreen].applicationFrame];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self customBarItem];
     [self setupTextView];
+    [self customNaviBar];
 }
+
+- (void)customNaviBar {
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(Cancel:)];
+    cancelItem.tintColor = [UIColor whiteColor];
+    self.navigationItem.leftBarButtonItem = cancelItem;
+    UIBarButtonItem *saveItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(Save:)];
+    saveItem.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = saveItem;
+    
+}
+
 
 - (void)setupTextView {
     CGFloat width = self.view.frame.size.width;
@@ -74,23 +97,13 @@
     [self.editTextView setTintColor:UIColorFromRGB(0x3CA9D2)];  // iOS 7.0 later
     
     //Toolbar
-    UIToolbar *toolbar = [[YNItemEditToolbar alloc]init].YNItemEditToolbar;
-    self.editTextView.inputAccessoryView = toolbar;
+    self.toolbar = [[YNItemEditToolbar alloc]init];
+    self.toolbar.delegate = self;
+    self.editTextView.inputAccessoryView = self.toolbar.YNItemEditToolbar;
     
     [self.view addSubview:self.editTextView];
     
-    
 }
-
-- (void)customBarItem {
-    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(Cancel:)];
-    cancelItem.tintColor = [UIColor whiteColor];
-    self.navigationItem.leftBarButtonItem = cancelItem;
-    UIBarButtonItem *saveItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(Save:)];
-    saveItem.tintColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItem = saveItem;
-}
-
 
 #pragma mark - IBActions
 
@@ -107,6 +120,19 @@
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - Delegate
+
+- (void)pickDateCreated {
+    self.toolbar.dateCreatedButton.tag = 1;
+    [self presentViewController:self.hsdpVC animated:YES completion:nil];
+    
+}
+
+- (void)pickDateAlarmed {
+    self.toolbar.dateAlarmedButton.tag = 1;
+    [self presentViewController:self.hsdpVC animated:YES completion:nil];
+}
+
 #pragma mark - Notifications
 
 - (void)registerForKeyboardNotifications
@@ -118,6 +144,7 @@
     
 }
 
+//  Dynamiclly change editTextView height
 - (void)keyboardFrameDidChange:(NSNotification*)aNotification
 {
     NSDictionary* info = [aNotification userInfo];
@@ -132,7 +159,7 @@
 
 }
 
-
+// Scroll UITextView
 - (void)textViewDidChange:(UITextView *)textView {
     CGRect line = [textView caretRectForPosition:
                    textView.selectedTextRange.start];
@@ -148,6 +175,25 @@
         [UIView animateWithDuration:.2 animations:^{
             [textView setContentOffset:offset];
         }];
+    }
+}
+
+#pragma mark - Private Methods
+
+- (void)hsDatePickerPickedDate:(NSDate *)date {
+    if (self.toolbar.dateCreatedButton.tag) {
+        self.toolbar.dateCreated = date;
+        self.toolbar.dateCreatedButton.tag = 0;
+        self.navigationItem.title = [_formatter stringFromDate:date];
+    }
+    
+    if (self.toolbar.dateAlarmedButton.tag) {
+        self.toolbar.dateAlarmed = date;
+        self.toolbar.dateAlarmedButton.tag = 0;
+        [self.toolbar.dateAlarmedButton setBackgroundImage:[UIImage imageNamed:@"ButtonBackground"] forState:UIControlStateNormal];
+        _formatter.dateFormat = kDayFormat;
+        [self.toolbar.dateAlarmedButton setTitle:[_formatter stringFromDate:date] forState:UIControlStateNormal];
+        _formatter.dateFormat = kDateFormat;
     }
 }
 

@@ -22,6 +22,10 @@
 
 // variables
 
+/*** Date Format ***/
+#define kDateFormat                 @"yyyy年M月d日"
+#define kDayFormat                  @"d日"
+
 /*** ItemCell ***/
 #define kMemoLabelWidthToSize       200.0f
 #define kMemoLabelHeightToSize      61.0f
