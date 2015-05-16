@@ -12,6 +12,8 @@
 
 - (void)pickDateCreated;
 - (void)pickDateAlarmed;
+- (void)selectCollection;
+- (void)selectTags;
 
 @end
 

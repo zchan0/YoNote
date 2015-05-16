@@ -47,5 +47,20 @@
     }
 }
 
+- (IBAction)touchCollectionButton:(id)sender {
+    if (!_delegate) {
+        NSLog(@"delegate is nil");
+    } else {
+        [_delegate selectCollection];
+    }
+
+}
+- (IBAction)touchTagsButton:(id)sender {
+    if (!_delegate) {
+        NSLog(@"delegate is nil");
+    } else {
+        [_delegate selectTags];
+    }
+}
 
 @end

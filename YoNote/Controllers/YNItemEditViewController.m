@@ -8,6 +8,7 @@
 
 #import "YNItemEditViewController.h"
 #import "HSDatePickerViewController.h"
+#import "YNItemSearchViewController.h"
 #import "YNItemEditToolbar.h"
 
 @interface YNItemEditViewController ()<UITextViewDelegate, YNItemEditToolbarDelegate, HSDatePickerViewControllerDelegate>
@@ -131,6 +132,22 @@
 - (void)pickDateAlarmed {
     self.toolbar.dateAlarmedButton.tag = 1;
     [self presentViewController:self.hsdpVC animated:YES completion:nil];
+}
+
+- (void)selectCollection {
+    YNItemSearchViewController *collectionSearchViewController = [[YNItemSearchViewController alloc]initWithNavTitle:@"图片集"];
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:collectionSearchViewController];
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:navController animated:YES completion:nil];
+    
+}
+
+- (void)selectTags {
+    YNItemSearchViewController *tagsSearchViewController = [[YNItemSearchViewController alloc]initWithNavTitle:@"标签"];
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:tagsSearchViewController];
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:navController animated:YES completion:nil];
+    
 }
 
 #pragma mark - Notifications
