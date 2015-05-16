@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YNItemSearchViewController : UITableViewController
+@interface YNItemSearchViewController : UITableViewController<UITextFieldDelegate>
 
 @property (nonatomic, strong) NSString *collectionResult;
-@property (nonatomic, strong) NSArray  *tagResults;
+@property (nonatomic, strong) NSMutableArray  *tagResults;
 @property (nonatomic, strong) NSArray  *items;
 
 

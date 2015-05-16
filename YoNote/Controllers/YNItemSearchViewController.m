@@ -13,7 +13,8 @@
 @property (nonatomic, strong) NSString    *navTitle;
 @property (nonatomic, strong) UITextField *inputTextField;
 @property (nonatomic, strong) UIView      *backgroundView;
-
+@property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *cellSelected; // for multiple selection
 
 @end
 
@@ -25,6 +26,9 @@
     [super loadView];
     [self customNaviBar];
     [self customTextView];
+    
+    self.tagResults = [NSMutableArray array];
+    self.cellSelected = [NSMutableArray array];
 }
 
 - (instancetype)initWithNavTitle:(NSString *)title {
@@ -38,8 +42,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.items = @[@"高级数据库", @"高级计算机网络", @"组合数学", @"数据挖掘", @"设计模式"];
+    self.dataSource = [NSMutableArray arrayWithArray:self.items];
     
     [self.inputTextField becomeFirstResponder];
 }
@@ -66,21 +70,39 @@
     self.inputTextField = [[UITextField alloc]initWithFrame:CGRectMake(kLabelHorizontalInsets, kLabelVerticalInsets, self.view.frame.size.width - 2*kLabelHorizontalInsets, 30)];
     self.inputTextField.backgroundColor = [UIColor whiteColor];
     self.inputTextField.borderStyle = UITextBorderStyleRoundedRect;
-    self.inputTextField.placeholder = [NSString stringWithFormat:@"请输入%@", self.navTitle];
+    self.inputTextField.placeholder = [NSString stringWithFormat:@"添加%@", self.navTitle];
+    self.inputTextField.delegate = self;
     
     [self.backgroundView addSubview:self.inputTextField];
 }
 
 #pragma mark - IBAcitons
 
-- (IBAction)Cancel:(id)sender {
+- (IBAction)Done:(id)sender {
+    
+    if ([self.navTitle isEqualToString:@"标签"]) {
+        //handle tagsResult
+        
+        for (NSIndexPath *selectedPath in self.cellSelected) {
+            NSString *selectedTag = self.dataSource[selectedPath.row];
+            [self.tagResults addObject:selectedTag];
+        }
+        
+        [self outputArray:self.tagResults];
+    }
     
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)Done:(id)sender {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.inputTextField) {
+        [self.dataSource addObject:self.inputTextField.text];
+        [self.tableView reloadData];
+        self.inputTextField.text = nil;
+    }
     
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    
+    return YES;
 }
 
 #pragma mark - Table view data source
@@ -92,10 +114,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [self.items count];
+    return [self.dataSource count];
 }
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *itemSearchCellIdentifier = @"itemSearchCellIdentifier";
@@ -107,48 +127,49 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    cell.textLabel.text = self.items[indexPath.row];
-    cell.separatorInset = ALEdgeInsetsZero;
-    
+    cell.textLabel.text = self.dataSource[indexPath.row];
     self.tableView.tableHeaderView = self.backgroundView;
+    
+    if ([self.cellSelected containsObject:indexPath]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;        
+    }
     
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.navTitle isEqualToString:@"图片集"]) {
+        self.collectionResult = self.dataSource[indexPath.row];
+        
+        NSLog(@"collectionResult: %@", self.collectionResult);
+        
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+    if ([self.navTitle isEqualToString:@"标签"]) {
+        
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+        if ([self.cellSelected containsObject:indexPath]) {
+            [self.cellSelected removeObject:indexPath];
+        } else {
+            [self.cellSelected addObject:indexPath];
+        }
+        
+        [tableView reloadData];
+    }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+#pragma mark - Private Methods
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (void)outputArray: (NSMutableArray *) array{
+    for (NSString *str in array) {
+        NSLog(@"%@", str);
+    }
 }
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 
 @end
