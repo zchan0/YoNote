@@ -11,6 +11,10 @@
 #import "YNItemSearchViewController.h"
 #import "YNItemEditToolbar.h"
 
+#define kDay    @"d"
+#define kMonth  @"M"
+#define kYear   @"yyyy"
+
 @interface YNItemEditViewController ()<UITextViewDelegate, YNItemEditToolbarDelegate, HSDatePickerViewControllerDelegate>
 
 @property (nonatomic, strong) UITextView *editTextView;
@@ -109,7 +113,9 @@
 #pragma mark - IBActions
 
 - (void)Save:(id)sender {
-    
+    if (self.toolbar.dateAlarmed) {
+        [self createLocalNotificationWithDateAlarmed:self.toolbar.dateAlarmed];
+    }
     
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
@@ -211,7 +217,42 @@
         _formatter.dateFormat = kDayFormat;
         [self.toolbar.dateAlarmedButton setTitle:[_formatter stringFromDate:date] forState:UIControlStateNormal];
         _formatter.dateFormat = kDateFormat;
+        
     }
+}
+
+- (void)createLocalNotificationWithDateAlarmed: (NSDate *)date {
+    _formatter.dateFormat = kDay;
+    NSInteger day = [[_formatter stringFromDate:date] integerValue];
+    _formatter.dateFormat = kMonth;
+    NSInteger month = [[_formatter stringFromDate:date] integerValue];
+    _formatter.dateFormat = kYear;
+    NSInteger year = [[_formatter stringFromDate:date] integerValue];
+    _formatter.dateFormat = kDateFormat;
+    NSLog(@"date: %@", date);
+    NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
+    NSDateComponents *dateComps = [[NSDateComponents alloc] init];
+    [dateComps setDay:day];
+    [dateComps setMonth:month];
+    [dateComps setYear:year];
+    [dateComps setHour:8]; // after Hour later
+    [dateComps setMinute:35];
+    NSDate *dateReminder = [calendar dateFromComponents:dateComps];
+    
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    if (localNotif == nil)
+        return;
+    localNotif.fireDate = dateReminder;NSLog(@"fireDate: %@", dateReminder);
+    localNotif.timeZone = [NSTimeZone defaultTimeZone];
+    
+    localNotif.alertBody = @"⏰提醒时间到了";
+    localNotif.alertAction = @"查看详情";
+    localNotif.alertTitle = @"Yo";
+    
+    localNotif.soundName = UILocalNotificationDefaultSoundName;
+    localNotif.applicationIconBadgeNumber = 1;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
 }
 
 @end

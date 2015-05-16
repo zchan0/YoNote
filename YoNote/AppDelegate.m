@@ -30,6 +30,8 @@
     [self customNaviBar];
     [self.window makeKeyAndVisible];    // Make current window visible
     
+    [self registerNotification];
+    
     return YES;
 }
 
@@ -55,6 +57,13 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+// Havn't tested it  
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    // Set icon badge number to zero
+    application.applicationIconBadgeNumber = 0;
+}
+
 #pragma mark - Private Methods
 
 - (void)customNaviBar {
@@ -71,6 +80,16 @@
 
     [navigationBarAppearance setBarTintColor:UIColorFromRGB(0x3CA9D2)];
 
+}
+
+- (void)registerNotification {
+    UIUserNotificationType types = UIUserNotificationTypeBadge |
+    UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    
+    UIUserNotificationSettings *mySettings =
+    [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
 }
 
 
