@@ -222,27 +222,17 @@
 }
 
 - (void)createLocalNotificationWithDateAlarmed: (NSDate *)date {
-    _formatter.dateFormat = kDay;
-    NSInteger day = [[_formatter stringFromDate:date] integerValue];
-    _formatter.dateFormat = kMonth;
-    NSInteger month = [[_formatter stringFromDate:date] integerValue];
-    _formatter.dateFormat = kYear;
-    NSInteger year = [[_formatter stringFromDate:date] integerValue];
-    _formatter.dateFormat = kDateFormat;
-    NSLog(@"date: %@", date);
-    NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
-    NSDateComponents *dateComps = [[NSDateComponents alloc] init];
-    [dateComps setDay:day];
-    [dateComps setMonth:month];
-    [dateComps setYear:year];
-    [dateComps setHour:8]; // after Hour later
-    [dateComps setMinute:35];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    [calendar setTimeZone:[NSTimeZone localTimeZone]];
+    NSUInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute;
+    NSDateComponents *dateComps = [calendar components:unitFlags fromDate:date];
     NSDate *dateReminder = [calendar dateFromComponents:dateComps];
     
     UILocalNotification *localNotif = [[UILocalNotification alloc] init];
     if (localNotif == nil)
         return;
-    localNotif.fireDate = dateReminder;NSLog(@"fireDate: %@", dateReminder);
+    localNotif.fireDate = dateReminder;
     localNotif.timeZone = [NSTimeZone defaultTimeZone];
     
     localNotif.alertBody = @"⏰提醒时间到了";

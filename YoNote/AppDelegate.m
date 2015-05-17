@@ -32,6 +32,7 @@
     
     [self registerNotification];
     
+    
     return YES;
 }
 
@@ -60,8 +61,7 @@
 // Havn't tested it  
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
-    // Set icon badge number to zero
-    application.applicationIconBadgeNumber = 0;
+    application.applicationIconBadgeNumber = notification.applicationIconBadgeNumber - 1;
 }
 
 #pragma mark - Private Methods
