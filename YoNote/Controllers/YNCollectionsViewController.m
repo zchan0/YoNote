@@ -53,6 +53,7 @@ static NSString *YNCollectionCellIndentifier = @"YNCollectionCellIndentifier";
     UIImage *thumbnail = [[YNImageStore sharedStore]setThumbnailFromImage:image newRect:kCollectionImageRect];
     cell.iv.image = thumbnail;
     cell.separatorInset = ALEdgeInsetsZero; // make separator below imageview visible
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     // Make sure the constraints have been added to this cell, since it may have just been created from scratch
     [cell setNeedsUpdateConstraints];

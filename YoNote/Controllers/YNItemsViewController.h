@@ -8,6 +8,6 @@
 
 #import "YNBaseViewController.h"
 
-@interface YNItemsViewController : YNBaseViewController
+@interface YNItemsViewController : YNBaseViewController<UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @end

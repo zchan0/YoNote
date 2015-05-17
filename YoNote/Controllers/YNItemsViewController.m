@@ -9,31 +9,46 @@
 #import "YNItemsViewController.h"
 #import "YNItemCell.h"
 #import "YNImageStore.h"
-#import "YNItemEditViewController.h"
 
 static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
+@interface YNItemsViewController ()
+
+@end
+
 @implementation YNItemsViewController
 
+- (void)loadView {
+    [super loadView];
+    
+    [self customNavBar];
+    [self customTableView];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self customNavigationItem];
-    [self customButtonItem];
-    
-    [self.tableView registerClass:[YNItemCell class] forCellReuseIdentifier:YNItemCellIndentifier];
-    
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
 
 #pragma mark - Views
 
-- (void)customNavigationItem {
+- (void)customTableView {
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerClass:[YNItemCell class] forCellReuseIdentifier:YNItemCellIndentifier];
+}
+
+- (void)customNavBar {
+    
     UINavigationItem *navItem = self.navigationItem;
     // custom title attributes
     navItem.title = @"首页";
-}
-
-- (void)customButtonItem {
+    
     UIImage *leftImage = [UIImage imageNamed:@"navi_search"];
     UIImage *rightImage = [UIImage imageNamed:@"navi_add"];
     
@@ -41,13 +56,13 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     [leftButton setBackgroundImage:leftImage forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(searchItem:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
-    self.navigationItem.leftBarButtonItem = leftBarItem;
+    navItem.leftBarButtonItem = leftBarItem;
     
     UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
     [rightButton setBackgroundImage:rightImage forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(addNewItem:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = rightBarItem;
+    navItem.rightBarButtonItem = rightBarItem;
     
 }
 
@@ -55,11 +70,10 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 #pragma mark - IBActions
 
 - (IBAction)addNewItem:(id)sender {
-    YNItemEditViewController *editViewController = [[YNItemEditViewController alloc]initForNewItem:YES];
     
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:editViewController];
-    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:navController animated:YES completion:nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"相册",nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+    [actionSheet showFromRect:self.view.bounds inView:self.view animated:YES]; // actionSheet弹出位置
     
 }
 
@@ -67,7 +81,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     
 }
 
-#pragma mark -Table
+#pragma mark - Table
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 4;
@@ -87,6 +101,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     UIImage *thumbnail = [[YNImageStore sharedStore]setThumbnailFromImage:image newRect:kItemImageRect];
     cell.iv.image = thumbnail;
     cell.separatorInset = ALEdgeInsetsZero; // make separator below imageview visible
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     // Make sure the constraints have been added to this cell, since it may have just been created from scratch
     [cell setNeedsUpdateConstraints];
@@ -95,10 +110,91 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return kItemTableCellHeight;
 }
+
+#pragma mark - Camaera
+
+
+
+#pragma mark - Actionsheet
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+        {
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.delegate = self;
+                picker.allowsEditing = YES;
+                picker.sourceType = UIImagePickerControllerSourceTypeCamera;//UIImagePicker选择器的类型，UIImagePickerControllerSourceTypeCamera调用系统相机
+                //[self presentViewController:picker animated:YES completion:nil];
+                if([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0)
+                {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        
+                        [self presentViewController:picker animated:NO completion:nil];
+                    }];
+                    
+                }
+                else{
+                    
+                    [self presentViewController:picker animated:NO completion:nil];
+                }
+            }
+            else{
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"哎呀，当前设备没有摄像头。" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alertView show];
+            }
+            break;
+        }
+        case 1:
+        {
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+                UIImagePickerController * picker = [[UIImagePickerController alloc]init];
+                picker.delegate = self;
+                picker.allowsEditing = YES;//是否可以对原图进行编辑
+                picker.navigationBar.tintColor = [UIColor whiteColor];
+                
+                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                //[self presentViewController:picker animated:YES completion:nil];
+                
+                if([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0)
+                {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        
+                        [self presentViewController:picker animated:NO completion:nil];
+                    }];
+                    
+                }
+                else{
+                    
+                    [self presentViewController:picker animated:NO completion:nil];
+                }
+            }
+            else{
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"相册不可用" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alertView show];
+            }
+            break;
+        }
+        case 3:
+        {
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 
 
 @end

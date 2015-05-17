@@ -26,9 +26,6 @@
     [super loadView];
     [self customNaviBar];
     [self customTextView];
-    
-    self.tagResults = [NSMutableArray array];
-    self.cellSelected = [NSMutableArray array];
 }
 
 - (instancetype)initWithNavTitle:(NSString *)title {
@@ -44,6 +41,8 @@
     [super viewDidLoad];
     self.items = @[@"高级数据库", @"高级计算机网络", @"组合数学", @"数据挖掘", @"设计模式"];
     self.dataSource = [NSMutableArray arrayWithArray:self.items];
+    self.tagResults = [NSMutableArray array];
+    self.cellSelected = [NSMutableArray array];
     
     [self.inputTextField becomeFirstResponder];
 }

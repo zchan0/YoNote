@@ -61,7 +61,7 @@
 // Havn't tested it  
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
-    application.applicationIconBadgeNumber = notification.applicationIconBadgeNumber - 1;
+    application.applicationIconBadgeNumber = 0;
 }
 
 #pragma mark - Private Methods
