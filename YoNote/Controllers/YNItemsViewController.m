@@ -9,6 +9,8 @@
 #import "YNItemsViewController.h"
 #import "YNItemCell.h"
 #import "YNImageStore.h"
+#import "YNItemEditViewController.h"
+#import "YNItemDetailViewController.h"
 
 static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
@@ -18,15 +20,11 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
 @implementation YNItemsViewController
 
-- (void)loadView {
-    [super loadView];
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
     [self customNavBar];
     [self customTableView];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -38,8 +36,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 #pragma mark - Views
 
 - (void)customTableView {
-    self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    //self.tableView.backgroundColor = [UIColor clearColor];
     [self.tableView registerClass:[YNItemCell class] forCellReuseIdentifier:YNItemCellIndentifier];
 }
 
@@ -63,17 +60,23 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     [rightButton addTarget:self action:@selector(addNewItem:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
     navItem.rightBarButtonItem = rightBarItem;
-    
+        
 }
 
 
 #pragma mark - IBActions
 
 - (IBAction)addNewItem:(id)sender {
+    YNItemEditViewController *editViewController = [[YNItemEditViewController alloc]initForNewItem:YES];
     
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:editViewController];
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:navController animated:YES completion:nil];
+    
+    /*
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"相册",nil];
     actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-    [actionSheet showFromRect:self.view.bounds inView:self.view animated:YES]; // actionSheet弹出位置
+    [actionSheet showFromRect:self.view.bounds inView:self.view animated:YES]; // actionSheet弹出位置*/
     
 }
 
@@ -101,7 +104,6 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     UIImage *thumbnail = [[YNImageStore sharedStore]setThumbnailFromImage:image newRect:kItemImageRect];
     cell.iv.image = thumbnail;
     cell.separatorInset = ALEdgeInsetsZero; // make separator below imageview visible
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     // Make sure the constraints have been added to this cell, since it may have just been created from scratch
     [cell setNeedsUpdateConstraints];
@@ -112,7 +114,8 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
+    YNItemDetailViewController *detailViewController = [[YNItemDetailViewController alloc]init];
+    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 

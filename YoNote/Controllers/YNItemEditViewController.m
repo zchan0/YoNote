@@ -11,10 +11,6 @@
 #import "YNItemSearchViewController.h"
 #import "YNItemEditToolbar.h"
 
-#define kDay    @"d"
-#define kMonth  @"M"
-#define kYear   @"yyyy"
-
 @interface YNItemEditViewController ()<UITextViewDelegate, YNItemEditToolbarDelegate, HSDatePickerViewControllerDelegate>
 
 @property (nonatomic, strong) UITextView *editTextView;
@@ -28,13 +24,24 @@
 
 #pragma mark - Lifecycle
 
+- (void)loadView {
+    self.view = [[UIView alloc]initWithFrame:[UIScreen mainScreen].applicationFrame];
+    self.view.backgroundColor = [UIColor whiteColor];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupTextView];
+    [self customNaviBar];
+    
+    //  formatter initialization
     _formatter = [[NSDateFormatter alloc]init];
     _formatter.dateFormat = kDateFormat;
     self.navigationItem.title = [_formatter stringFromDate:[NSDate date]];
     
+    
+    //  hsdpVC initialization
     self.hsdpVC = [HSDatePickerViewController new];
     self.hsdpVC.delegate = self;
 
@@ -71,14 +78,6 @@
 }
 
 #pragma mark - Views
-
-- (void)loadView {
-    [super loadView];
-    self.view = [[UIView alloc]initWithFrame:[UIScreen mainScreen].applicationFrame];
-    self.view.backgroundColor = [UIColor whiteColor];
-    [self setupTextView];
-    [self customNaviBar];
-}
 
 - (void)customNaviBar {
     UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(Cancel:)];

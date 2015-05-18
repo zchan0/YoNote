@@ -20,6 +20,7 @@
 		955CF4F41AF9C2DF00C8BBE6 /* YNSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4F31AF9C2DF00C8BBE6 /* YNSettingsViewController.m */; };
 		955CF4F71AFA038C00C8BBE6 /* YNBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4F61AFA038C00C8BBE6 /* YNBaseNavigationController.m */; };
 		955CF4FC1AFA107500C8BBE6 /* UINavigationController+StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4FB1AFA107500C8BBE6 /* UINavigationController+StatusBar.m */; };
+		956768741B09A20800426993 /* YNItemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 956768731B09A20800426993 /* YNItemDetailViewController.m */; };
 		957DC3121AF99FF600DA8D6A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 957DC3111AF99FF600DA8D6A /* main.m */; };
 		957DC3151AF99FF600DA8D6A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 957DC3141AF99FF600DA8D6A /* AppDelegate.m */; };
 		957DC31D1AF99FF600DA8D6A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 957DC31C1AF99FF600DA8D6A /* Images.xcassets */; };
@@ -74,6 +75,8 @@
 		955CF4F61AFA038C00C8BBE6 /* YNBaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNBaseNavigationController.m; path = Controllers/YNBaseNavigationController.m; sourceTree = "<group>"; };
 		955CF4FA1AFA107500C8BBE6 /* UINavigationController+StatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+StatusBar.h"; path = "Util/Category/UINavigationController+StatusBar.h"; sourceTree = "<group>"; };
 		955CF4FB1AFA107500C8BBE6 /* UINavigationController+StatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+StatusBar.m"; path = "Util/Category/UINavigationController+StatusBar.m"; sourceTree = "<group>"; };
+		956768721B09A20800426993 /* YNItemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNItemDetailViewController.h; path = Controllers/YNItemDetailViewController.h; sourceTree = "<group>"; };
+		956768731B09A20800426993 /* YNItemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemDetailViewController.m; path = Controllers/YNItemDetailViewController.m; sourceTree = "<group>"; };
 		957DC30C1AF99FF600DA8D6A /* YoNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		957DC3101AF99FF600DA8D6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		957DC3111AF99FF600DA8D6A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -136,6 +139,8 @@
 				95EC8A901AFF69CE00C68D2B /* YNItemEditViewController.m */,
 				95AEE8651B06CD0E00C477EB /* YNItemSearchViewController.h */,
 				95AEE8661B06CD0E00C477EB /* YNItemSearchViewController.m */,
+				956768721B09A20800426993 /* YNItemDetailViewController.h */,
+				956768731B09A20800426993 /* YNItemDetailViewController.m */,
 			);
 			name = Item;
 			sourceTree = "<group>";
@@ -462,6 +467,7 @@
 				95895D211AFB04E500BE7D2E /* YNItemCell.m in Sources */,
 				955CF4DF1AF9C06D00C8BBE6 /* RDVTabBar.m in Sources */,
 				955CF4EE1AF9C2B400C8BBE6 /* YNTagsViewController.m in Sources */,
+				956768741B09A20800426993 /* YNItemDetailViewController.m in Sources */,
 				95AEE8781B072A1B00C477EB /* HSDatePickerViewController.m in Sources */,
 				955CF4F11AF9C2CA00C8BBE6 /* YNCollectionsViewController.m in Sources */,
 				95863CAC1AFDA83C00C31E2D /* ALView+PureLayout.m in Sources */,

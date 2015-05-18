@@ -22,12 +22,6 @@
 
 #pragma mark - Lifecycle
 
-- (void)loadView {
-    [super loadView];
-    [self customNaviBar];
-    [self customTextView];
-}
-
 - (instancetype)initWithNavTitle:(NSString *)title {
     self = [super init];
     if (self) {
@@ -39,12 +33,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self customNaviBar];
+    [self customTextView];
+    
     self.items = @[@"高级数据库", @"高级计算机网络", @"组合数学", @"数据挖掘", @"设计模式"];
     self.dataSource = [NSMutableArray arrayWithArray:self.items];
     self.tagResults = [NSMutableArray array];
     self.cellSelected = [NSMutableArray array];
     
-    [self.inputTextField becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
