@@ -26,6 +26,16 @@ static NSString *YNCollectionCellIndentifier = @"YNCollectionCellIndentifier";
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tabBarController setTabBarHidden:NO animated:YES];
+    [self.tableView reloadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.tabBarController setTabBarHidden:YES animated:YES];
+}
+
 #pragma mark - Views
 
 - (void)customNavigationItem {

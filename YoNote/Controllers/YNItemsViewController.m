@@ -9,7 +9,6 @@
 #import "YNItemsViewController.h"
 #import "YNItemCell.h"
 #import "YNImageStore.h"
-#import "YNItemEditViewController.h"
 #import "YNItemDetailViewController.h"
 
 static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
@@ -29,14 +28,17 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.tabBarController setTabBarHidden:NO animated:YES];
     [self.tableView reloadData];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.tabBarController setTabBarHidden:YES animated:YES];
+}
 
 #pragma mark - Views
 
 - (void)customTableView {
-    //self.tableView.backgroundColor = [UIColor clearColor];
     [self.tableView registerClass:[YNItemCell class] forCellReuseIdentifier:YNItemCellIndentifier];
 }
 
@@ -67,16 +69,10 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 #pragma mark - IBActions
 
 - (IBAction)addNewItem:(id)sender {
-    YNItemEditViewController *editViewController = [[YNItemEditViewController alloc]initForNewItem:YES];
     
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:editViewController];
-    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:navController animated:YES completion:nil];
-    
-    /*
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"相册",nil];
     actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-    [actionSheet showFromRect:self.view.bounds inView:self.view animated:YES]; // actionSheet弹出位置*/
+    [actionSheet showFromRect:self.view.bounds inView:self.view animated:YES]; // actionSheet弹出位置
     
 }
 

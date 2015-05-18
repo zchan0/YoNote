@@ -33,15 +33,18 @@
 - (void)setupViewControllers {
     YNItemsViewController *homeViewController = [[YNItemsViewController alloc]init];
     UINavigationController *navHome = [[YNBaseNavigationController alloc]initWithRootViewController:homeViewController];
-    
+    homeViewController.tabBarController = self;
+
     YNCollectionsViewController *collectionsViewController = [[YNCollectionsViewController alloc]init];
     UINavigationController *navCollection = [[YNBaseNavigationController alloc]initWithRootViewController:collectionsViewController];
+    collectionsViewController.tabBarController = self;
     
     YNTagsViewController *tagsViewController = [[YNTagsViewController alloc]init];
     UINavigationController *navTag = [[YNBaseNavigationController alloc]initWithRootViewController:tagsViewController];
     
     YNSettingsViewController *settingsViewController = [[YNSettingsViewController alloc]init];
     UINavigationController *navSettings = [[YNBaseNavigationController alloc]initWithRootViewController:settingsViewController];
+    
     
     [self setViewControllers:@[navHome, navCollection, navTag, navSettings]];
     

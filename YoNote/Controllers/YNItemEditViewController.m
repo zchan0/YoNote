@@ -60,7 +60,8 @@
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        if (isNew) {
+        if (!isNew) {
+            // dateAlarmedButton imageButton tags and collection button has specific value
         }
     }
     

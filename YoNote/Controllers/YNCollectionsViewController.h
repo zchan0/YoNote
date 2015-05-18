@@ -7,7 +7,10 @@
 //
 
 #import "YNBaseViewController.h"
+#import "RDVTabBarController.h"
 
 @interface YNCollectionsViewController : YNBaseViewController
+
+@property (nonatomic, strong) RDVTabBarController *tabBarController;
 
 @end
