@@ -24,16 +24,14 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     
     [self customNavBar];
     [self customTableView];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.tabBarController setTabBarHidden:NO animated:YES];
     [self.tableView reloadData];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [self.tabBarController setTabBarHidden:YES animated:YES];
 }
 
 #pragma mark - Views
@@ -100,6 +98,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     UIImage *thumbnail = [[YNImageStore sharedStore]setThumbnailFromImage:image newRect:kItemImageRect];
     cell.iv.image = thumbnail;
     cell.separatorInset = ALEdgeInsetsZero; // make separator below imageview visible
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     // Make sure the constraints have been added to this cell, since it may have just been created from scratch
     [cell setNeedsUpdateConstraints];

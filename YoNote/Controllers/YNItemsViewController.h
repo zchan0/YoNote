@@ -7,10 +7,8 @@
 //
 
 #import "YNBaseViewController.h"
-#import "RDVTabBarController.h"
 
 @interface YNItemsViewController : YNBaseViewController<UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (nonatomic, strong) RDVTabBarController *tabBarController;
 
 @end
