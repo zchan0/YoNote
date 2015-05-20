@@ -36,6 +36,7 @@
 		95AEE8671B06CD0E00C477EB /* YNItemSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AEE8661B06CD0E00C477EB /* YNItemSearchViewController.m */; };
 		95AEE8781B072A1B00C477EB /* HSDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AEE8761B072A1B00C477EB /* HSDatePickerViewController.m */; };
 		95AEE8791B072A1B00C477EB /* HSDatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95AEE8771B072A1B00C477EB /* HSDatePickerViewController.xib */; };
+		95E5D6401B0C7CC500E75339 /* YNItemDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95E5D63F1B0C7CC500E75339 /* YNItemDetailViewController.xib */; };
 		95EC8A911AFF69CE00C68D2B /* YNItemEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95EC8A901AFF69CE00C68D2B /* YNItemEditViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +111,7 @@
 		95AEE8751B072A1B00C477EB /* HSDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSDatePickerViewController.h; sourceTree = "<group>"; };
 		95AEE8761B072A1B00C477EB /* HSDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSDatePickerViewController.m; sourceTree = "<group>"; };
 		95AEE8771B072A1B00C477EB /* HSDatePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HSDatePickerViewController.xib; sourceTree = "<group>"; };
+		95E5D63F1B0C7CC500E75339 /* YNItemDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YNItemDetailViewController.xib; sourceTree = "<group>"; };
 		95EC8A8F1AFF69CE00C68D2B /* YNItemEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNItemEditViewController.h; path = Controllers/YNItemEditViewController.h; sourceTree = "<group>"; };
 		95EC8A901AFF69CE00C68D2B /* YNItemEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemEditViewController.m; path = Controllers/YNItemEditViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -262,6 +264,7 @@
 			children = (
 				95AEE8581B05D18100C477EB /* cell */,
 				95AEE87D1B0898F700C477EB /* toolbar */,
+				95E5D63F1B0C7CC500E75339 /* YNItemDetailViewController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				953438401B01EF74001859D7 /* YNItemEditToolbar.xib in Resources */,
 				95AEE8791B072A1B00C477EB /* HSDatePickerViewController.xib in Resources */,
 				957DC3201AF99FF600DA8D6A /* LaunchScreen.xib in Resources */,
+				95E5D6401B0C7CC500E75339 /* YNItemDetailViewController.xib in Resources */,
 				957DC31D1AF99FF600DA8D6A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

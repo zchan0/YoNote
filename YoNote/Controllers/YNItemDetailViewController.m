@@ -18,7 +18,14 @@
 @interface YNItemDetailViewController ()
 
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
-@property (nonatomic, strong) UIView *background;
+@property (nonatomic, strong) IBOutlet UILabel     *memoLabel;
+@property (nonatomic, strong) IBOutlet UILabel     *tagLabel;
+@property (nonatomic, strong) IBOutlet UILabel     *dateCreatedLabel;
+@property (nonatomic, strong) IBOutlet UIButton    *imageBrowserButton;
+@property (nonatomic, strong) IBOutlet UIButton    *exportButton;
+
+@property (nonatomic, strong) NSDateFormatter *formatter;
+
 
 @end
 
@@ -26,18 +33,30 @@
 
 #pragma mark - Lifecycle
 
-- (void)loadView {
-    self.view = [[UIView alloc]initWithFrame:[UIScreen mainScreen].applicationFrame];
-    self.view.backgroundColor = [UIColor whiteColor];
+- (instancetype)initForNewItem:(BOOL)isNew
+{
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        if (isNew) {
+            
+        }
+    }
+    
+    return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //  formatter initialization
+    _formatter = [[NSDateFormatter alloc]init];
+    _formatter.dateFormat = kDateFormat;
+    
     [self customNaviBar];
     [self customImageView];
-    [self customTextArea];
+    [self customLabels];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -49,6 +68,10 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
+    //put the bar back to default
+    [self.navigationController.navigationBar setBackgroundImage:nil
+                                                  forBarMetrics:UIBarMetricsDefault];
+    
     [[self rdv_tabBarController] setTabBarHidden:NO animated:YES];
 }
 
@@ -59,38 +82,30 @@
 
 #pragma mark - Views
 
-- (void)customImageView {
-    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kFrameWidth, kFrameHeight * 0.6)];
-    UIImage *image = [[YNImageStore sharedStore]imageForKey:@"img_2.jpg"];
-    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.imageView.image = image;
-    
-    [self.view addSubview:self.imageView];
-}
-
-- (void)customTextArea {
-    
-}
-
 - (void)customNaviBar {
-    
-    /*** This is Plan B ***/
-    //UIButton *editButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 24, 20)];
-    //[editButton setBackgroundImage:[UIImage imageNamed:@"navi_edit"] forState:UIControlStateNormal];
-    //[editButton addTarget:self action:@selector(Edit:) forControlEvents:UIControlEventTouchUpInside];
-    
+
     UIBarButtonItem *editItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(Edit:)];
-    //UIBarButtonItem *editItem = [[UIBarButtonItem alloc]initWithCustomView:editButton];
     self.navigationItem.rightBarButtonItem = editItem;
     
-    /*UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"navi_back"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(Back:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
-    self.navigationItem.leftBarButtonItem = backItem;*/
-    
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    
+    //  make the navigationBar transparent
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    [navigationBar setTintColor:[UIColor whiteColor]];
+    [navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [navigationBar setShadowImage:[UIImage new]];
+    [navigationBar setTranslucent:YES];
+}
+
+- (void)customImageView {
+
+    UIImage *image = [[YNImageStore sharedStore]imageForKey:@"img_4.jpg"];
+    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.imageView.image = image;
+}
+
+- (void)customLabels {
+
+    self.memoLabel.text = kTestString;
+    self.dateCreatedLabel.text = [_formatter stringFromDate:[NSDate date]];
 }
 
 #pragma mark - IBActions
@@ -103,9 +118,5 @@
     [self presentViewController:navController animated:YES completion:nil];
 }
 
-/*
-- (IBAction)Back:(id)sender {
-    [self.navigationController popViewControllerAnimated:NO];
-}*/
 
 @end

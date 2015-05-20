@@ -10,5 +10,6 @@
 
 @interface YNItemDetailViewController : UIViewController
 
+- (instancetype)initForNewItem:(BOOL)isNew;
 
 @end
