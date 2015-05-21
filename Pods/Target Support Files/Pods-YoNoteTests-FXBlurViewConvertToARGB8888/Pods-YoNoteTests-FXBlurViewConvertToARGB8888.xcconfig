@@ -1,0 +1,1 @@
+PODS_YONOTETESTS_FXBLURVIEWCONVERTTOARGB_____OTHER_LDFLAGS = -framework "Accelerate" -framework "QuartzCore"

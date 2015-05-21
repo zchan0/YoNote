@@ -14,9 +14,6 @@
 		9539A2EA1B0DFCEE004E1A48 /* YNImageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9539A2E91B0DFCEE004E1A48 /* YNImageDetailViewController.xib */; };
 		9539A2EC1B0DFCFF004E1A48 /* YNImagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9539A2EB1B0DFCFF004E1A48 /* YNImagesViewController.xib */; };
 		955CF4D61AF9B9CC00C8BBE6 /* YNBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4D51AF9B9CC00C8BBE6 /* YNBaseViewController.m */; };
-		955CF4DF1AF9C06D00C8BBE6 /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4DA1AF9C06D00C8BBE6 /* RDVTabBar.m */; };
-		955CF4E01AF9C06D00C8BBE6 /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4DC1AF9C06D00C8BBE6 /* RDVTabBarController.m */; };
-		955CF4E11AF9C06D00C8BBE6 /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4DE1AF9C06D00C8BBE6 /* RDVTabBarItem.m */; };
 		955CF4E51AF9C0AC00C8BBE6 /* YNRootTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4E41AF9C0AC00C8BBE6 /* YNRootTabViewController.m */; };
 		955CF4E81AF9C21B00C8BBE6 /* YNItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4E71AF9C21B00C8BBE6 /* YNItemsViewController.m */; };
 		955CF4EE1AF9C2B400C8BBE6 /* YNTagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4ED1AF9C2B400C8BBE6 /* YNTagsViewController.m */; };
@@ -30,18 +27,13 @@
 		957DC31D1AF99FF600DA8D6A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 957DC31C1AF99FF600DA8D6A /* Images.xcassets */; };
 		957DC3201AF99FF600DA8D6A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 957DC31E1AF99FF600DA8D6A /* LaunchScreen.xib */; };
 		957DC32C1AF99FF600DA8D6A /* YoNoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 957DC32B1AF99FF600DA8D6A /* YoNoteTests.m */; };
-		95863CAA1AFDA83C00C31E2D /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 95863CA41AFDA83C00C31E2D /* NSLayoutConstraint+PureLayout.m */; };
-		95863CAB1AFDA83C00C31E2D /* NSArray+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 95863CA61AFDA83C00C31E2D /* NSArray+PureLayout.m */; };
-		95863CAC1AFDA83C00C31E2D /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 95863CA81AFDA83C00C31E2D /* ALView+PureLayout.m */; };
 		95895D211AFB04E500BE7D2E /* YNItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95895D201AFB04E500BE7D2E /* YNItemCell.m */; };
 		95895D271AFB0F6100BE7D2E /* YNImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 95895D261AFB0F6100BE7D2E /* YNImageStore.m */; };
-		958B29801AFEE9CC00815154 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 958B297F1AFEE9CC00815154 /* FXBlurView.m */; };
 		95A6E55D1AFDBBC500071561 /* YNCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A6E55C1AFDBBC500071561 /* YNCollectionCell.m */; };
 		95AEE8671B06CD0E00C477EB /* YNItemSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AEE8661B06CD0E00C477EB /* YNItemSearchViewController.m */; };
-		95AEE8781B072A1B00C477EB /* HSDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AEE8761B072A1B00C477EB /* HSDatePickerViewController.m */; };
-		95AEE8791B072A1B00C477EB /* HSDatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95AEE8771B072A1B00C477EB /* HSDatePickerViewController.xib */; };
 		95E5D6401B0C7CC500E75339 /* YNItemDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95E5D63F1B0C7CC500E75339 /* YNItemDetailViewController.xib */; };
 		95EC8A911AFF69CE00C68D2B /* YNItemEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95EC8A901AFF69CE00C68D2B /* YNItemEditViewController.m */; };
+		F2CB2153EA955B4A6DE64B1F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DDD64A8A14D25B75D9393C88 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,12 +58,6 @@
 		9539A2EB1B0DFCFF004E1A48 /* YNImagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YNImagesViewController.xib; sourceTree = "<group>"; };
 		955CF4D41AF9B9CC00C8BBE6 /* YNBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNBaseViewController.h; path = Controllers/YNBaseViewController.h; sourceTree = "<group>"; };
 		955CF4D51AF9B9CC00C8BBE6 /* YNBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNBaseViewController.m; path = Controllers/YNBaseViewController.m; sourceTree = "<group>"; };
-		955CF4D91AF9C06D00C8BBE6 /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDVTabBar.h; path = Vendor/RDVTabBarController/RDVTabBar.h; sourceTree = "<group>"; };
-		955CF4DA1AF9C06D00C8BBE6 /* RDVTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RDVTabBar.m; path = Vendor/RDVTabBarController/RDVTabBar.m; sourceTree = "<group>"; };
-		955CF4DB1AF9C06D00C8BBE6 /* RDVTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDVTabBarController.h; path = Vendor/RDVTabBarController/RDVTabBarController.h; sourceTree = "<group>"; };
-		955CF4DC1AF9C06D00C8BBE6 /* RDVTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RDVTabBarController.m; path = Vendor/RDVTabBarController/RDVTabBarController.m; sourceTree = "<group>"; };
-		955CF4DD1AF9C06D00C8BBE6 /* RDVTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDVTabBarItem.h; path = Vendor/RDVTabBarController/RDVTabBarItem.h; sourceTree = "<group>"; };
-		955CF4DE1AF9C06D00C8BBE6 /* RDVTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RDVTabBarItem.m; path = Vendor/RDVTabBarController/RDVTabBarItem.m; sourceTree = "<group>"; };
 		955CF4E31AF9C0AC00C8BBE6 /* YNRootTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNRootTabViewController.h; path = Controllers/YNRootTabViewController.h; sourceTree = "<group>"; };
 		955CF4E41AF9C0AC00C8BBE6 /* YNRootTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNRootTabViewController.m; path = Controllers/YNRootTabViewController.m; sourceTree = "<group>"; };
 		955CF4E61AF9C21B00C8BBE6 /* YNItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNItemsViewController.h; path = Controllers/YNItemsViewController.h; sourceTree = "<group>"; };
@@ -99,31 +85,20 @@
 		957DC32A1AF99FF600DA8D6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		957DC32B1AF99FF600DA8D6A /* YoNoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YoNoteTests.m; sourceTree = "<group>"; };
 		957DC3351AF9A25B00DA8D6A /* YoNote-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YoNote-Prefix.pch"; sourceTree = "<group>"; };
-		95863CA11AFDA83C00C31E2D /* PureLayoutDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PureLayoutDefines.h; path = Vendor/PureLayout/PureLayoutDefines.h; sourceTree = "<group>"; };
-		95863CA21AFDA83C00C31E2D /* PureLayout+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PureLayout+Internal.h"; path = "Vendor/PureLayout/PureLayout+Internal.h"; sourceTree = "<group>"; };
-		95863CA31AFDA83C00C31E2D /* PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PureLayout.h; path = Vendor/PureLayout/PureLayout.h; sourceTree = "<group>"; };
-		95863CA41AFDA83C00C31E2D /* NSLayoutConstraint+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSLayoutConstraint+PureLayout.m"; path = "Vendor/PureLayout/NSLayoutConstraint+PureLayout.m"; sourceTree = "<group>"; };
-		95863CA51AFDA83C00C31E2D /* NSLayoutConstraint+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSLayoutConstraint+PureLayout.h"; path = "Vendor/PureLayout/NSLayoutConstraint+PureLayout.h"; sourceTree = "<group>"; };
-		95863CA61AFDA83C00C31E2D /* NSArray+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+PureLayout.m"; path = "Vendor/PureLayout/NSArray+PureLayout.m"; sourceTree = "<group>"; };
-		95863CA71AFDA83C00C31E2D /* NSArray+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+PureLayout.h"; path = "Vendor/PureLayout/NSArray+PureLayout.h"; sourceTree = "<group>"; };
-		95863CA81AFDA83C00C31E2D /* ALView+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ALView+PureLayout.m"; path = "Vendor/PureLayout/ALView+PureLayout.m"; sourceTree = "<group>"; };
-		95863CA91AFDA83C00C31E2D /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ALView+PureLayout.h"; path = "Vendor/PureLayout/ALView+PureLayout.h"; sourceTree = "<group>"; };
 		95895D1F1AFB04E500BE7D2E /* YNItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNItemCell.h; path = Views/YNItemCell.h; sourceTree = "<group>"; };
 		95895D201AFB04E500BE7D2E /* YNItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemCell.m; path = Views/YNItemCell.m; sourceTree = "<group>"; };
 		95895D251AFB0F6100BE7D2E /* YNImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNImageStore.h; path = Model/YNImageStore.h; sourceTree = "<group>"; };
 		95895D261AFB0F6100BE7D2E /* YNImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNImageStore.m; path = Model/YNImageStore.m; sourceTree = "<group>"; };
-		958B297E1AFEE9CC00815154 /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FXBlurView.h; path = Vendor/FXBlurView/FXBlurView.h; sourceTree = "<group>"; };
-		958B297F1AFEE9CC00815154 /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FXBlurView.m; path = Vendor/FXBlurView/FXBlurView.m; sourceTree = "<group>"; };
 		95A6E55B1AFDBBC500071561 /* YNCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNCollectionCell.h; path = Views/YNCollectionCell.h; sourceTree = "<group>"; };
 		95A6E55C1AFDBBC500071561 /* YNCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNCollectionCell.m; path = Views/YNCollectionCell.m; sourceTree = "<group>"; };
 		95AEE8651B06CD0E00C477EB /* YNItemSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNItemSearchViewController.h; path = Controllers/YNItemSearchViewController.h; sourceTree = "<group>"; };
 		95AEE8661B06CD0E00C477EB /* YNItemSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemSearchViewController.m; path = Controllers/YNItemSearchViewController.m; sourceTree = "<group>"; };
-		95AEE8751B072A1B00C477EB /* HSDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSDatePickerViewController.h; sourceTree = "<group>"; };
-		95AEE8761B072A1B00C477EB /* HSDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSDatePickerViewController.m; sourceTree = "<group>"; };
-		95AEE8771B072A1B00C477EB /* HSDatePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HSDatePickerViewController.xib; sourceTree = "<group>"; };
 		95E5D63F1B0C7CC500E75339 /* YNItemDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YNItemDetailViewController.xib; sourceTree = "<group>"; };
 		95EC8A8F1AFF69CE00C68D2B /* YNItemEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNItemEditViewController.h; path = Controllers/YNItemEditViewController.h; sourceTree = "<group>"; };
 		95EC8A901AFF69CE00C68D2B /* YNItemEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemEditViewController.m; path = Controllers/YNItemEditViewController.m; sourceTree = "<group>"; };
+		B6329A7AD74C3302441CEFCA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		DDD64A8A14D25B75D9393C88 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F541243CA2F8D4A6F1E6DA7B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2CB2153EA955B4A6DE64B1F /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +120,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		923D414B370563984C9B8FC4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DDD64A8A14D25B75D9393C88 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		953438441B04C966001859D7 /* Items */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,30 +164,6 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		955CF4D81AF9C00E00C8BBE6 /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				95AEE8741B072A1B00C477EB /* HSDatePickerViewController */,
-				958B29811AFEE9D700815154 /* FXBlurView */,
-				95895D281AFB1ABD00BE7D2E /* PureLayout */,
-				955CF4E21AF9C07600C8BBE6 /* RDVTabController */,
-			);
-			name = Vendor;
-			sourceTree = "<group>";
-		};
-		955CF4E21AF9C07600C8BBE6 /* RDVTabController */ = {
-			isa = PBXGroup;
-			children = (
-				955CF4D91AF9C06D00C8BBE6 /* RDVTabBar.h */,
-				955CF4DA1AF9C06D00C8BBE6 /* RDVTabBar.m */,
-				955CF4DB1AF9C06D00C8BBE6 /* RDVTabBarController.h */,
-				955CF4DC1AF9C06D00C8BBE6 /* RDVTabBarController.m */,
-				955CF4DD1AF9C06D00C8BBE6 /* RDVTabBarItem.h */,
-				955CF4DE1AF9C06D00C8BBE6 /* RDVTabBarItem.m */,
-			);
-			name = RDVTabController;
-			sourceTree = "<group>";
-		};
 		955CF4F81AFA103900C8BBE6 /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +187,8 @@
 				957DC30E1AF99FF600DA8D6A /* YoNote */,
 				957DC3281AF99FF600DA8D6A /* YoNoteTests */,
 				957DC30D1AF99FF600DA8D6A /* Products */,
+				99DACFA6F43263242C4A550D /* Pods */,
+				923D414B370563984C9B8FC4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -247,7 +209,6 @@
 				95895D241AFB0F3B00BE7D2E /* Model */,
 				95895D181AFA610B00BE7D2E /* Views */,
 				955CF4D71AF9B9D300C8BBE6 /* Controllers */,
-				955CF4D81AF9C00E00C8BBE6 /* Vendor */,
 				955CF4F81AFA103900C8BBE6 /* Util */,
 				957DC30F1AF99FF600DA8D6A /* Supporting Files */,
 			);
@@ -302,31 +263,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		95895D281AFB1ABD00BE7D2E /* PureLayout */ = {
-			isa = PBXGroup;
-			children = (
-				95863CA11AFDA83C00C31E2D /* PureLayoutDefines.h */,
-				95863CA21AFDA83C00C31E2D /* PureLayout+Internal.h */,
-				95863CA31AFDA83C00C31E2D /* PureLayout.h */,
-				95863CA41AFDA83C00C31E2D /* NSLayoutConstraint+PureLayout.m */,
-				95863CA51AFDA83C00C31E2D /* NSLayoutConstraint+PureLayout.h */,
-				95863CA61AFDA83C00C31E2D /* NSArray+PureLayout.m */,
-				95863CA71AFDA83C00C31E2D /* NSArray+PureLayout.h */,
-				95863CA81AFDA83C00C31E2D /* ALView+PureLayout.m */,
-				95863CA91AFDA83C00C31E2D /* ALView+PureLayout.h */,
-			);
-			name = PureLayout;
-			sourceTree = "<group>";
-		};
-		958B29811AFEE9D700815154 /* FXBlurView */ = {
-			isa = PBXGroup;
-			children = (
-				958B297E1AFEE9CC00815154 /* FXBlurView.h */,
-				958B297F1AFEE9CC00815154 /* FXBlurView.m */,
-			);
-			name = FXBlurView;
-			sourceTree = "<group>";
-		};
 		95AEE8581B05D18100C477EB /* cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,17 +272,6 @@
 				95A6E55C1AFDBBC500071561 /* YNCollectionCell.m */,
 			);
 			name = cell;
-			sourceTree = "<group>";
-		};
-		95AEE8741B072A1B00C477EB /* HSDatePickerViewController */ = {
-			isa = PBXGroup;
-			children = (
-				95AEE8751B072A1B00C477EB /* HSDatePickerViewController.h */,
-				95AEE8761B072A1B00C477EB /* HSDatePickerViewController.m */,
-				95AEE8771B072A1B00C477EB /* HSDatePickerViewController.xib */,
-			);
-			name = HSDatePickerViewController;
-			path = Vendor/HSDatePickerViewController;
 			sourceTree = "<group>";
 		};
 		95AEE87D1B0898F700C477EB /* toolbar */ = {
@@ -380,6 +305,15 @@
 			name = TabBar;
 			sourceTree = "<group>";
 		};
+		99DACFA6F43263242C4A550D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F541243CA2F8D4A6F1E6DA7B /* Pods.debug.xcconfig */,
+				B6329A7AD74C3302441CEFCA /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -387,9 +321,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 957DC32F1AF99FF600DA8D6A /* Build configuration list for PBXNativeTarget "YoNote" */;
 			buildPhases = (
+				5275161A7F6B66AD6A5CBDF9 /* Check Pods Manifest.lock */,
 				957DC3081AF99FF600DA8D6A /* Sources */,
 				957DC3091AF99FF600DA8D6A /* Frameworks */,
 				957DC30A1AF99FF600DA8D6A /* Resources */,
+				C3D40939ECCFB9B057BCFD39 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -461,7 +397,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				953438401B01EF74001859D7 /* YNItemEditToolbar.xib in Resources */,
-				95AEE8791B072A1B00C477EB /* HSDatePickerViewController.xib in Resources */,
 				9539A2EA1B0DFCEE004E1A48 /* YNImageDetailViewController.xib in Resources */,
 				957DC3201AF99FF600DA8D6A /* LaunchScreen.xib in Resources */,
 				9539A2EC1B0DFCFF004E1A48 /* YNImagesViewController.xib in Resources */,
@@ -479,6 +414,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5275161A7F6B66AD6A5CBDF9 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C3D40939ECCFB9B057BCFD39 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		957DC3081AF99FF600DA8D6A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -488,29 +456,21 @@
 				955CF4F41AF9C2DF00C8BBE6 /* YNSettingsViewController.m in Sources */,
 				955CF4FC1AFA107500C8BBE6 /* UINavigationController+StatusBar.m in Sources */,
 				957DC3151AF99FF600DA8D6A /* AppDelegate.m in Sources */,
-				95863CAA1AFDA83C00C31E2D /* NSLayoutConstraint+PureLayout.m in Sources */,
-				955CF4E01AF9C06D00C8BBE6 /* RDVTabBarController.m in Sources */,
 				955CF4E81AF9C21B00C8BBE6 /* YNItemsViewController.m in Sources */,
 				955CF4D61AF9B9CC00C8BBE6 /* YNBaseViewController.m in Sources */,
-				95863CAB1AFDA83C00C31E2D /* NSArray+PureLayout.m in Sources */,
 				9534384A1B04D0B1001859D7 /* YNItemEdiToolbar.m in Sources */,
 				955CF4E51AF9C0AC00C8BBE6 /* YNRootTabViewController.m in Sources */,
 				95895D211AFB04E500BE7D2E /* YNItemCell.m in Sources */,
-				955CF4DF1AF9C06D00C8BBE6 /* RDVTabBar.m in Sources */,
 				9539A2E51B0DFCA7004E1A48 /* YNImageDetailViewController.m in Sources */,
 				955CF4EE1AF9C2B400C8BBE6 /* YNTagsViewController.m in Sources */,
 				956768741B09A20800426993 /* YNItemDetailViewController.m in Sources */,
-				95AEE8781B072A1B00C477EB /* HSDatePickerViewController.m in Sources */,
 				955CF4F11AF9C2CA00C8BBE6 /* YNCollectionsViewController.m in Sources */,
-				95863CAC1AFDA83C00C31E2D /* ALView+PureLayout.m in Sources */,
 				955CF4F71AFA038C00C8BBE6 /* YNBaseNavigationController.m in Sources */,
 				95EC8A911AFF69CE00C68D2B /* YNItemEditViewController.m in Sources */,
 				95AEE8671B06CD0E00C477EB /* YNItemSearchViewController.m in Sources */,
 				957DC3121AF99FF600DA8D6A /* main.m in Sources */,
 				95895D271AFB0F6100BE7D2E /* YNImageStore.m in Sources */,
-				958B29801AFEE9CC00815154 /* FXBlurView.m in Sources */,
 				95A6E55D1AFDBBC500071561 /* YNCollectionCell.m in Sources */,
-				955CF4E11AF9C06D00C8BBE6 /* RDVTabBarItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,6 +588,7 @@
 		};
 		957DC3301AF99FF600DA8D6A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F541243CA2F8D4A6F1E6DA7B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "YoNote/YoNote-Prefix.pch";
@@ -639,6 +600,7 @@
 		};
 		957DC3311AF99FF600DA8D6A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6329A7AD74C3302441CEFCA /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "YoNote/YoNote-Prefix.pch";
