@@ -18,9 +18,13 @@
 @interface YNItemDetailViewController ()
 
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak)   IBOutlet UIVisualEffectView *visualEffectView;
+
 @property (nonatomic, strong) IBOutlet UILabel     *memoLabel;
 @property (nonatomic, strong) IBOutlet UILabel     *tagLabel;
 @property (nonatomic, strong) IBOutlet UILabel     *dateCreatedLabel;
+
+
 @property (nonatomic, strong) IBOutlet UIButton    *imageBrowserButton;
 @property (nonatomic, strong) IBOutlet UIButton    *exportButton;
 
@@ -55,7 +59,7 @@
     
     [self customNaviBar];
     [self customImageView];
-    [self customLabels];
+    [self customTextArea];
     
 }
 
@@ -97,15 +101,18 @@
 
 - (void)customImageView {
 
-    UIImage *image = [[YNImageStore sharedStore]imageForKey:@"img_4.jpg"];
+    UIImage *image = [[YNImageStore sharedStore]imageForKey:@"img_2.jpg"];
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.imageView.image = image;
 }
 
-- (void)customLabels {
+- (void)customTextArea {
 
     self.memoLabel.text = kTestString;
     self.dateCreatedLabel.text = [_formatter stringFromDate:[NSDate date]];
+    
+    self.visualEffectView.backgroundColor = UIColorFromRGB(0x3CA9D2);
+    
 }
 
 #pragma mark - IBActions
