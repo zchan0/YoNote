@@ -9,6 +9,7 @@
 #import "YNItemsViewController.h"
 #import "YNItemCell.h"
 #import "YNImageStore.h"
+#import "RDVTabBarController.h"
 #import "YNItemDetailViewController.h"
 
 static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
@@ -31,6 +32,13 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    //put the bar back to default
+    [self.navigationController.navigationBar setBackgroundImage:nil
+                                                  forBarMetrics:UIBarMetricsDefault];
+    
+    [[self rdv_tabBarController] setTabBarHidden:NO animated:YES];
+    
     [self.tableView reloadData];
 }
 

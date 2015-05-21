@@ -8,8 +8,10 @@
 
 #import "YNItemDetailViewController.h"
 #import "YNItemEditViewController.h"
-#import "YNImageStore.h"
+#import "YNImageDetailViewController.h"
 #import "RDVTabBarController.h"
+#import "YNImageStore.h"
+
 
 #define kFrameHeight self.view.frame.size.height
 #define kFrameWidth  self.view.frame.size.width
@@ -24,12 +26,10 @@
 @property (nonatomic, strong) IBOutlet UILabel     *tagLabel;
 @property (nonatomic, strong) IBOutlet UILabel     *dateCreatedLabel;
 
-
-@property (nonatomic, strong) IBOutlet UIButton    *imageBrowserButton;
 @property (nonatomic, strong) IBOutlet UIButton    *exportButton;
 
 @property (nonatomic, strong) NSDateFormatter *formatter;
-
+@property (nonatomic, strong) NSArray *images;
 
 @end
 
@@ -65,18 +65,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [self makeNaviBarTransparent];
     [[self rdv_tabBarController] setTabBarHidden:YES animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
-    //put the bar back to default
-    [self.navigationController.navigationBar setBackgroundImage:nil
-                                                  forBarMetrics:UIBarMetricsDefault];
-    
-    [[self rdv_tabBarController] setTabBarHidden:NO animated:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -91,6 +86,11 @@
     UIBarButtonItem *editItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(Edit:)];
     self.navigationItem.rightBarButtonItem = editItem;
     
+    [self makeNaviBarTransparent];
+    
+}
+
+- (void)makeNaviBarTransparent {
     //  make the navigationBar transparent
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
     [navigationBar setTintColor:[UIColor whiteColor]];
@@ -101,17 +101,22 @@
 
 - (void)customImageView {
 
-    UIImage *image = [[YNImageStore sharedStore]imageForKey:@"img_2.jpg"];
+    UIImage *image = [[YNImageStore sharedStore]imageForKey:@"img_4.jpg"];
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.imageView.image = image;
+    
+    //  Add aciton to imageView
+    self.imageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImage:)];
+    singleTap.numberOfTapsRequired = 1;
+    [self.imageView addGestureRecognizer:singleTap];
 }
 
 - (void)customTextArea {
 
     self.memoLabel.text = kTestString;
     self.dateCreatedLabel.text = [_formatter stringFromDate:[NSDate date]];
-    
-    self.visualEffectView.backgroundColor = UIColorFromRGB(0x3CA9D2);
+    //self.visualEffectView.backgroundColor = UIColorFromRGB(0x3CA9D2);
     
 }
 
@@ -123,6 +128,14 @@
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:editViewController];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navController animated:YES completion:nil];
+}
+
+- (IBAction)tapImage:(id)sender {
+    YNImageDetailViewController *imageDetailViewController = [[YNImageDetailViewController alloc]initWithNibName:@"YNImageDetailViewController" bundle:nil];
+    
+    imageDetailViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    [self presentViewController:imageDetailViewController animated:YES completion:nil];
+    
 }
 
 
