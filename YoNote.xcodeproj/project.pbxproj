@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		953438401B01EF74001859D7 /* YNItemEditToolbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9534383F1B01EF74001859D7 /* YNItemEditToolbar.xib */; };
-		9534384A1B04D0B1001859D7 /* YNItemEdiToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 953438481B04D0B1001859D7 /* YNItemEdiToolbar.m */; };
+		9534384A1B04D0B1001859D7 /* YNItemEditToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 953438481B04D0B1001859D7 /* YNItemEditToolbar.m */; };
 		9539A2E51B0DFCA7004E1A48 /* YNImageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9539A2E41B0DFCA7004E1A48 /* YNImageDetailViewController.m */; };
 		9539A2E81B0DFCD1004E1A48 /* YNImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9539A2E71B0DFCD1004E1A48 /* YNImagesViewController.m */; };
 		9539A2EA1B0DFCEE004E1A48 /* YNImageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9539A2E91B0DFCEE004E1A48 /* YNImageDetailViewController.xib */; };
@@ -48,7 +48,7 @@
 
 /* Begin PBXFileReference section */
 		9534383F1B01EF74001859D7 /* YNItemEditToolbar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YNItemEditToolbar.xib; sourceTree = "<group>"; };
-		953438481B04D0B1001859D7 /* YNItemEdiToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemEdiToolbar.m; path = Views/YNItemEdiToolbar.m; sourceTree = "<group>"; };
+		953438481B04D0B1001859D7 /* YNItemEditToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemEditToolbar.m; path = Views/YNItemEditToolbar.m; sourceTree = "<group>"; };
 		953438491B04D0B1001859D7 /* YNItemEditToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNItemEditToolbar.h; path = Views/YNItemEditToolbar.h; sourceTree = "<group>"; };
 		9539A2E31B0DFCA7004E1A48 /* YNImageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNImageDetailViewController.h; path = Controllers/YNImageDetailViewController.h; sourceTree = "<group>"; };
 		9539A2E41B0DFCA7004E1A48 /* YNImageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNImageDetailViewController.m; path = Controllers/YNImageDetailViewController.m; sourceTree = "<group>"; };
@@ -278,7 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				953438491B04D0B1001859D7 /* YNItemEditToolbar.h */,
-				953438481B04D0B1001859D7 /* YNItemEdiToolbar.m */,
+				953438481B04D0B1001859D7 /* YNItemEditToolbar.m */,
 				9534383F1B01EF74001859D7 /* YNItemEditToolbar.xib */,
 			);
 			name = toolbar;
@@ -458,7 +458,7 @@
 				957DC3151AF99FF600DA8D6A /* AppDelegate.m in Sources */,
 				955CF4E81AF9C21B00C8BBE6 /* YNItemsViewController.m in Sources */,
 				955CF4D61AF9B9CC00C8BBE6 /* YNBaseViewController.m in Sources */,
-				9534384A1B04D0B1001859D7 /* YNItemEdiToolbar.m in Sources */,
+				9534384A1B04D0B1001859D7 /* YNItemEditToolbar.m in Sources */,
 				955CF4E51AF9C0AC00C8BBE6 /* YNRootTabViewController.m in Sources */,
 				95895D211AFB04E500BE7D2E /* YNItemCell.m in Sources */,
 				9539A2E51B0DFCA7004E1A48 /* YNImageDetailViewController.m in Sources */,

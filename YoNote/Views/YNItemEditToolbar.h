@@ -14,6 +14,7 @@
 - (void)pickDateAlarmed;
 - (void)selectCollection;
 - (void)selectTags;
+- (void)pickImages;
 
 @end
 

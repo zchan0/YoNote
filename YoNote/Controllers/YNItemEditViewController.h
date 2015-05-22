@@ -10,7 +10,7 @@
 
 @interface YNItemEditViewController : UIViewController
 
-@property (nonatomic, strong) NSString *memo;
+@property (nonatomic, strong) NSArray *images;
 
 - (instancetype)initForNewItem:(BOOL)isNew;
 

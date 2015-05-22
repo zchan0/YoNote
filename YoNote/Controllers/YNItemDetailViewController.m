@@ -124,7 +124,6 @@
 
 - (IBAction)Edit:(id)sender {
     YNItemEditViewController *editViewController = [[YNItemEditViewController alloc]initForNewItem:NO];
-    
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:editViewController];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navController animated:YES completion:nil];

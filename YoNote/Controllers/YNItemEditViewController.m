@@ -10,13 +10,17 @@
 #import "HSDatePickerViewController.h"
 #import "YNItemSearchViewController.h"
 #import "YNItemEditToolbar.h"
+#import <CTAssetsPickerController.h>
 
-@interface YNItemEditViewController ()<UITextViewDelegate, YNItemEditToolbarDelegate, HSDatePickerViewControllerDelegate>
+@interface YNItemEditViewController ()<UITextViewDelegate, YNItemEditToolbarDelegate, HSDatePickerViewControllerDelegate, CTAssetsPickerControllerDelegate, UIPopoverControllerDelegate>
 
 @property (nonatomic, strong) UITextView *editTextView;
 @property (nonatomic, strong) YNItemEditToolbar *toolbar;
 @property (nonatomic, strong) NSDateFormatter *formatter;
 @property (nonatomic, strong) HSDatePickerViewController *hsdpVC;
+@property (nonatomic, strong) UIPopoverController *popover;
+
+@property (nonatomic, strong) NSMutableArray *editedImages;
 
 @end
 
@@ -40,7 +44,6 @@
     _formatter.dateFormat = kDateFormat;
     self.navigationItem.title = [_formatter stringFromDate:[NSDate date]];
     
-    
     //  hsdpVC initialization
     self.hsdpVC = [HSDatePickerViewController new];
     self.hsdpVC.delegate = self;
@@ -60,8 +63,11 @@
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
+        self.editedImages = [NSMutableArray array];
         if (!isNew) {
             // dateAlarmedButton imageButton tags and collection button has specific value
+            self.editedImages = [NSMutableArray arrayWithArray:_images];
+            
         }
     }
     
@@ -154,6 +160,52 @@
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navController animated:YES completion:nil];
     
+}
+
+- (void)pickImages {
+    
+    CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
+    picker.delegate = self;
+    picker.showsCancelButton    = (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad);
+    picker.delegate             = self;
+    picker.selectedAssets       = [NSMutableArray arrayWithArray:self.editedImages];
+    // Set navigation bar's tint color
+    picker.childNavigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    // iPad
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        self.popover = [[UIPopoverController alloc] initWithContentViewController:picker];
+        self.popover.delegate = self;
+        
+        [self.popover
+                    presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem
+                    permittedArrowDirections:UIPopoverArrowDirectionAny
+                    animated:YES];
+    }
+    else
+    {
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+
+}
+
+#pragma mark - Camera
+
+- (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets {
+    if (self.popover != nil)
+        [self.popover dismissPopoverAnimated:YES];
+    else
+        [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    
+    self.editedImages = [NSMutableArray arrayWithArray:assets];
+    NSLog(@"%@", _editedImages);
+}
+
+- (BOOL)assetsPickerController:(CTAssetsPickerController *)picker isDefaultAssetsGroup:(ALAssetsGroup *)group
+{
+    // Set All Photos as default album and it will be shown initially.
+    return ([[group valueForProperty:ALAssetsGroupPropertyType] integerValue] == ALAssetsGroupSavedPhotos);
 }
 
 #pragma mark - Notifications

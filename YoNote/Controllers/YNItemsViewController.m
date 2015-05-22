@@ -16,6 +16,9 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
 @interface YNItemsViewController ()
 
+@property (nonatomic, strong) UIPopoverController *popover;
+@property (nonatomic, strong) NSMutableArray *selectedImages;
+
 @end
 
 @implementation YNItemsViewController
@@ -126,11 +129,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     return kItemTableCellHeight;
 }
 
-#pragma mark - Camaera
-
-
-
-#pragma mark - Actionsheet
+#pragma mark - Camera
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -149,10 +148,8 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
                         
                         [self presentViewController:picker animated:NO completion:nil];
                     }];
-                    
                 }
                 else{
-                    
                     [self presentViewController:picker animated:NO completion:nil];
                 }
             }
@@ -164,32 +161,36 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
         }
         case 1:
         {
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-                UIImagePickerController * picker = [[UIImagePickerController alloc]init];
-                picker.delegate = self;
-                picker.allowsEditing = YES;//是否可以对原图进行编辑
-                picker.navigationBar.tintColor = [UIColor whiteColor];
-                
-                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                //[self presentViewController:picker animated:YES completion:nil];
-                
-                if([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0)
-                {
-                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                        
-                        [self presentViewController:picker animated:NO completion:nil];
-                    }];
-                    
-                }
-                else{
-                    
-                    [self presentViewController:picker animated:NO completion:nil];
-                }
+            if (!_selectedImages) {
+                _selectedImages = [[NSMutableArray alloc]init];
             }
-            else{
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"相册不可用" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alertView show];
+            
+            CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
+            picker.delegate = self;
+            picker.showsCancelButton    = (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad);
+            picker.delegate             = self;
+            picker.selectedAssets       = [NSMutableArray arrayWithArray:self.selectedImages];
+            // Set navigation bar's tint color
+            picker.childNavigationController.navigationBar.tintColor = [UIColor whiteColor];
+            
+            // iPad
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            {
+                self.popover = [[UIPopoverController alloc] initWithContentViewController:picker];
+                self.popover.delegate = self;
+                
+                [self.popover
+                 presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem
+                 permittedArrowDirections:UIPopoverArrowDirectionAny
+                 animated:YES];
             }
+            else
+            {
+                [self presentViewController:picker animated:YES completion:nil];
+            }
+
+            
+            
             break;
         }
         case 3:
@@ -201,6 +202,21 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     }
 }
 
+- (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets {
+    if (self.popover != nil)
+        [self.popover dismissPopoverAnimated:YES];
+    else
+        [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    
+    self.selectedImages = [NSMutableArray arrayWithArray:assets];
+    NSLog(@"%@", _selectedImages);
+}
+
+- (BOOL)assetsPickerController:(CTAssetsPickerController *)picker isDefaultAssetsGroup:(ALAssetsGroup *)group
+{
+    // Set All Photos as default album and it will be shown initially.
+    return ([[group valueForProperty:ALAssetsGroupPropertyType] integerValue] == ALAssetsGroupSavedPhotos);
+}
 
 
 @end

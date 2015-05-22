@@ -62,5 +62,12 @@
         [_delegate selectTags];
     }
 }
+- (IBAction)touchImageButton:(id)sender {
+    if (!_delegate) {
+        NSLog(@"delegate is nil");
+    } else {
+        [_delegate pickImages];
+    }
+}
 
 @end
