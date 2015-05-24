@@ -34,9 +34,9 @@
     self.iv.contentMode = UIViewContentModeScaleToFill;
     
     self.fxView = [[FXBlurView alloc]init];
-    self.fxView.blurRadius = 17;
+    self.fxView.blurRadius = 8;
     self.fxView.tintColor = [UIColor blackColor];
-
+    
     self.contentView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0];
     
     [self.contentView addSubview:self.iv];
@@ -106,6 +106,5 @@
 
     // Configure the view for the selected state
 }
-
 
 @end
