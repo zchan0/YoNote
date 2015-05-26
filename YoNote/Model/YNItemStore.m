@@ -127,7 +127,7 @@
     if (!self.privateItems) {
         NSFetchRequest *request = [[NSFetchRequest alloc] init];
         
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"PNItem" inManagedObjectContext:self.context];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"YNItem" inManagedObjectContext:self.context];
         request.entity = entity;
         
         NSError *error;

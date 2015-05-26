@@ -8,16 +8,22 @@
 
 #import "YNItemsViewController.h"
 #import "YNItemCell.h"
+#import "YNItemStore.h"
+#import "YNTag.h"
+#import "YNCollection.h"
 #import "YNImageStore.h"
 #import "RDVTabBarController.h"
 #import "YNItemDetailViewController.h"
+#import "YNItemEditViewController.h"
 
 static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
-@interface YNItemsViewController ()
+@interface YNItemsViewController ()<UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CTAssetsPickerControllerDelegate, UIPopoverControllerDelegate>
 
 @property (nonatomic, strong) UIPopoverController *popover;
 @property (nonatomic, strong) NSMutableArray *selectedImages;
+
+@property (nonatomic, strong) NSArray *items;
 
 @end
 
@@ -30,7 +36,8 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     [self customTableView];
     
     self.view.backgroundColor = [UIColor whiteColor];
-
+    
+    self.items = [[YNItemStore sharedStore]allItems];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -92,14 +99,24 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 #pragma mark - Table
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return self.items.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     YNItemCell *cell = [tableView dequeueReusableCellWithIdentifier:YNItemCellIndentifier];
-    [cell updateFonts];
+    
+    YNItem *item = self.items[indexPath.row];
+    
+    //configure cell with YNItem
+    cell.collectionNameLabel.text = item.collection.collection;
+    cell.memoLabel.text = item.memo;
+    NSMutableArray *tags = [item mutableArrayValueForKeyPath:@"tags.tag"];
+    cell.tagLabel.text = [tags componentsJoinedByString:@","];
+    cell.iv.image = item.thumbnaiil;
+    
+    /*
     cell.collectionNameLabel.text = @"高级数据库";
     cell.memoLabel.text = @"概念模型，从用户角度建模，有利于实现数据库的, 概念模型，从用户角度建模，有利于实现数据库的";
     cell.tagLabel.text = @"笔记";
@@ -107,11 +124,13 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     NSString *path = [NSString stringWithFormat:@"img_%d.jpg", ((int)indexPath.row)+1];
     UIImage *image = [[YNImageStore sharedStore]imageForKey:path];
     UIImage *thumbnail = [[YNImageStore sharedStore]setThumbnailFromImage:image newRect:kItemImageRect];
-    cell.iv.image = thumbnail;
+    cell.iv.image = thumbnail;*/
+    
     cell.separatorInset = ALEdgeInsetsZero; // make separator below imageview visible
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     // Make sure the constraints have been added to this cell, since it may have just been created from scratch
+    [cell updateFonts];
     [cell setNeedsUpdateConstraints];
     [cell updateConstraintsIfNeeded];
     
@@ -203,13 +222,20 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 }
 
 - (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets {
+    YNItemEditViewController *itemEditViewController = [[YNItemEditViewController alloc]initForNewItem:YES];
+    self.selectedImages = [NSMutableArray arrayWithArray:assets];
+    itemEditViewController.images = [NSArray arrayWithArray:self.selectedImages];
+    YNItem *newItem = [[YNItemStore sharedStore]createItem];
+    itemEditViewController.item = newItem;
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:itemEditViewController];
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    
     if (self.popover != nil)
         [self.popover dismissPopoverAnimated:YES];
     else
         [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     
-    self.selectedImages = [NSMutableArray arrayWithArray:assets];
-    NSLog(@"%@", _selectedImages);
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 - (BOOL)assetsPickerController:(CTAssetsPickerController *)picker isDefaultAssetsGroup:(ALAssetsGroup *)group
@@ -217,6 +243,9 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     // Set All Photos as default album and it will be shown initially.
     return ([[group valueForProperty:ALAssetsGroupPropertyType] integerValue] == ALAssetsGroupSavedPhotos);
 }
+
+#pragma mark - Private Methods
+
 
 
 @end

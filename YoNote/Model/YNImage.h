@@ -2,7 +2,7 @@
 //  YNImage.h
 //  YoNote
 //
-//  Created by Zchan on 15/5/24.
+//  Created by Zchan on 15/5/25.
 //  Copyright (c) 2015年 Zchan. All rights reserved.
 //
 
@@ -14,14 +14,6 @@
 @interface YNImage : NSManagedObject
 
 @property (nonatomic, retain) NSString * imageName;
-@property (nonatomic, retain) NSSet *imageItems;
-@end
-
-@interface YNImage (CoreDataGeneratedAccessors)
-
-- (void)addImageItemsObject:(YNItem *)value;
-- (void)removeImageItemsObject:(YNItem *)value;
-- (void)addImageItems:(NSSet *)values;
-- (void)removeImageItems:(NSSet *)values;
+@property (nonatomic, retain) YNItem *imageItem;
 
 @end

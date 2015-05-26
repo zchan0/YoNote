@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YNItem.h"
 
 @interface YNItemEditViewController : UIViewController
 
 @property (nonatomic, strong) NSArray *images;
+@property (nonatomic, strong) YNItem *item;
 
 - (instancetype)initForNewItem:(BOOL)isNew;
 

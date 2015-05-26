@@ -2,7 +2,7 @@
 //  YNImage.m
 //  YoNote
 //
-//  Created by Zchan on 15/5/24.
+//  Created by Zchan on 15/5/25.
 //  Copyright (c) 2015年 Zchan. All rights reserved.
 //
 
@@ -13,6 +13,6 @@
 @implementation YNImage
 
 @dynamic imageName;
-@dynamic imageItems;
+@dynamic imageItem;
 
 @end

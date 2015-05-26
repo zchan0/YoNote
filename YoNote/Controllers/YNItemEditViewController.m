@@ -10,6 +10,10 @@
 #import "HSDatePickerViewController.h"
 #import "YNItemSearchViewController.h"
 #import "YNItemEditToolbar.h"
+#import "YNItem.h"
+#import "YNCollection.h"
+#import "YNTag.h"
+#import "YNItemStore.h"
 #import <CTAssetsPickerController.h>
 
 @interface YNItemEditViewController ()<UITextViewDelegate, YNItemEditToolbarDelegate, HSDatePickerViewControllerDelegate, CTAssetsPickerControllerDelegate, UIPopoverControllerDelegate>
@@ -20,7 +24,12 @@
 @property (nonatomic, strong) HSDatePickerViewController *hsdpVC;
 @property (nonatomic, strong) UIPopoverController *popover;
 
+@property (nonatomic) BOOL isNew;
+@property (nonatomic, strong) NSDate *itemDateCreated;
+@property (nonatomic, strong) NSDate *itemDateAlarmed;
 @property (nonatomic, strong) NSMutableArray *editedImages;
+@property (nonatomic, strong) NSString *itemCollection;
+@property (nonatomic, strong) NSMutableArray *itemTags;
 
 @end
 
@@ -36,17 +45,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setupTextView];
-    [self customNaviBar];
-    
     //  formatter initialization
     _formatter = [[NSDateFormatter alloc]init];
     _formatter.dateFormat = kDateFormat;
-    self.navigationItem.title = [_formatter stringFromDate:[NSDate date]];
     
     //  hsdpVC initialization
     self.hsdpVC = [HSDatePickerViewController new];
     self.hsdpVC.delegate = self;
+    
+    
+    [self setupTextView];
+    [self customNaviBar];
 
 }
 
@@ -61,13 +70,18 @@
 
 - (instancetype)initForNewItem:(BOOL)isNew
 {
-    self = [super initWithNibName:nil bundle:nil];
+    self   = [super initWithNibName:nil bundle:nil];
+    _isNew = isNew;
+    self.itemTags = [NSMutableArray array];
+    self.editedImages = [NSMutableArray array];
+
     if (self) {
-        self.editedImages = [NSMutableArray array];
         if (!isNew) {
-            // dateAlarmedButton imageButton tags and collection button has specific value
-            self.editedImages = [NSMutableArray arrayWithArray:_images];
-            
+            self.itemDateCreated = _item.dateCreated;
+            self.itemDateAlarmed = _item.dateAlarmed;
+            self.editedImages  = [NSMutableArray arrayWithArray:_images];
+            self.itemCollection  = _item.collection.collection;
+            self.itemTags        = [_item mutableArrayValueForKeyPath:@"tags.tag"];
         }
     }
     
@@ -93,9 +107,12 @@
     UIBarButtonItem *saveItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(Save:)];
     saveItem.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = saveItem;
-    
+    if (!_isNew) {
+        self.navigationItem.title = [_formatter stringFromDate:self.itemDateCreated];
+    } else {
+        self.navigationItem.title = [_formatter stringFromDate:[NSDate date]];
+    }
 }
-
 
 - (void)setupTextView {
     CGFloat width = self.view.frame.size.width;
@@ -112,8 +129,33 @@
     self.toolbar.delegate = self;
     self.editTextView.inputAccessoryView = self.toolbar.YNItemEditToolbar;
     
+    if (!_isNew) {
+        self.editTextView.text = _item.memo;
+        [self addImagesOnButton];
+        [self addNumberOnButton:self.toolbar.dateAlarmedButton withDate:self.itemDateAlarmed];
+    }
+    
     [self.view addSubview:self.editTextView];
     
+}
+
+- (void)addImagesOnButton {
+    CGRect frame = self.toolbar.imageButton.frame;
+    UIImageView *iv = [[UIImageView alloc]initWithFrame:frame];
+    iv.image = [self.editedImages firstObject];
+    [self.toolbar.imageButton addSubview:iv];
+    UILabel *label = [[UILabel alloc]initWithFrame:frame];
+    label.text = [NSString stringWithFormat:@"%d", (int)self.editedImages.count];
+    label.tintColor = [UIColor grayColor];
+    [self.toolbar.imageButton addSubview:label];
+    
+}
+
+- (void)addNumberOnButton:(UIButton *)onButton withDate: (NSDate *)date {
+    [onButton setBackgroundImage:[UIImage imageNamed:@"ButtonBackground"] forState:UIControlStateNormal];
+    _formatter.dateFormat = kDayFormat;
+    [onButton setTitle:[_formatter stringFromDate:date] forState:UIControlStateNormal];
+    _formatter.dateFormat = kDateFormat;
 }
 
 #pragma mark - IBActions
@@ -123,12 +165,26 @@
         [self createLocalNotificationWithDateAlarmed:self.toolbar.dateAlarmed];
     }
     
+    BOOL success = [[YNItemStore sharedStore] saveChanges];
+    if (success) {
+        NSLog(@"Saved coredata changes!");
+    } else {
+        NSLog(@"Could not save coredata changes");
+    }
+    
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 
 - (void)Cancel:(id)sender {
+    [[YNItemStore sharedStore] removeItem:self.item];
     
+    BOOL success = [[YNItemStore sharedStore] saveChanges];
+    if (success) {
+        NSLog(@"Saved coredata changes!");
+    } else {
+        NSLog(@"Could not save coredata changes");
+    }
     
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
@@ -199,7 +255,6 @@
         [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     
     self.editedImages = [NSMutableArray arrayWithArray:assets];
-    NSLog(@"%@", _editedImages);
 }
 
 - (BOOL)assetsPickerController:(CTAssetsPickerController *)picker isDefaultAssetsGroup:(ALAssetsGroup *)group
@@ -265,11 +320,8 @@
     if (self.toolbar.dateAlarmedButton.tag) {
         self.toolbar.dateAlarmed = date;
         self.toolbar.dateAlarmedButton.tag = 0;
-        [self.toolbar.dateAlarmedButton setBackgroundImage:[UIImage imageNamed:@"ButtonBackground"] forState:UIControlStateNormal];
-        _formatter.dateFormat = kDayFormat;
-        [self.toolbar.dateAlarmedButton setTitle:[_formatter stringFromDate:date] forState:UIControlStateNormal];
-        _formatter.dateFormat = kDateFormat;
         
+        [self addNumberOnButton:self.toolbar.dateAlarmedButton withDate:date];
     }
 }
 

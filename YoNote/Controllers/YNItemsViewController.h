@@ -9,7 +9,6 @@
 #import "YNBaseViewController.h"
 #import <CTAssetsPickerController.h>
 
-@interface YNItemsViewController : YNBaseViewController<UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CTAssetsPickerControllerDelegate, UIPopoverControllerDelegate>
-
+@interface YNItemsViewController : YNBaseViewController
 
 @end

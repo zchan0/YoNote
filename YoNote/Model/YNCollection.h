@@ -2,7 +2,7 @@
 //  YNCollection.h
 //  YoNote
 //
-//  Created by Zchan on 15/5/24.
+//  Created by Zchan on 15/5/25.
 //  Copyright (c) 2015年 Zchan. All rights reserved.
 //
 
@@ -15,14 +15,14 @@
 
 @property (nonatomic, retain) NSString * collection;
 @property (nonatomic, retain) UIImage * thumbnail;
-@property (nonatomic, retain) NSSet *collectionItem;
+@property (nonatomic, retain) NSSet *allItems;
 @end
 
 @interface YNCollection (CoreDataGeneratedAccessors)
 
-- (void)addCollectionItemObject:(YNItem *)value;
-- (void)removeCollectionItemObject:(YNItem *)value;
-- (void)addCollectionItem:(NSSet *)values;
-- (void)removeCollectionItem:(NSSet *)values;
+- (void)addAllItemsObject:(YNItem *)value;
+- (void)removeAllItemsObject:(YNItem *)value;
+- (void)addAllItems:(NSSet *)values;
+- (void)removeAllItems:(NSSet *)values;
 
 @end
