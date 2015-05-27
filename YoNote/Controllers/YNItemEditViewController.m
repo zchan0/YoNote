@@ -25,11 +25,7 @@
 @property (nonatomic, strong) UIPopoverController *popover;
 
 @property (nonatomic) BOOL isNew;
-@property (nonatomic, strong) NSDate *itemDateCreated;
-@property (nonatomic, strong) NSDate *itemDateAlarmed;
 @property (nonatomic, strong) NSMutableArray *editedImages;
-@property (nonatomic, strong) NSString *itemCollection;
-@property (nonatomic, strong) NSMutableArray *itemTags;
 
 @end
 
@@ -53,7 +49,6 @@
     self.hsdpVC = [HSDatePickerViewController new];
     self.hsdpVC.delegate = self;
     
-    
     [self setupTextView];
     [self customNaviBar];
 
@@ -65,23 +60,35 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // Clear first responder
+    [self.view endEditing:YES];
     [self.editTextView resignFirstResponder];
+    
+    // "Save" changes to item
+    YNItem *item = _item;
+    item.tags        = [NSSet setWithArray:self.toolbar.tags];
+    item.dateCreated = self.toolbar.dateCreated;
+    item.dateAlarmed = self.toolbar.dateAlarmed;
+    item.collection.collection  = self.toolbar.collection;
+    
+    NSLog(@"viewWillDisappear, item: %@", item);
 }
 
 - (instancetype)initForNewItem:(BOOL)isNew
 {
     self   = [super initWithNibName:nil bundle:nil];
     _isNew = isNew;
-    self.itemTags = [NSMutableArray array];
     self.editedImages = [NSMutableArray array];
 
     if (self) {
         if (!isNew) {
-            self.itemDateCreated = _item.dateCreated;
-            self.itemDateAlarmed = _item.dateAlarmed;
+            self.toolbar.dateCreated = _item.dateCreated;
+            self.toolbar.dateAlarmed = _item.dateAlarmed;
             self.editedImages  = [NSMutableArray arrayWithArray:_images];
-            self.itemCollection  = _item.collection.collection;
-            self.itemTags        = [_item mutableArrayValueForKeyPath:@"tags.tag"];
+            self.toolbar.collection  = _item.collection.collection;
+            self.toolbar.tags        = [_item mutableArrayValueForKeyPath:@"tags.tag"];
         }
     }
     
@@ -107,11 +114,12 @@
     UIBarButtonItem *saveItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(Save:)];
     saveItem.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = saveItem;
-    if (!_isNew) {
-        self.navigationItem.title = [_formatter stringFromDate:self.itemDateCreated];
-    } else {
-        self.navigationItem.title = [_formatter stringFromDate:[NSDate date]];
+    
+    if (_isNew) {
+        self.toolbar.dateCreated = [NSDate date];
     }
+    self.navigationItem.title = [_formatter stringFromDate:self.toolbar.dateCreated];
+    
 }
 
 - (void)setupTextView {
@@ -132,7 +140,7 @@
     if (!_isNew) {
         self.editTextView.text = _item.memo;
         [self addImagesOnButton];
-        [self addNumberOnButton:self.toolbar.dateAlarmedButton withDate:self.itemDateAlarmed];
+        [self addNumberOnButton:self.toolbar.dateAlarmedButton withDate:self.toolbar.dateAlarmed];
     }
     
     [self.view addSubview:self.editTextView];
@@ -204,6 +212,8 @@
 
 - (void)selectCollection {
     YNItemSearchViewController *collectionSearchViewController = [[YNItemSearchViewController alloc]initWithNavTitle:@"图片集"];
+    collectionSearchViewController.searchItemToolbar = self.toolbar;
+    collectionSearchViewController.item = _item;
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:collectionSearchViewController];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navController animated:YES completion:nil];
@@ -212,6 +222,8 @@
 
 - (void)selectTags {
     YNItemSearchViewController *tagsSearchViewController = [[YNItemSearchViewController alloc]initWithNavTitle:@"标签"];
+    tagsSearchViewController.searchItemToolbar = self.toolbar;
+    tagsSearchViewController.item = _item;
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:tagsSearchViewController];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navController animated:YES completion:nil];

@@ -7,14 +7,13 @@
 //
 
 #import "YNItemStore.h"
-#import "YNItem.h"
 #import "YNImageStore.h"
 
 @interface YNItemStore ()
 
 @property (nonatomic) NSMutableArray *privateItems;
-@property (nonatomic, strong) NSMutableArray *allCollections;
-@property (nonatomic, strong) NSMutableArray *allTags;
+@property (nonatomic) NSMutableArray *privateCollections;
+@property (nonatomic) NSMutableArray *privateTags;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSManagedObjectModel *model;
 
@@ -79,7 +78,7 @@
     return  self;
 }
 
-#pragma mark - CRUD
+#pragma mark - Item
 
 - (NSArray *)allItems
 {
@@ -110,18 +109,6 @@
     [self.privateItems removeObjectIdenticalTo:item];
 }
 
-#pragma mark - Private Methods
-
-- (NSString *)itemArchivePath
-{
-    // NSSearchPathForDirectoriesInDomains能返回Sandbox中某种(第一个参数指定的）目录的全路径
-    // 后面两个参数在iOS中都这样, 在OS中会不一样
-    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDirectory = [documentDirectories firstObject];
-    
-    return [documentDirectory stringByAppendingPathComponent:@"store.data"];
-}
-
 - (void)loadAllItems
 {
     if (!self.privateItems) {
@@ -141,5 +128,52 @@
         
     }
 }
+
+#pragma mark - Collection
+
+- (NSArray *)allCollections {
+    return [self.privateCollections copy];
+}
+
+- (void)createCollection:(NSString *)collectionName {
+    YNCollection *collection = [NSEntityDescription insertNewObjectForEntityForName:@"YNCollection" inManagedObjectContext:self.context];
+    collection.collection = collectionName;
+    [self.privateCollections addObject:collection];
+}
+
+- (void)addCollectionForItem:(NSString *)collection forItem:(YNItem *)item {
+    item.collection.collection = collection;
+}
+
+#pragma mark - Tags
+
+- (NSArray *)allTags {
+    return [self.privateTags copy];
+}
+
+- (void)createTag:(NSString *)tagName {
+    YNTag *tag = [NSEntityDescription insertNewObjectForEntityForName:@"YNTag" inManagedObjectContext:self.context];
+    tag.tag = tagName;
+    [self.privateTags addObject:tag];
+
+}
+
+- (void)addTagsForItem:(NSArray *)tags forItem:(YNItem *)item {
+    item.tags = [NSSet setWithArray:tags];
+}
+
+#pragma mark - Private Methods
+
+- (NSString *)itemArchivePath
+{
+    // NSSearchPathForDirectoriesInDomains能返回Sandbox中某种(第一个参数指定的）目录的全路径
+    // 后面两个参数在iOS中都这样, 在OS中会不一样
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [documentDirectories firstObject];
+    
+    return [documentDirectory stringByAppendingPathComponent:@"store.data"];
+}
+
+
 
 @end

@@ -7,6 +7,9 @@
 //
 
 #import "YNItemSearchViewController.h"
+#import "YNItemStore.h"
+#import "YNCollection.h"
+#import "YNTag.h"
 
 @interface YNItemSearchViewController ()
 
@@ -27,6 +30,13 @@
     if (self) {
         self.navTitle = title;
         self.navigationItem.title = title;
+        self.dataSource = [NSMutableArray array];
+        if ([title isEqualToString:@"图片集"]) {
+            self.dataSource = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore] allCollections]] ;
+        }
+        if ([title isEqualToString:@"标签"]) {
+            self.dataSource = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore] allTags]];
+        }
     }
     return self;
 }
@@ -36,9 +46,7 @@
     
     [self customNaviBar];
     [self customTextView];
-    
-    self.items = @[@"高级数据库", @"高级计算机网络", @"组合数学", @"数据挖掘", @"设计模式"];
-    self.dataSource = [NSMutableArray arrayWithArray:self.items];
+        
     self.tagResults = [NSMutableArray array];
     self.cellSelected = [NSMutableArray array];
     
@@ -70,6 +78,7 @@
     self.inputTextField.delegate = self;
     
     [self.backgroundView addSubview:self.inputTextField];
+    self.tableView.tableHeaderView = self.backgroundView;
 }
 
 #pragma mark - IBAcitons
@@ -85,9 +94,20 @@
         }
         
         [self outputArray:self.tagResults];
+        _searchItemToolbar.tags = [NSArray arrayWithArray:self.tagResults];
+        [[YNItemStore sharedStore]addTagsForItem:self.tagResults forItem:_item];
     }
     
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [self.presentingViewController
+            dismissViewControllerAnimated:YES
+            completion:^{
+                BOOL success = [[YNItemStore sharedStore] saveChanges];
+                if (success) {
+                    NSLog(@"为%@添加tags成功.", _item);
+                } else {
+                    NSLog(@"添加tags失败");
+                }
+     }];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -95,6 +115,20 @@
         [self.dataSource addObject:self.inputTextField.text];
         [self.tableView reloadData];
         self.inputTextField.text = nil;
+        
+        if ([self.navTitle isEqualToString:@"图片集"]) {
+            [[YNItemStore sharedStore]createCollection:self.inputTextField.text];
+        }
+        if ([self.navTitle isEqualToString:@"标签"]) {
+            [[YNItemStore sharedStore]createTag:self.inputTextField.text];
+        }
+        
+        BOOL success = [[YNItemStore sharedStore] saveChanges];
+        if (success) {
+            NSLog(@"添加成功.");
+        } else {
+            NSLog(@"添加失败.");
+        }
     }
     
     
@@ -124,7 +158,7 @@
     }
     
     cell.textLabel.text = self.dataSource[indexPath.row];
-    self.tableView.tableHeaderView = self.backgroundView;
+    //self.tableView.tableHeaderView = self.backgroundView;
     
     if ([self.cellSelected containsObject:indexPath]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -140,8 +174,21 @@
         self.collectionResult = self.dataSource[indexPath.row];
         
         NSLog(@"collectionResult: %@", self.collectionResult);
+        [[YNItemStore sharedStore]addCollectionForItem:self.collectionResult forItem:self.item];
+        NSLog(@"%@", self.collectionResult);
+        NSLog(@"%@", self.item);
+        _searchItemToolbar.collection = self.collectionResult;
         
-        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        [self.presentingViewController
+                dismissViewControllerAnimated:YES
+                completion:^{
+                    BOOL success = [[YNItemStore sharedStore] saveChanges];
+                    if (success) {
+                        NSLog(@"为%@添加colleciton成功.", self.item);
+                    } else {
+                        NSLog(@"添加collection失败");
+                    }
+         }];
     }
     
     if ([self.navTitle isEqualToString:@"标签"]) {
