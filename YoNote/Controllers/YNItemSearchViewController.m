@@ -87,15 +87,16 @@
     
     if ([self.navTitle isEqualToString:@"标签"]) {
         //handle tagsResult
-        
         for (NSIndexPath *selectedPath in self.cellSelected) {
             NSString *selectedTag = self.dataSource[selectedPath.row];
             [self.tagResults addObject:selectedTag];
         }
         
-        [self outputArray:self.tagResults];
         _searchItemToolbar.tags = [NSArray arrayWithArray:self.tagResults];
-        [[YNItemStore sharedStore]addTagsForItem:self.tagResults forItem:_item];
+        
+        NSSet *tagsSet = [NSSet setWithArray:self.tagResults];
+        
+        [[YNItemStore sharedStore]addTagsForItem:tagsSet forItem:_item];
     }
     
     [self.presentingViewController
@@ -204,14 +205,5 @@
     }
 
 }
-
-#pragma mark - Private Methods
-
-- (void)outputArray: (NSMutableArray *) array{
-    for (NSString *str in array) {
-        NSLog(@"%@", str);
-    }
-}
-
 
 @end

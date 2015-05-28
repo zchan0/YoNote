@@ -225,6 +225,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     YNItemEditViewController *itemEditViewController = [[YNItemEditViewController alloc]initForNewItem:YES];
     self.selectedImages = [NSMutableArray arrayWithArray:assets];
     itemEditViewController.images = [NSArray arrayWithArray:self.selectedImages];
+    
     YNItem *newItem = [[YNItemStore sharedStore]createItem];
     itemEditViewController.item = newItem;
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:itemEditViewController];

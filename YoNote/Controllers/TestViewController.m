@@ -52,9 +52,12 @@
 
 - (IBAction)submit:(id)sender {
     NSString *textInput = self.textField.text;
-    NSLog(@"%@", _item);
-    [[YNItemStore sharedStore]createCollection:textInput];
-    [[YNItemStore sharedStore]addCollectionForItem:textInput forItem:_item];
+    NSArray *tags = @[textInput];
+    NSSet *textSet = [NSSet setWithArray:tags];
+    
+    NSLog(@"%@", textSet);
+    [[YNItemStore sharedStore]createTag:textInput];
+    [[YNItemStore sharedStore]addTagsForItem:textSet forItem:_item];
     
     BOOL success = [[YNItemStore sharedStore] saveChanges];
     if (success) {
@@ -62,7 +65,10 @@
     } else {
         NSLog(@"添加失败");
     }
+    
+   
 }
+
 
 
 @end

@@ -66,14 +66,6 @@
     [self.view endEditing:YES];
     [self.editTextView resignFirstResponder];
     
-    // "Save" changes to item
-    YNItem *item = _item;
-    item.tags        = [NSSet setWithArray:self.toolbar.tags];
-    item.dateCreated = self.toolbar.dateCreated;
-    item.dateAlarmed = self.toolbar.dateAlarmed;
-    item.collection.collectionName  = self.toolbar.collection;
-    
-    NSLog(@"viewWillDisappear, item: %@", item);
 }
 
 - (instancetype)initForNewItem:(BOOL)isNew
@@ -172,6 +164,14 @@
     if (self.toolbar.dateAlarmed) {
         [self createLocalNotificationWithDateAlarmed:self.toolbar.dateAlarmed];
     }
+    
+    // "Save" changes to item
+    YNItem *item = _item;
+    item.dateCreated = self.toolbar.dateCreated;
+    item.dateAlarmed = self.toolbar.dateAlarmed;
+    item.memo        = self.editTextView.text;
+    
+    NSLog(@"item: %@", item);
     
     BOOL success = [[YNItemStore sharedStore] saveChanges];
     if (success) {

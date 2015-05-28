@@ -168,8 +168,6 @@
     
 }
 
-
-
 #pragma mark - Tags
 
 - (NSArray *)allTags {
@@ -178,13 +176,48 @@
 
 - (void)createTag:(NSString *)tagName {
     YNTag *tag = [NSEntityDescription insertNewObjectForEntityForName:@"YNTag" inManagedObjectContext:self.context];
-    tag.tag = tagName;
+
+    [tag setValue:tagName forKey:@"tag"];
+    
     [self.privateTags addObject:tag];
 
 }
 
-- (void)addTagsForItem:(NSArray *)tags forItem:(YNItem *)item {
-    item.tags = [NSSet setWithArray:tags];
+- (void)addTagsForItem:(NSSet *)tags forItem:(YNItem *)item {
+    
+    //[item addTags:tags];
+    for (NSString *tagName in tags) {
+        YNTag *tag = [self getTagByName:tagName];
+        [item addTagsObject:tag];
+    }
+}
+
+- (YNTag *)getTagByName: (NSString *)tagName {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"YNTag"];
+    
+    request.predicate = [NSPredicate predicateWithFormat:@"%K=%@",@"tag", tagName];
+    
+    NSError *error;
+    YNTag   *tag;
+    
+    NSArray *results = [self.context executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"Error：%@！",error.localizedDescription);
+    } else {
+        tag = [results firstObject];
+    }
+    return tag;
+}
+
+- (NSArray *)getTagsByItem: (YNItem *)item {
+    
+    NSMutableArray *itemTags = [NSMutableArray array];
+    
+    for (NSString *tag in item.tags) {
+        [itemTags addObject:tag];
+    }
+    
+    return itemTags;
 }
 
 #pragma mark - Private Methods

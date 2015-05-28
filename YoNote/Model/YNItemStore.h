@@ -25,8 +25,12 @@
 - (BOOL)saveChanges;
 
 - (void)createCollection:(NSString *)collectionName;
+- (YNCollection *)getCollectionByName:(NSString *)collectionName;
 - (void)addCollectionForItem:(NSString *)collection forItem:(YNItem *)item;
+
 - (void)createTag:(NSString *)tagName;
-- (void)addTagsForItem:(NSArray *)tags forItem:(YNItem *)item;
+- (YNTag *)getTagByName: (NSString *)tagName;
+- (NSArray *)getTagsByItem: (YNItem *)item;
+- (void)addTagsForItem:(NSSet *)tags forItem:(YNItem *)item;
 
 @end
