@@ -110,7 +110,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     YNItem *item = self.items[indexPath.row];
     
     //configure cell with YNItem
-    cell.collectionNameLabel.text = item.collection.collection;
+    cell.collectionNameLabel.text = item.collection.collectionName;
     cell.memoLabel.text = item.memo;
     NSMutableArray *tags = [item mutableArrayValueForKeyPath:@"tags.tag"];
     cell.tagLabel.text = [tags componentsJoinedByString:@","];

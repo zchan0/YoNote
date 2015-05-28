@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "YNRootTabViewController.h"
+#import "TestViewController.h"
 
 @interface AppDelegate ()
 
@@ -24,8 +25,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     YNRootTabViewController *rootViewController = [[YNRootTabViewController alloc] init];
-    
     self.window.rootViewController = rootViewController;
+
+    //TestViewController *viewController = [[TestViewController alloc]init];
+    //self.window.rootViewController = viewController;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self customNaviBar];
     [self.window makeKeyAndVisible];    // Make current window visible

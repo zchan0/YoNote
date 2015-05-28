@@ -71,7 +71,7 @@
     item.tags        = [NSSet setWithArray:self.toolbar.tags];
     item.dateCreated = self.toolbar.dateCreated;
     item.dateAlarmed = self.toolbar.dateAlarmed;
-    item.collection.collection  = self.toolbar.collection;
+    item.collection.collectionName  = self.toolbar.collection;
     
     NSLog(@"viewWillDisappear, item: %@", item);
 }
@@ -87,7 +87,7 @@
             self.toolbar.dateCreated = _item.dateCreated;
             self.toolbar.dateAlarmed = _item.dateAlarmed;
             self.editedImages  = [NSMutableArray arrayWithArray:_images];
-            self.toolbar.collection  = _item.collection.collection;
+            self.toolbar.collection  = _item.collection.collectionName;
             self.toolbar.tags        = [_item mutableArrayValueForKeyPath:@"tags.tag"];
         }
     }

@@ -2,7 +2,7 @@
 //  YNTag.h
 //  YoNote
 //
-//  Created by Zchan on 15/5/25.
+//  Created by Zchan on 15/5/28.
 //  Copyright (c) 2015年 Zchan. All rights reserved.
 //
 
@@ -15,14 +15,14 @@
 
 @property (nonatomic, retain) NSString * tag;
 @property (nonatomic, retain) UIImage  * thumbnail;
-@property (nonatomic, retain) NSSet *tagItem;
+@property (nonatomic, retain) NSSet *items;
 @end
 
 @interface YNTag (CoreDataGeneratedAccessors)
 
-- (void)addTagItemObject:(YNItem *)value;
-- (void)removeTagItemObject:(YNItem *)value;
-- (void)addTagItem:(NSSet *)values;
-- (void)removeTagItem:(NSSet *)values;
+- (void)addItemsObject:(YNItem *)value;
+- (void)removeItemsObject:(YNItem *)value;
+- (void)addItems:(NSSet *)values;
+- (void)removeItems:(NSSet *)values;
 
 @end

@@ -114,7 +114,6 @@
     if (textField == self.inputTextField) {
         [self.dataSource addObject:self.inputTextField.text];
         [self.tableView reloadData];
-        self.inputTextField.text = nil;
         
         if ([self.navTitle isEqualToString:@"图片集"]) {
             [[YNItemStore sharedStore]createCollection:self.inputTextField.text];
@@ -122,13 +121,15 @@
         if ([self.navTitle isEqualToString:@"标签"]) {
             [[YNItemStore sharedStore]createTag:self.inputTextField.text];
         }
-        
+        /*
         BOOL success = [[YNItemStore sharedStore] saveChanges];
         if (success) {
             NSLog(@"添加成功.");
         } else {
             NSLog(@"添加失败.");
-        }
+        }*/
+        
+        self.inputTextField.text = nil;
     }
     
     
@@ -173,10 +174,8 @@
     if ([self.navTitle isEqualToString:@"图片集"]) {
         self.collectionResult = self.dataSource[indexPath.row];
         
-        NSLog(@"collectionResult: %@", self.collectionResult);
         [[YNItemStore sharedStore]addCollectionForItem:self.collectionResult forItem:self.item];
-        NSLog(@"%@", self.collectionResult);
-        NSLog(@"%@", self.item);
+        
         _searchItemToolbar.collection = self.collectionResult;
         
         [self.presentingViewController

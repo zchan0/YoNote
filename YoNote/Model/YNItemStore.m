@@ -135,15 +135,40 @@
     return [self.privateCollections copy];
 }
 
+- (YNCollection *)getCollectionByName:(NSString *)collectionName {
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"YNCollection"];
+    
+    request.predicate = [NSPredicate predicateWithFormat:@"%K=%@",@"collectionName", collectionName];
+    
+    NSError *error;
+    YNCollection *collection;
+    
+    NSArray *results = [self.context executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"Error：%@！",error.localizedDescription);
+    } else {
+        collection = [results firstObject];
+    }
+    return collection;
+    
+}
+
 - (void)createCollection:(NSString *)collectionName {
     YNCollection *collection = [NSEntityDescription insertNewObjectForEntityForName:@"YNCollection" inManagedObjectContext:self.context];
-    collection.collection = collectionName;
+    
+    [collection setValue:collectionName forKey:@"collectionName"];
+    
     [self.privateCollections addObject:collection];
 }
 
-- (void)addCollectionForItem:(NSString *)collection forItem:(YNItem *)item {
-    item.collection.collection = collection;
+- (void)addCollectionForItem:(NSString *)collectionName forItem:(YNItem *)item {
+    YNCollection *collection = [self getCollectionByName:collectionName];
+    [collection addItemsObject:item];
+    
 }
+
+
 
 #pragma mark - Tags
 
