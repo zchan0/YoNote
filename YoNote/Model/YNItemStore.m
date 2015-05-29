@@ -7,7 +7,6 @@
 //
 
 #import "YNItemStore.h"
-#import "YNImageStore.h"
 
 @interface YNItemStore ()
 
@@ -220,7 +219,7 @@
     
     NSArray *results = [self.context executeFetchRequest:request error:&error];
     if (error) {
-        NSLog(@"Error：%@！",error.localizedDescription);
+        NSLog(@"getTagByName, Error：%@！",error.localizedDescription);
     } else {
         tag = [results firstObject];
     }
@@ -249,7 +248,7 @@
         NSArray *result = [self.context executeFetchRequest:request error:&error];
         
         if (!result) {
-            [NSException raise:@"Fetch failed" format:@"Reason: %@", [error localizedDescription]];
+            [NSException raise:@"Fetch All Tags failed" format:@"Reason: %@", [error localizedDescription]];
         }
         
         self.privateTags = [[NSMutableArray alloc] initWithArray:result];
@@ -257,12 +256,49 @@
     
 }
 
+#pragma mark - Images
+
+- (void)addImagesForItem:(NSSet *)images forItem:(YNItem *)item {
+    for (NSString *imageName in images) {
+        YNImage *image = [self getImageByName:imageName];
+        [item addImagesObject:image];
+    }
+}
+
+- (YNImage *)getImageByName: (NSString *)imageName {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"YNImage"];
+    
+    request.predicate = [NSPredicate predicateWithFormat:@"%K=%@",@"imageName", imageName];
+    
+    NSError *error;
+    YNImage *image;
+    
+    NSArray *results = [self.context executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"getImageByName, Error：%@！",error.localizedDescription);
+    } else {
+        image = [results firstObject];
+    }
+    return image;
+}
+
+- (NSArray *)getImagesByItem:(YNItem *)item
+{
+    NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"YNImage"];
+    request.predicate=[NSPredicate predicateWithFormat:@"%K=%@",@"imageItem",item];
+    NSError *error;
+    //进行查询
+    NSArray *results=[self.context executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"getImagesByItem Error：%@！",error.localizedDescription);
+    }
+    return results;
+}
+
 #pragma mark - Private Methods
 
 - (NSString *)itemArchivePath
 {
-    // NSSearchPathForDirectoriesInDomains能返回Sandbox中某种(第一个参数指定的）目录的全路径
-    // 后面两个参数在iOS中都这样, 在OS中会不一样
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [documentDirectories firstObject];
     

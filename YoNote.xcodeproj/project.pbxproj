@@ -13,6 +13,7 @@
 		95255F831B16FF2B00B1DAE3 /* YNItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 95255F821B16FF2B00B1DAE3 /* YNItem.m */; };
 		95255F861B16FF2B00B1DAE3 /* YNTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 95255F851B16FF2B00B1DAE3 /* YNTag.m */; };
 		95255F891B16FF6800B1DAE3 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95255F881B16FF6800B1DAE3 /* TestViewController.m */; };
+		95255F8B1B18B5BF00B1DAE3 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95255F8A1B18B5BF00B1DAE3 /* AssetsLibrary.framework */; };
 		953438401B01EF74001859D7 /* YNItemEditToolbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9534383F1B01EF74001859D7 /* YNItemEditToolbar.xib */; };
 		9534384A1B04D0B1001859D7 /* YNItemEditToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 953438481B04D0B1001859D7 /* YNItemEditToolbar.m */; };
 		9539A2E51B0DFCA7004E1A48 /* YNImageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9539A2E41B0DFCA7004E1A48 /* YNImageDetailViewController.m */; };
@@ -66,6 +67,7 @@
 		95255F851B16FF2B00B1DAE3 /* YNTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNTag.m; path = Model/YNTag.m; sourceTree = "<group>"; };
 		95255F871B16FF6800B1DAE3 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestViewController.h; path = Controllers/TestViewController.h; sourceTree = "<group>"; };
 		95255F881B16FF6800B1DAE3 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestViewController.m; path = Controllers/TestViewController.m; sourceTree = "<group>"; };
+		95255F8A1B18B5BF00B1DAE3 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		9534383F1B01EF74001859D7 /* YNItemEditToolbar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YNItemEditToolbar.xib; sourceTree = "<group>"; };
 		953438481B04D0B1001859D7 /* YNItemEditToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemEditToolbar.m; path = Views/YNItemEditToolbar.m; sourceTree = "<group>"; };
 		953438491B04D0B1001859D7 /* YNItemEditToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNItemEditToolbar.h; path = Views/YNItemEditToolbar.h; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95255F8B1B18B5BF00B1DAE3 /* AssetsLibrary.framework in Frameworks */,
 				F2CB2153EA955B4A6DE64B1F /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,6 +149,7 @@
 		923D414B370563984C9B8FC4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				95255F8A1B18B5BF00B1DAE3 /* AssetsLibrary.framework */,
 				DDD64A8A14D25B75D9393C88 /* libPods.a */,
 			);
 			name = Frameworks;

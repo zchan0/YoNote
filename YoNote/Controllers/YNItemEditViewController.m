@@ -10,9 +10,6 @@
 #import "HSDatePickerViewController.h"
 #import "YNItemSearchViewController.h"
 #import "YNItemEditToolbar.h"
-#import "YNItem.h"
-#import "YNCollection.h"
-#import "YNTag.h"
 #import "YNItemStore.h"
 #import <CTAssetsPickerController.h>
 
@@ -51,7 +48,11 @@
     
     [self setupTextView];
     [self customNaviBar];
-
+    
+    if (_isNew) {
+        self.editedImages = [NSMutableArray array];
+        self.editedImages  = [NSMutableArray arrayWithArray:_images];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -71,16 +72,14 @@
 - (instancetype)initForNewItem:(BOOL)isNew
 {
     self   = [super initWithNibName:nil bundle:nil];
-    _isNew = isNew;
-    self.editedImages = [NSMutableArray array];
-
     if (self) {
+        _isNew = isNew;
         if (!isNew) {
             self.toolbar.dateCreated = _item.dateCreated;
             self.toolbar.dateAlarmed = _item.dateAlarmed;
-            self.editedImages  = [NSMutableArray arrayWithArray:_images];
             self.toolbar.collection  = _item.collection.collectionName;
             self.toolbar.tags        = [_item mutableArrayValueForKeyPath:@"tags.tag"];
+            //add get image
         }
     }
     
@@ -170,6 +169,8 @@
     item.dateCreated = self.toolbar.dateCreated;
     item.dateAlarmed = self.toolbar.dateAlarmed;
     item.memo        = self.editTextView.text;
+    
+    
     
     NSLog(@"item: %@", item);
     

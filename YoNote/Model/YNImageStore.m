@@ -7,6 +7,7 @@
 //
 
 #import "YNImageStore.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface YNImageStore ()
 
@@ -140,7 +141,6 @@
     UIGraphicsEndImageContext();
     
     return smallImage;
-    
     
 }
 

@@ -11,7 +11,7 @@
 #import "YNImageDetailViewController.h"
 #import "RDVTabBarController.h"
 #import "YNImageStore.h"
-
+#import "YNItemStore.h"
 
 #define kFrameHeight self.view.frame.size.height
 #define kFrameWidth  self.view.frame.size.width
@@ -36,18 +36,6 @@
 @implementation YNItemDetailViewController
 
 #pragma mark - Lifecycle
-
-- (instancetype)initForNewItem:(BOOL)isNew
-{
-    self = [super initWithNibName:nil bundle:nil];
-    if (self) {
-        if (isNew) {
-            
-        }
-    }
-    
-    return self;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

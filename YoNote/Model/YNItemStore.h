@@ -33,4 +33,8 @@
 - (NSArray *)getTagsByItem: (YNItem *)item;
 - (void)addTagsForItem:(NSSet *)tags forItem:(YNItem *)item;
 
+- (void)addImagesForItem:(NSSet *)images forItem:(YNItem *)item;
+- (YNImage *)getImageByName: (NSString *)imageName;
+- (NSArray *)getImagesByItem:(YNItem *)item;
+
 @end
