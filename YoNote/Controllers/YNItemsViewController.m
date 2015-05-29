@@ -112,24 +112,16 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     //configure cell with YNItem
     cell.collectionNameLabel.text = item.collection.collectionName;
     cell.memoLabel.text = item.memo;
-    NSMutableArray *tags = [item mutableArrayValueForKeyPath:@"tags.tag"];
+    
+    //NSMutableArray *tags = [item mutableArrayValueForKeyPath:@"tags.tag"];
+    NSSet *tagsSet = [item tags];
+    NSArray *tags  = [self setToArray:tagsSet];
     cell.tagLabel.text = [tags componentsJoinedByString:@","];
     cell.iv.image = item.thumbnaiil;
-    
-    /*
-    cell.collectionNameLabel.text = @"高级数据库";
-    cell.memoLabel.text = @"概念模型，从用户角度建模，有利于实现数据库的, 概念模型，从用户角度建模，有利于实现数据库的";
-    cell.tagLabel.text = @"笔记";
-    
-    NSString *path = [NSString stringWithFormat:@"img_%d.jpg", ((int)indexPath.row)+1];
-    UIImage *image = [[YNImageStore sharedStore]imageForKey:path];
-    UIImage *thumbnail = [[YNImageStore sharedStore]setThumbnailFromImage:image newRect:kItemImageRect];
-    cell.iv.image = thumbnail;*/
     
     cell.separatorInset = ALEdgeInsetsZero; // make separator below imageview visible
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    // Make sure the constraints have been added to this cell, since it may have just been created from scratch
     [cell updateFonts];
     [cell setNeedsUpdateConstraints];
     [cell updateConstraintsIfNeeded];
@@ -247,6 +239,12 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
 #pragma mark - Private Methods
 
-
+- (NSArray *)setToArray:(NSSet *)set {
+    NSMutableArray *array = [NSMutableArray array];
+    for (YNTag *element in set) {
+        [array addObject:element.tag];
+    }
+    return array;
+}
 
 @end

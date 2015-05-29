@@ -184,8 +184,6 @@
 }
 
 - (void)addTagsForItem:(NSSet *)tags forItem:(YNItem *)item {
-    
-    //[item addTags:tags];
     for (NSString *tagName in tags) {
         YNTag *tag = [self getTagByName:tagName];
         [item addTagsObject:tag];

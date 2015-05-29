@@ -33,9 +33,12 @@
         self.dataSource = [NSMutableArray array];
         if ([title isEqualToString:@"图片集"]) {
             self.dataSource = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore] allCollections]] ;
+            NSLog(@"%@", self.dataSource);
         }
         if ([title isEqualToString:@"标签"]) {
             self.dataSource = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore] allTags]];
+            NSLog(@"%@", self.dataSource);
+
         }
     }
     return self;
@@ -95,6 +98,10 @@
         _searchItemToolbar.tags = [NSArray arrayWithArray:self.tagResults];
         
         NSSet *tagsSet = [NSSet setWithArray:self.tagResults];
+        /*NSMutableSet *tagsSet;
+        for (NSString *tag in self.tagResults) {
+            [tagsSet addObject:tag];
+        }*/
         
         [[YNItemStore sharedStore]addTagsForItem:tagsSet forItem:_item];
     }
@@ -122,18 +129,8 @@
         if ([self.navTitle isEqualToString:@"标签"]) {
             [[YNItemStore sharedStore]createTag:self.inputTextField.text];
         }
-        /*
-        BOOL success = [[YNItemStore sharedStore] saveChanges];
-        if (success) {
-            NSLog(@"添加成功.");
-        } else {
-            NSLog(@"添加失败.");
-        }*/
-        
         self.inputTextField.text = nil;
     }
-    
-    
     return YES;
 }
 
