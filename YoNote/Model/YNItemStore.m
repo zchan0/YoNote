@@ -72,6 +72,8 @@
         
         // 如果已经有数据存在，取出
         [self loadAllItems];
+        [self loadAllCollections];
+        [self loadAllTags];
         
     }
     
@@ -135,6 +137,21 @@
     return [self.privateCollections copy];
 }
 
+- (void)createCollection:(NSString *)collectionName {
+    YNCollection *collection = [NSEntityDescription insertNewObjectForEntityForName:@"YNCollection" inManagedObjectContext:self.context];
+    
+    [collection setValue:collectionName forKey:@"collectionName"];
+    
+    [self.privateCollections addObject:collection];
+}
+
+
+- (void)addCollectionForItem:(NSString *)collectionName forItem:(YNItem *)item {
+    YNCollection *collection = [self getCollectionByName:collectionName];
+    [collection addItemsObject:item];
+    
+}
+
 - (YNCollection *)getCollectionByName:(NSString *)collectionName {
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"YNCollection"];
@@ -154,22 +171,25 @@
     
 }
 
-- (void)createCollection:(NSString *)collectionName {
-    YNCollection *collection = [NSEntityDescription insertNewObjectForEntityForName:@"YNCollection" inManagedObjectContext:self.context];
-    
-    [collection setValue:collectionName forKey:@"collectionName"];
-    
-    [self.privateCollections addObject:collection];
-}
-
-- (void)addCollectionForItem:(NSString *)collectionName forItem:(YNItem *)item {
-    YNCollection *collection = [self getCollectionByName:collectionName];
-    [collection addItemsObject:item];
+- (void)loadAllCollections {
+    if (!self.privateCollections) {
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"YNCollection" inManagedObjectContext:self.context];
+        request.entity = entity;
+        
+        NSError *error;
+        NSArray *result = [self.context executeFetchRequest:request error:&error];
+        
+        if (!result) {
+            [NSException raise:@"Fetch failed" format:@"Reason: %@", [error localizedDescription]];
+        }
+        self.privateCollections = [[NSMutableArray alloc] initWithArray:result];
+    }
     
 }
 
 #pragma mark - Tags
-
 - (NSArray *)allTags {
     return [self.privateTags copy];
 }
@@ -216,6 +236,25 @@
     }
     
     return itemTags;
+}
+
+- (void)loadAllTags {
+    if (!self.privateTags) {
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"YNTag" inManagedObjectContext:self.context];
+        request.entity = entity;
+        
+        NSError *error;
+        NSArray *result = [self.context executeFetchRequest:request error:&error];
+        
+        if (!result) {
+            [NSException raise:@"Fetch failed" format:@"Reason: %@", [error localizedDescription]];
+        }
+        
+        self.privateTags = [[NSMutableArray alloc] initWithArray:result];
+    }
+    
 }
 
 #pragma mark - Private Methods

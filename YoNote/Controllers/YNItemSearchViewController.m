@@ -32,13 +32,14 @@
         self.navigationItem.title = title;
         self.dataSource = [NSMutableArray array];
         if ([title isEqualToString:@"图片集"]) {
-            self.dataSource = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore] allCollections]] ;
-            NSLog(@"%@", self.dataSource);
+            for (YNCollection *collection in [[YNItemStore sharedStore] allCollections]) {
+                [self.dataSource addObject:collection.collectionName];
+            }
         }
         if ([title isEqualToString:@"标签"]) {
-            self.dataSource = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore] allTags]];
-            NSLog(@"%@", self.dataSource);
-
+            for (YNTag *tag in [[YNItemStore sharedStore] allTags]) {
+                [self.dataSource addObject:tag.tag];
+            }
         }
     }
     return self;
@@ -63,6 +64,10 @@
 #pragma mark - Views
 
 - (void)customNaviBar {
+    
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(Cancel:)];
+    cancelItem.tintColor = [UIColor whiteColor];
+    self.navigationItem.leftBarButtonItem = cancelItem;
     
     UIBarButtonItem *doneItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(Done:)];
     doneItem.tintColor = [UIColor whiteColor];
@@ -94,15 +99,9 @@
             NSString *selectedTag = self.dataSource[selectedPath.row];
             [self.tagResults addObject:selectedTag];
         }
-        
         _searchItemToolbar.tags = [NSArray arrayWithArray:self.tagResults];
         
         NSSet *tagsSet = [NSSet setWithArray:self.tagResults];
-        /*NSMutableSet *tagsSet;
-        for (NSString *tag in self.tagResults) {
-            [tagsSet addObject:tag];
-        }*/
-        
         [[YNItemStore sharedStore]addTagsForItem:tagsSet forItem:_item];
     }
     
@@ -116,6 +115,10 @@
                     NSLog(@"添加tags失败");
                 }
      }];
+}
+
+- (IBAction)Cancel:(id)sender {
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -155,9 +158,8 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:itemSearchCellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    
+
     cell.textLabel.text = self.dataSource[indexPath.row];
-    //self.tableView.tableHeaderView = self.backgroundView;
     
     if ([self.cellSelected containsObject:indexPath]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
