@@ -8,13 +8,12 @@
 
 #import "YNItemsViewController.h"
 #import "YNItemCell.h"
-#import "YNItemStore.h"
-#import "YNTag.h"
-#import "YNCollection.h"
-#import "YNImageStore.h"
 #import "RDVTabBarController.h"
 #import "YNItemDetailViewController.h"
 #import "YNItemEditViewController.h"
+#import "YNItemStore.h"
+#import "YNImageStore.h"
+#import <CTAssetsPickerController.h>
 
 static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
@@ -22,6 +21,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
 @property (nonatomic, strong) UIPopoverController *popover;
 @property (nonatomic, strong) NSMutableArray *selectedImages;
+@property (nonatomic, strong) NSMutableArray *selectedImagesNames;
 
 @property (nonatomic, strong) NSArray *items;
 
@@ -36,6 +36,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     [self customTableView];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    self.selectedImagesNames  = [NSMutableArray array];
     
     self.items = [[YNItemStore sharedStore]allItems];
 }
@@ -113,7 +114,6 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     cell.collectionNameLabel.text = item.collection.collectionName;
     cell.memoLabel.text = item.memo;
     
-    //NSMutableArray *tags = [item mutableArrayValueForKeyPath:@"tags.tag"];
     NSSet *tagsSet = [item tags];
     NSArray *tags  = [self setToArray:tagsSet];
     cell.tagLabel.text = [tags componentsJoinedByString:@","];
@@ -214,9 +214,15 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 }
 
 - (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets {
+    
+    for (ALAsset *asset in assets) {
+        [self.selectedImagesNames addObject:[[asset defaultRepresentation] filename]];
+    }
+    
     YNItemEditViewController *itemEditViewController = [[YNItemEditViewController alloc]initForNewItem:YES];
     self.selectedImages = [NSMutableArray arrayWithArray:assets];
     itemEditViewController.images = [NSArray arrayWithArray:self.selectedImages];
+    itemEditViewController.imagesNames = [NSArray arrayWithArray:self.selectedImagesNames];
     
     YNItem *newItem = [[YNItemStore sharedStore]createItem];
     itemEditViewController.item = newItem;

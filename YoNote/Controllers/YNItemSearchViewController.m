@@ -110,7 +110,7 @@
             completion:^{
                 BOOL success = [[YNItemStore sharedStore] saveChanges];
                 if (success) {
-                    NSLog(@"为%@添加tags成功.", _item);
+                    NSLog(@"添加tags成功.");
                 } else {
                     NSLog(@"添加tags失败");
                 }
@@ -183,9 +183,9 @@
                 completion:^{
                     BOOL success = [[YNItemStore sharedStore] saveChanges];
                     if (success) {
-                        NSLog(@"为%@添加colleciton成功.", self.item);
+                        NSLog(@"添加colleciton成功.");
                     } else {
-                        NSLog(@"添加collection失败");
+                        NSLog(@"添加collection失败.");
                     }
          }];
     }

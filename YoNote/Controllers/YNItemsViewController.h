@@ -7,7 +7,6 @@
 //
 
 #import "YNBaseViewController.h"
-#import <CTAssetsPickerController.h>
 
 @interface YNItemsViewController : YNBaseViewController
 

@@ -7,7 +7,6 @@
 //
 
 #import "YNImageStore.h"
-#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface YNImageStore ()
 
@@ -58,10 +57,20 @@
 - (NSString *)imagePathForKey:(NSString *)key
 {
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
     NSString *documentDirectory = [documentDirectories firstObject];
+    NSString *imagePath = [documentDirectory stringByAppendingPathComponent:key];
+    return imagePath;
+}
+
+- (UIImage *)getfullResolutionImage:(ALAsset *)asset {
+    ALAssetRepresentation *representation = [asset defaultRepresentation];
     
-    return [documentDirectory stringByAppendingPathComponent:key];
+    UIImage *fullResolutionImage =
+    [UIImage imageWithCGImage:representation.fullResolutionImage
+                        scale:1.0f
+                  orientation:(UIImageOrientation)representation.orientation];
+
+    return fullResolutionImage;
 }
 
 //  保存图片
@@ -71,12 +80,36 @@
     
     // Create full path for image
     NSString *imagePath = [self imagePathForKey:key];
-    
+        
     // Turn image into JPEG data
     NSData *data = UIImageJPEGRepresentation(image, 0.5);
     
     // Write it to full path
     [data writeToFile:imagePath atomically:YES];
+}
+
+- (void)saveImages:(NSArray *)assets {
+    NSMutableArray *imagesNames = [NSMutableArray array];
+    
+    for (ALAsset *asset in assets) {
+        [imagesNames addObject:[[asset defaultRepresentation] filename]];
+    }
+    
+    // Save image to Documents
+    for (int i = 0; i < assets.count; i++) {
+        NSString *imageName = imagesNames[i];
+        ALAsset *asset = assets[i];
+        /*ALAssetRepresentation *representation = [assets[i] defaultRepresentation];
+        
+        UIImage *fullResolutionImage =
+        [UIImage imageWithCGImage:representation.fullResolutionImage
+                            scale:1.0f
+                      orientation:(UIImageOrientation)representation.orientation];*/
+        UIImage *fullResolutionImage = [self getfullResolutionImage:asset];
+        
+        [self setImage:fullResolutionImage forKey:imageName];
+    }
+
 }
 
 //  读取指定图片
@@ -142,6 +175,17 @@
     
     return smallImage;
     
+}
+
+- (NSArray *)getImageNames:(NSArray *)assets {
+    NSMutableArray *imageNames = [NSMutableArray array];
+    
+    for (ALAsset *asset in assets) {
+        ALAssetRepresentation *imageRep = [asset defaultRepresentation];
+        [imageNames addObject:[imageRep filename]];
+    }
+    
+    return imageNames;
 }
 
 

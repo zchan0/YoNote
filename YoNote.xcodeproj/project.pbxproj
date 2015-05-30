@@ -68,6 +68,8 @@
 		95255F871B16FF6800B1DAE3 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestViewController.h; path = Controllers/TestViewController.h; sourceTree = "<group>"; };
 		95255F881B16FF6800B1DAE3 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestViewController.m; path = Controllers/TestViewController.m; sourceTree = "<group>"; };
 		95255F8A1B18B5BF00B1DAE3 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		95255F8C1B19E75900B1DAE3 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		95255F8E1B19E76200B1DAE3 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		9534383F1B01EF74001859D7 /* YNItemEditToolbar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YNItemEditToolbar.xib; sourceTree = "<group>"; };
 		953438481B04D0B1001859D7 /* YNItemEditToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemEditToolbar.m; path = Views/YNItemEditToolbar.m; sourceTree = "<group>"; };
 		953438491B04D0B1001859D7 /* YNItemEditToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNItemEditToolbar.h; path = Views/YNItemEditToolbar.h; sourceTree = "<group>"; };
@@ -149,6 +151,8 @@
 		923D414B370563984C9B8FC4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				95255F8E1B19E76200B1DAE3 /* MobileCoreServices.framework */,
+				95255F8C1B19E75900B1DAE3 /* ImageIO.framework */,
 				95255F8A1B18B5BF00B1DAE3 /* AssetsLibrary.framework */,
 				DDD64A8A14D25B75D9393C88 /* libPods.a */,
 			);

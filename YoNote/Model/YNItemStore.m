@@ -13,6 +13,7 @@
 @property (nonatomic) NSMutableArray *privateItems;
 @property (nonatomic) NSMutableArray *privateCollections;
 @property (nonatomic) NSMutableArray *privateTags;
+@property (nonatomic) NSMutableArray *privateImages;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSManagedObjectModel *model;
 
@@ -257,6 +258,14 @@
 }
 
 #pragma mark - Images
+
+- (void)createImage:(NSString *)imageName {
+    YNImage *image = [NSEntityDescription insertNewObjectForEntityForName:@"YNImage" inManagedObjectContext:self.context];
+    
+    [image setValue:imageName forKey:@"imageName"];
+    
+    [self.privateImages addObject:image];
+}
 
 - (void)addImagesForItem:(NSSet *)images forItem:(YNItem *)item {
     for (NSString *imageName in images) {

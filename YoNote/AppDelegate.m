@@ -28,7 +28,8 @@
     self.window.rootViewController = rootViewController;
 
     //TestViewController *viewController = [[TestViewController alloc]init];
-    //self.window.rootViewController = viewController;
+    //UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:viewController];
+    //self.window.rootViewController = navController;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self customNaviBar];

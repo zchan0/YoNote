@@ -10,6 +10,7 @@
 #import "YNItem.h"
 #import "YNCollection.h"
 #import "YNTag.h"
+#import "YNImage.h"
 
 @import CoreData;
 
@@ -33,6 +34,7 @@
 - (NSArray *)getTagsByItem: (YNItem *)item;
 - (void)addTagsForItem:(NSSet *)tags forItem:(YNItem *)item;
 
+- (void)createImage:(NSString *)imageName;
 - (void)addImagesForItem:(NSSet *)images forItem:(YNItem *)item;
 - (YNImage *)getImageByName: (NSString *)imageName;
 - (NSArray *)getImagesByItem:(YNItem *)item;

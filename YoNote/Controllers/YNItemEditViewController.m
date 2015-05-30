@@ -11,6 +11,7 @@
 #import "YNItemSearchViewController.h"
 #import "YNItemEditToolbar.h"
 #import "YNItemStore.h"
+#import "YNImageStore.h"
 #import <CTAssetsPickerController.h>
 
 @interface YNItemEditViewController ()<UITextViewDelegate, YNItemEditToolbarDelegate, HSDatePickerViewControllerDelegate, CTAssetsPickerControllerDelegate, UIPopoverControllerDelegate>
@@ -23,6 +24,7 @@
 
 @property (nonatomic) BOOL isNew;
 @property (nonatomic, strong) NSMutableArray *editedImages;
+@property (nonatomic, strong) NSMutableArray *editedImagesNames;
 
 @end
 
@@ -51,7 +53,9 @@
     
     if (_isNew) {
         self.editedImages = [NSMutableArray array];
+        self.editedImagesNames = [NSMutableArray array];
         self.editedImages  = [NSMutableArray arrayWithArray:_images];
+        self.editedImagesNames = [NSMutableArray arrayWithArray:_imagesNames];
     }
 }
 
@@ -170,10 +174,25 @@
     item.dateAlarmed = self.toolbar.dateAlarmed;
     item.memo        = self.editTextView.text;
     
+    // Save image to Documents
+    [[YNImageStore sharedStore]saveImages:self.editedImages];
+    
+    // Save thumbnail(get the first object) for item
+    ALAsset *asset = [self.editedImages firstObject];
+    UIImage *toThumbnail = [[YNImageStore sharedStore]getfullResolutionImage:asset];
+    NSLog(@"%@", toThumbnail);
+    item.thumbnaiil = [[YNImageStore sharedStore]setThumbnailFromImage:toThumbnail newRect:kItemImageRect];
+    NSLog(@"%@", item.thumbnaiil);
+    
+    // Save image and item in Coredata
+    for (NSString *imageName in self.editedImagesNames) {
+        [[YNItemStore sharedStore] createImage:imageName];
+    }
+    NSSet *imageNameSet = [NSSet setWithArray:self.editedImagesNames];
+    [[YNItemStore sharedStore]addImagesForItem:imageNameSet forItem:item];
     
     
-    NSLog(@"item: %@", item);
-    
+    //  Save
     BOOL success = [[YNItemStore sharedStore] saveChanges];
     if (success) {
         NSLog(@"Saved coredata changes!");
@@ -267,7 +286,10 @@
     else
         [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     
-    self.editedImages = [NSMutableArray arrayWithArray:assets];
+    [[YNImageStore sharedStore] saveImages:assets];
+    
+    self.editedImagesNames = [NSMutableArray arrayWithArray:[[YNImageStore sharedStore] getImageNames:assets]];
+
 }
 
 - (BOOL)assetsPickerController:(CTAssetsPickerController *)picker isDefaultAssetsGroup:(ALAssetsGroup *)group

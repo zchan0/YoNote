@@ -12,6 +12,7 @@
 @interface YNItemEditViewController : UIViewController
 
 @property (nonatomic, strong) NSArray *images;
+@property (nonatomic, strong) NSArray *imagesNames;
 @property (nonatomic, strong) YNItem *item;
 
 - (instancetype)initForNewItem:(BOOL)isNew;
