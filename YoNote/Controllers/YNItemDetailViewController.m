@@ -10,8 +10,7 @@
 #import "YNItemEditViewController.h"
 #import "YNImageDetailViewController.h"
 #import "RDVTabBarController.h"
-#import "YNImageStore.h"
-#import "YNItemStore.h"
+
 
 #define kFrameHeight self.view.frame.size.height
 #define kFrameWidth  self.view.frame.size.width
@@ -88,8 +87,9 @@
 }
 
 - (void)customImageView {
-
-    UIImage *image = [[YNImageStore sharedStore]imageForKey:@"img_4.jpg"];
+    
+    NSArray *images = [[YNItemStore sharedStore]getImagesByItem:_item];
+    UIImage *image = [[YNImageStore sharedStore]imageForKey:[[images firstObject] imageName]];
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.imageView.image = image;
     
@@ -102,8 +102,8 @@
 
 - (void)customTextArea {
 
-    self.memoLabel.text = kTestString;
-    self.dateCreatedLabel.text = [_formatter stringFromDate:[NSDate date]];
+    self.memoLabel.text = _item.memo;
+    self.dateCreatedLabel.text = [_formatter stringFromDate:_item.dateCreated];
     //self.visualEffectView.backgroundColor = UIColorFromRGB(0x3CA9D2);
     
 }
@@ -112,6 +112,7 @@
 
 - (IBAction)Edit:(id)sender {
     YNItemEditViewController *editViewController = [[YNItemEditViewController alloc]initForNewItem:NO];
+    editViewController.item = _item;
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:editViewController];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navController animated:YES completion:nil];

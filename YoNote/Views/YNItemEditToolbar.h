@@ -21,10 +21,10 @@
 @interface YNItemEditToolbar : UIView
 
 @property (nonatomic, strong) NSString *memo;
-@property (nonatomic, strong) UIImage  *image;
 @property (nonatomic, strong) NSDate *dateCreated;
 @property (nonatomic, strong) NSDate *dateAlarmed;
-@property (nonatomic, strong) NSArray  *tags;
+@property (nonatomic, strong) NSArray *tags;
+@property (nonatomic, strong) NSArray *images;
 @property (nonatomic, strong) NSString *collection;
 
 @property (nonatomic, weak) IBOutlet UIButton *imageButton;

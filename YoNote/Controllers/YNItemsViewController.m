@@ -173,6 +173,9 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     YNItemDetailViewController *detailViewController = [[YNItemDetailViewController alloc]init];
+    
+    detailViewController.item = self.items[indexPath.row];
+    
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 

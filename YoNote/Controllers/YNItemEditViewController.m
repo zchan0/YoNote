@@ -24,7 +24,8 @@
 
 @property (nonatomic) BOOL isNew;
 @property (nonatomic, strong) NSMutableArray *editedImages;
-@property (nonatomic, strong) NSMutableArray *editedImagesNames;
+@property (nonatomic, strong) NSMutableArray *selectedImages;
+@property (nonatomic, strong) NSMutableArray *selectedImagesNames;
 
 @end
 
@@ -48,15 +49,28 @@
     self.hsdpVC = [HSDatePickerViewController new];
     self.hsdpVC.delegate = self;
     
-    [self setupTextView];
-    [self customNaviBar];
+    self.toolbar = [[YNItemEditToolbar alloc]init];
     
     if (_isNew) {
         self.editedImages = [NSMutableArray array];
-        self.editedImagesNames = [NSMutableArray array];
+        self.selectedImagesNames = [NSMutableArray array];
         self.editedImages  = [NSMutableArray arrayWithArray:_images];
-        self.editedImagesNames = [NSMutableArray arrayWithArray:_imagesNames];
+        self.selectedImagesNames = [NSMutableArray arrayWithArray:_imagesNames];
+    } else {
+        self.toolbar.memo        = _item.memo;
+        self.toolbar.dateCreated = _item.dateCreated;
+        self.toolbar.dateAlarmed = _item.dateAlarmed;
+        self.toolbar.collection  = _item.collection.collectionName;
+        self.toolbar.tags        = [self tagsSetToArray:_item.tags];
+        self.toolbar.images      = [self imagesSetToArray:_item.images];
+        self.editedImages        = [NSMutableArray array];
+        self.editedImages        = [NSMutableArray arrayWithArray:self.toolbar.images];
+        NSLog(@"%@", self.toolbar.images);
+        NSLog(@"%@", self.editedImages);
     }
+    
+    [self setupTextView];
+    [self customNaviBar];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -78,13 +92,7 @@
     self   = [super initWithNibName:nil bundle:nil];
     if (self) {
         _isNew = isNew;
-        if (!isNew) {
-            self.toolbar.dateCreated = _item.dateCreated;
-            self.toolbar.dateAlarmed = _item.dateAlarmed;
-            self.toolbar.collection  = _item.collection.collectionName;
-            self.toolbar.tags        = [_item mutableArrayValueForKeyPath:@"tags.tag"];
-            //add get image
-        }
+        
     }
     
     return self;
@@ -122,18 +130,17 @@
     self.editTextView = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, width, 170)];
     self.editTextView.delegate = self;
     self.editTextView.scrollEnabled = YES;
+    self.editTextView.text = self.toolbar.memo;
     
     //Appearence
     [self.editTextView setFont:[UIFont systemFontOfSize:kTitleFontSize]];
     [self.editTextView setTintColor:UIColorFromRGB(0x3CA9D2)];  // iOS 7.0 later
     
     //Toolbar
-    self.toolbar = [[YNItemEditToolbar alloc]init];
     self.toolbar.delegate = self;
     self.editTextView.inputAccessoryView = self.toolbar.YNItemEditToolbar;
     
     if (!_isNew) {
-        self.editTextView.text = _item.memo;
         [self addImagesOnButton];
         [self addNumberOnButton:self.toolbar.dateAlarmedButton withDate:self.toolbar.dateAlarmed];
     }
@@ -147,6 +154,7 @@
     UIImageView *iv = [[UIImageView alloc]initWithFrame:frame];
     iv.image = [self.editedImages firstObject];
     [self.toolbar.imageButton addSubview:iv];
+    
     UILabel *label = [[UILabel alloc]initWithFrame:frame];
     label.text = [NSString stringWithFormat:@"%d", (int)self.editedImages.count];
     label.tintColor = [UIColor grayColor];
@@ -179,10 +187,10 @@
     [[YNImageStore sharedStore]saveImages:self.editedImages];
     
     // Save image and item in Coredata
-    for (NSString *imageName in self.editedImagesNames) {
+    for (NSString *imageName in self.selectedImagesNames) {
         [[YNItemStore sharedStore] createImage:imageName];
     }
-    NSSet *imageNameSet = [NSSet setWithArray:self.editedImagesNames];
+    NSSet *imageNameSet = [NSSet setWithArray:self.selectedImagesNames];
     [[YNItemStore sharedStore]addImagesForItem:imageNameSet forItem:item];
     
     
@@ -199,14 +207,6 @@
 
 
 - (void)Cancel:(id)sender {
-    [[YNItemStore sharedStore] removeItem:self.item];
-    
-    BOOL success = [[YNItemStore sharedStore] saveChanges];
-    if (success) {
-        NSLog(@"Saved coredata changes!");
-    } else {
-        NSLog(@"Could not save coredata changes");
-    }
     
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
@@ -282,7 +282,7 @@
     
     [[YNImageStore sharedStore] saveImages:assets];
     
-    self.editedImagesNames = [NSMutableArray arrayWithArray:[[YNImageStore sharedStore] getImageNames:assets]];
+    self.selectedImagesNames = [NSMutableArray arrayWithArray:[[YNImageStore sharedStore] getImageNames:assets]];
 
 }
 
@@ -338,6 +338,22 @@
 }
 
 #pragma mark - Private Methods
+
+- (NSArray *)tagsSetToArray:(NSSet *)set {
+    NSMutableArray *array = [NSMutableArray array];
+    for (YNTag *element in set) {
+        [array addObject:element.tag];
+    }
+    return array;
+}
+
+- (NSArray *)imagesSetToArray:(NSSet *)set {
+    NSMutableArray *array = [NSMutableArray array];
+    for (YNImage *element in set) {
+        [array addObject:element.imageName];
+    }
+    return array;
+}
 
 - (void)hsDatePickerPickedDate:(NSDate *)date {
     if (self.toolbar.dateCreatedButton.tag) {

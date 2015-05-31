@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YNImageStore.h"
+#import "YNItemStore.h"
 
 @interface YNItemDetailViewController : UIViewController
+
+@property (nonatomic, strong) YNItem *item;
 
 @end
