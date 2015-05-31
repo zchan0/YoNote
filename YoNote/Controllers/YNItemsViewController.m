@@ -57,6 +57,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
 - (void)customTableView {
     [self.tableView registerClass:[YNItemCell class] forCellReuseIdentifier:YNItemCellIndentifier];
+    self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
 - (void)customNavBar {
