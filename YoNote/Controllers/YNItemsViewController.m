@@ -124,7 +124,8 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     
     [cell updateFonts];
     [cell setNeedsUpdateConstraints];
-    [cell updateConstraintsIfNeeded];
+    //[cell updateConstraintsIfNeeded];
+    [cell setNeedsLayout];
     
     return cell;
 }
