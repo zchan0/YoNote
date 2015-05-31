@@ -16,7 +16,6 @@
 		9539A2E81B0DFCD1004E1A48 /* YNImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9539A2E71B0DFCD1004E1A48 /* YNImagesViewController.m */; };
 		9539A2EA1B0DFCEE004E1A48 /* YNImageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9539A2E91B0DFCEE004E1A48 /* YNImageDetailViewController.xib */; };
 		9539A2EC1B0DFCFF004E1A48 /* YNImagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9539A2EB1B0DFCFF004E1A48 /* YNImagesViewController.xib */; };
-		955C0AF21B106A4500315DEF /* YNImageTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 955C0AF11B106A4500315DEF /* YNImageTransformer.m */; };
 		955C0B011B106CB000315DEF /* YNItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 955C0B001B106CB000315DEF /* YNItemStore.m */; };
 		955CF4D61AF9B9CC00C8BBE6 /* YNBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4D51AF9B9CC00C8BBE6 /* YNBaseViewController.m */; };
 		955CF4E51AF9C0AC00C8BBE6 /* YNRootTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 955CF4E41AF9C0AC00C8BBE6 /* YNRootTabViewController.m */; };
@@ -71,8 +70,6 @@
 		9539A2E71B0DFCD1004E1A48 /* YNImagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNImagesViewController.m; path = Controllers/YNImagesViewController.m; sourceTree = "<group>"; };
 		9539A2E91B0DFCEE004E1A48 /* YNImageDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YNImageDetailViewController.xib; sourceTree = "<group>"; };
 		9539A2EB1B0DFCFF004E1A48 /* YNImagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YNImagesViewController.xib; sourceTree = "<group>"; };
-		955C0AF01B106A4500315DEF /* YNImageTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNImageTransformer.h; path = Model/YNImageTransformer.h; sourceTree = "<group>"; };
-		955C0AF11B106A4500315DEF /* YNImageTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNImageTransformer.m; path = Model/YNImageTransformer.m; sourceTree = "<group>"; };
 		955C0AFF1B106CB000315DEF /* YNItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNItemStore.h; path = Model/YNItemStore.h; sourceTree = "<group>"; };
 		955C0B001B106CB000315DEF /* YNItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemStore.m; path = Model/YNItemStore.m; sourceTree = "<group>"; };
 		955CF4D41AF9B9CC00C8BBE6 /* YNBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNBaseViewController.h; path = Controllers/YNBaseViewController.h; sourceTree = "<group>"; };
@@ -303,8 +300,6 @@
 				955C0B001B106CB000315DEF /* YNItemStore.m */,
 				95895D251AFB0F6100BE7D2E /* YNImageStore.h */,
 				95895D261AFB0F6100BE7D2E /* YNImageStore.m */,
-				955C0AF01B106A4500315DEF /* YNImageTransformer.h */,
-				955C0AF11B106A4500315DEF /* YNImageTransformer.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -498,7 +493,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				955C0AF21B106A4500315DEF /* YNImageTransformer.m in Sources */,
 				9539A2E81B0DFCD1004E1A48 /* YNImagesViewController.m in Sources */,
 				950CEBFD1B1038C400B00945 /* YoNote.xcdatamodeld in Sources */,
 				955CF4F41AF9C2DF00C8BBE6 /* YNSettingsViewController.m in Sources */,

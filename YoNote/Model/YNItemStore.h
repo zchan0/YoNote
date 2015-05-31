@@ -19,6 +19,7 @@
 @property (nonatomic, readonly) NSArray *allItems;
 @property (nonatomic, readonly) NSArray *allCollections;
 @property (nonatomic, readonly) NSArray *allTags;
+@property (nonatomic, readonly) NSArray *allImages;
 
 + (instancetype)sharedStore;
 - (YNItem *)createItem;
@@ -26,17 +27,21 @@
 - (BOOL)saveChanges;
 
 - (void)createCollection:(NSString *)collectionName;
-- (YNCollection *)getCollectionByName:(NSString *)collectionName;
+- (void)removeCollection:(YNCollection *)collection;
 - (void)addCollectionForItem:(NSString *)collection forItem:(YNItem *)item;
+- (YNCollection *)getCollectionByName:(NSString *)collectionName;
+
 
 - (void)createTag:(NSString *)tagName;
+- (void)removeTag:(YNTag *)tag;
+- (void)addTagsForItem:(NSSet *)tags forItem:(YNItem *)item;
 - (YNTag *)getTagByName: (NSString *)tagName;
 - (NSArray *)getTagsByItem: (YNItem *)item;
-- (void)addTagsForItem:(NSSet *)tags forItem:(YNItem *)item;
 
 - (void)createImage:(NSString *)imageName;
 - (void)addImagesForItem:(NSSet *)images forItem:(YNItem *)item;
+- (void)removeImage:(YNImage *)image;
 - (YNImage *)getImageByName: (NSString *)imageName;
 - (NSArray *)getImagesByItem:(YNItem *)item;
-
+- (NSArray *)getSameNameImages:(YNImage *)image;
 @end

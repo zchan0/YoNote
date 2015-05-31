@@ -25,18 +25,12 @@
 
 + (instancetype)sharedStore
 {
-    //  声明为静态变量
-    //  静态变量和全局变量一样，并不是在栈中，所以该方法返回时，程序并不会释放该变量
     static YNItemStore *sharedStore = nil;
-    
-    //  判断是否需要创建一个sharedStore对象
     if (!sharedStore) {
         sharedStore = [[self alloc] initPrivate];
     }
-    
     return sharedStore;
 }
-
 
 - (instancetype)init
 {
@@ -58,18 +52,15 @@
         NSString *path = self.itemArchivePath;
         NSURL *storeURL = [NSURL fileURLWithPath:path];
         NSError *error;
-        
         //  指定存储格式为SQLite
         if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
             @throw [NSException exceptionWithName:@"OpenFailure"
                                            reason:[error localizedDescription]
                                          userInfo:nil];
         }
-        
         // 创建NSManagedObjectContext
         _context = [[NSManagedObjectContext alloc]init];
         _context.persistentStoreCoordinator = psc;
-        
         // 如果已经有数据存在，取出
         [self loadAllItems];
         [self loadAllCollections];
@@ -145,6 +136,10 @@
     [self.privateCollections addObject:collection];
 }
 
+- (void)removeCollection:(YNCollection *)collection {
+    [self.context deleteObject:collection];
+    [self.privateCollections removeObjectIdenticalTo:collection];
+}
 
 - (void)addCollectionForItem:(NSString *)collectionName forItem:(YNItem *)item {
     YNCollection *collection = [self getCollectionByName:collectionName];
@@ -203,6 +198,11 @@
 
 }
 
+- (void)removeTag:(YNTag *)tag {
+    [self.context deleteObject:tag];
+    [self.privateTags removeObjectIdenticalTo:tag];
+}
+
 - (void)addTagsForItem:(NSSet *)tags forItem:(YNItem *)item {
     for (NSString *tagName in tags) {
         YNTag *tag = [self getTagByName:tagName];
@@ -259,12 +259,21 @@
 
 #pragma mark - Images
 
+- (NSArray *)allImages {
+    return [self.privateImages copy];
+}
+
 - (void)createImage:(NSString *)imageName {
     YNImage *image = [NSEntityDescription insertNewObjectForEntityForName:@"YNImage" inManagedObjectContext:self.context];
     
     [image setValue:imageName forKey:@"imageName"];
     
     [self.privateImages addObject:image];
+}
+
+- (void)removeImage:(YNImage *)image {
+    [self.context deleteObject:image];
+    [self.privateImages removeObjectIdenticalTo:image];
 }
 
 - (void)addImagesForItem:(NSSet *)images forItem:(YNItem *)item {
@@ -296,8 +305,19 @@
     NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"YNImage"];
     request.predicate=[NSPredicate predicateWithFormat:@"%K=%@",@"imageItem",item];
     NSError *error;
-    //进行查询
     NSArray *results=[self.context executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"getImagesByItem Error：%@！",error.localizedDescription);
+    }
+    return results;
+}
+
+- (NSArray *)getSameNameImages:(YNImage *)image {
+    NSString *imageName = image.imageName;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"YNImage"];
+    request.predicate = [NSPredicate predicateWithFormat:@"%K=%@",@"imageName", imageName];
+    NSError *error;
+    NSArray *results = [self.context executeFetchRequest:request error:&error];
     if (error) {
         NSLog(@"getImagesByItem Error：%@！",error.localizedDescription);
     }

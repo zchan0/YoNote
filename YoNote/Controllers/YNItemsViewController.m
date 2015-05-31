@@ -23,7 +23,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 @property (nonatomic, strong) NSMutableArray *selectedImages;
 @property (nonatomic, strong) NSMutableArray *selectedImagesNames;
 
-@property (nonatomic, strong) NSArray *items;
+@property (nonatomic, strong) NSMutableArray *items;
 
 @end
 
@@ -37,8 +37,8 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.selectedImagesNames  = [NSMutableArray array];
-    
-    self.items = [[YNItemStore sharedStore]allItems];
+    self.items =[NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allItems]];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -134,6 +134,36 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //delete YNItem
+        YNItem *item = self.items[indexPath.row];
+        NSArray *images = [[YNItemStore sharedStore]getImagesByItem:item];
+        for (YNImage *image in images) {
+            NSString *imageName = image.imageName;
+            [[YNItemStore sharedStore] removeImage:image];
+            NSArray *sameNamesImages = [[YNItemStore sharedStore]getSameNameImages:image];
+            if (sameNamesImages.count < 1) {
+                NSLog(@"要删除的图片: %@", imageName);
+                [[YNImageStore sharedStore] deleteImageForKey:imageName];
+            }
+        }
+        
+        [[YNItemStore sharedStore] removeItem: item];
+        [self.items removeObjectIdenticalTo:item];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        BOOL success = [[YNItemStore sharedStore] saveChanges];
+        if (success) {
+            NSLog(@"Saved coredata changes!");
+        } else {
+            NSLog(@"Could not save coredata changes");
+        }
+    }
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     

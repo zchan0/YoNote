@@ -9,182 +9,122 @@
 #import "TestViewController.h"
 #import "YNItemStore.h"
 #import "YNImageStore.h"
-#import <CTAssetsPickerController.h>
+#import "YNItemCell.h"
 
-#define kWidth  self.view.frame.size.width
-#define kHeight self.view.frame.size.height
+static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
-@interface TestViewController ()<CTAssetsPickerControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UINavigationControllerDelegate>
 
-@property (nonatomic, strong) UITextField *textField;
-@property (nonatomic, strong) UIButton *submit;
-@property (nonatomic, strong) YNItem *item;
+@interface TestViewController ()
 
-@property (nonatomic, strong) NSMutableArray *selectedImages;
-@property (nonatomic, strong) NSMutableArray *selectedImagesNames;
+@property (nonatomic, strong) NSMutableArray *items;
+
 
 @end
 
 @implementation TestViewController
 
-- (void)loadView {
-    self.view = [[UIView alloc]initWithFrame:[UIScreen mainScreen].applicationFrame];
-    self.view.backgroundColor = [UIColor whiteColor];
-
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.item = [[YNItemStore sharedStore]createItem];
-    self.item.dateAlarmed = [NSDate date];
-    self.item.dateCreated = [NSDate date];
-    self.item.memo        = @"我是萌萌的测试备注";
-    
-    [self customNavBar];
-    [self customTextView];
-    
-    _selectedImages = [NSMutableArray array];
-    _selectedImagesNames = [NSMutableArray array];
-}
+    [self.tableView registerClass:[YNItemCell class] forCellReuseIdentifier:YNItemCellIndentifier];
+    self.tableView.tableFooterView = [[UIView alloc] init];
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
 
-- (void)customTextView {
-    self.textField = [[UITextField alloc]initWithFrame:CGRectMake(kWidth * 0.3, kHeight * 0.5, kWidth * 0.5, 40)];
-    self.textField.backgroundColor = [UIColor greenColor];
-    self.textField.textColor = [UIColor redColor];
-    self.submit = [[UIButton alloc]initWithFrame:CGRectMake(kWidth * 0.3, kHeight * 0.3 , kWidth * 0.5, 40)];
-    self.submit.backgroundColor = [UIColor blackColor];
-    [self.submit setTitle:@"提交" forState:UIControlStateNormal];
-    self.submit.titleLabel.tintColor = [UIColor whiteColor];
-    [self.submit addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:self.textField];
-    [self.view addSubview:self.submit];
-}
-
-- (void)customNavBar {
-    UIImage *rightImage = [UIImage imageNamed:@"navi_add"];
-    
-    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
-    [rightButton setBackgroundImage:rightImage forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(addNewItem:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = rightBarItem;
-
-}
-
-- (IBAction)submit:(id)sender {
-    NSString *textInput = self.textField.text;
-    NSArray *tags = @[textInput];
-    NSSet *textSet = [NSSet setWithArray:tags];
-    NSSet *imageNamesSet = [NSSet setWithArray:self.selectedImagesNames];
-    
-    [[YNItemStore sharedStore]createTag:textInput];
-    [[YNItemStore sharedStore]addTagsForItem:textSet forItem:_item];
-    [[YNItemStore sharedStore]addImagesForItem:imageNamesSet forItem:_item];
-    
-    BOOL success = [[YNItemStore sharedStore] saveChanges];
-    if (success) {
-        NSLog(@"添加成功.");
-    } else {
-        NSLog(@"添加失败");
-    }
-    
-   
-}
-
-- (IBAction)addNewItem:(id)sender {
-    
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"相册",nil];
-    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-    [actionSheet showFromRect:self.view.bounds inView:self.view animated:YES]; // actionSheet弹出位置
+    self.items =[NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allItems]];
     
 }
 
-#pragma mark - Camera
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
+}
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) {
-        case 0:
-        {
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-                picker.delegate = self;
-                picker.allowsEditing = YES;
-                picker.sourceType = UIImagePickerControllerSourceTypeCamera;//UIImagePicker选择器的类型，UIImagePickerControllerSourceTypeCamera调用系统相机
-                //[self presentViewController:picker animated:YES completion:nil];
-                if([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0)
-                {
-                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                        
-                        [self presentViewController:picker animated:NO completion:nil];
-                    }];
-                }
-                else{
-                    [self presentViewController:picker animated:NO completion:nil];
-                }
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.items.count;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    YNItemCell *cell = [tableView dequeueReusableCellWithIdentifier:YNItemCellIndentifier];
+    
+    YNItem *item = self.items[indexPath.row];
+    
+    //configure cell with YNItem
+    cell.collectionNameLabel.text = item.collection.collectionName;
+    cell.memoLabel.text = item.memo;
+    
+    NSSet *tagsSet = [item tags];
+    NSArray *tags  = [self tagsSetToArray:tagsSet];
+    cell.tagLabel.text = [tags componentsJoinedByString:@", "];
+    
+    NSString *imageName = [[self imagesSetToArray:[item images]]firstObject];
+    UIImage *image = [[YNImageStore sharedStore]imageForKey:imageName];
+    cell.iv.image = [[YNImageStore sharedStore]setThumbnailFromImage:image newRect:kItemImageViewRect];;
+    
+    cell.clipsToBounds = YES;
+    cell.separatorInset = ALEdgeInsetsZero; // make separator below imageview visible
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    [cell updateFonts];
+    [cell setNeedsUpdateConstraints];
+    [cell updateConstraintsIfNeeded];
+    [cell setNeedsLayout];
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return kItemTableCellHeight;
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //delete YNItem
+        YNItem *item = self.items[indexPath.row];
+        NSArray *images = [[YNItemStore sharedStore]getImagesByItem:item];
+        for (YNImage *image in images) {
+            NSString *imageName = image.imageName;
+            [[YNItemStore sharedStore] removeImage:image];
+            NSArray *sameNamesImages = [[YNItemStore sharedStore]getSameNameImages:image];
+            if (sameNamesImages.count < 1) {
+                NSLog(@"要删除的图片: %@", imageName);
+                [[YNImageStore sharedStore] deleteImageForKey:imageName];
             }
-            else{
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"哎呀，当前设备没有摄像头。" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alertView show];
-            }
-            break;
         }
-        case 1:
-        {
-            /*if (!_selectedImages) {
-                _selectedImages = [[NSMutableArray alloc]init];
-            }*/
-            
-            CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
-            picker.delegate = self;
-            picker.showsCancelButton    = (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad);
-            picker.delegate             = self;
-            picker.selectedAssets       = [NSMutableArray arrayWithArray:self.selectedImages];
-            // Set navigation bar's tint color
-            picker.childNavigationController.navigationBar.tintColor = [UIColor whiteColor];
-            
-            [self presentViewController:picker animated:YES completion:nil];
         
-            break;
+        [[YNItemStore sharedStore] removeItem: item];
+        [self.items removeObjectIdenticalTo:item];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        BOOL success = [[YNItemStore sharedStore] saveChanges];
+        if (success) {
+            NSLog(@"Saved coredata changes!");
+        } else {
+            NSLog(@"Could not save coredata changes");
         }
-        case 3:
-        {
-            break;
-        }
-        default:
-            break;
     }
 }
 
-- (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets {
-    [[YNImageStore sharedStore] saveImages:assets];
-    
-    self.selectedImagesNames = [NSMutableArray arrayWithArray:[self getImageNames:assets]];
-    for (NSString *imageName in self.selectedImagesNames) {
-        [[YNItemStore sharedStore] createImage:imageName];
+#pragma mark - Private Methods
+
+- (NSArray *)tagsSetToArray:(NSSet *)set {
+    NSMutableArray *array = [NSMutableArray array];
+    for (YNTag *element in set) {
+        [array addObject:element.tag];
     }
-    
-    [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    return array;
 }
 
-- (BOOL)assetsPickerController:(CTAssetsPickerController *)picker isDefaultAssetsGroup:(ALAssetsGroup *)group
-{
-    // Set All Photos as default album and it will be shown initially.
-    return ([[group valueForProperty:ALAssetsGroupPropertyType] integerValue] == ALAssetsGroupSavedPhotos);
+- (NSArray *)imagesSetToArray:(NSSet *)set {
+    NSMutableArray *array = [NSMutableArray array];
+    for (YNImage *element in set) {
+        [array addObject:element.imageName];
+    }
+    return array;
 }
 
-- (NSArray *)getImageNames:(NSArray *)assets {
-    NSMutableArray *imageNames = [NSMutableArray array];
-    
-    for (ALAsset *asset in assets) {
-        ALAssetRepresentation *imageRep = [asset defaultRepresentation];
-        [imageNames addObject:[imageRep filename]];
-    }
-    
-    return imageNames;
-}
 
 @end

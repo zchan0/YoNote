@@ -157,6 +157,7 @@
 - (void)addNumberOnButton:(UIButton *)onButton withDate: (NSDate *)date {
     [onButton setBackgroundImage:[UIImage imageNamed:@"ButtonBackground"] forState:UIControlStateNormal];
     _formatter.dateFormat = kDayFormat;
+    onButton.tintColor = UIColorFromRGB(0x3CA9D2);
     [onButton setTitle:[_formatter stringFromDate:date] forState:UIControlStateNormal];
     _formatter.dateFormat = kDateFormat;
 }
