@@ -37,7 +37,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.selectedImagesNames  = [NSMutableArray array];
-    self.items =[NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allItems]];
+    self.items = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allItems]];
 
 }
 
@@ -50,7 +50,8 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     
     [[self rdv_tabBarController] setTabBarHidden:NO animated:YES];
     
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
+    [self refreshTableView];
 }
 
 #pragma mark - Views
@@ -83,6 +84,10 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
         
 }
 
+- (void)refreshTableView {
+    self.items = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allItems]];
+    [self.tableView reloadData];
+}
 
 #pragma mark - IBActions
 
