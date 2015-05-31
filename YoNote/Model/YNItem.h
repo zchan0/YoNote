@@ -2,7 +2,7 @@
 //  YNItem.h
 //  YoNote
 //
-//  Created by Zchan on 15/5/28.
+//  Created by Zchan on 15/5/31.
 //  Copyright (c) 2015年 Zchan. All rights reserved.
 //
 
@@ -16,7 +16,6 @@
 @property (nonatomic, retain) NSDate * dateAlarmed;
 @property (nonatomic, retain) NSDate * dateCreated;
 @property (nonatomic, retain) NSString * memo;
-@property (nonatomic, retain) UIImage * thumbnaiil;
 @property (nonatomic, retain) YNCollection *collection;
 @property (nonatomic, retain) NSSet *images;
 @property (nonatomic, retain) NSSet *tags;

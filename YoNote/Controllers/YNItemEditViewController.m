@@ -177,13 +177,6 @@
     // Save image to Documents
     [[YNImageStore sharedStore]saveImages:self.editedImages];
     
-    // Save thumbnail(get the first object) for item
-    ALAsset *asset = [self.editedImages firstObject];
-    UIImage *toThumbnail = [[YNImageStore sharedStore]getfullResolutionImage:asset];
-    NSLog(@"%@", toThumbnail);
-    item.thumbnaiil = [[YNImageStore sharedStore]setThumbnailFromImage:toThumbnail newRect:kItemImageRect];
-    NSLog(@"%@", item.thumbnaiil);
-    
     // Save image and item in Coredata
     for (NSString *imageName in self.editedImagesNames) {
         [[YNItemStore sharedStore] createImage:imageName];

@@ -2,7 +2,7 @@
 //  YNItem.m
 //  YoNote
 //
-//  Created by Zchan on 15/5/28.
+//  Created by Zchan on 15/5/31.
 //  Copyright (c) 2015年 Zchan. All rights reserved.
 //
 
@@ -17,7 +17,6 @@
 @dynamic dateAlarmed;
 @dynamic dateCreated;
 @dynamic memo;
-@dynamic thumbnaiil;
 @dynamic collection;
 @dynamic images;
 @dynamic tags;

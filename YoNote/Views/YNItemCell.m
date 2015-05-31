@@ -8,9 +8,12 @@
 
 #import "YNItemCell.h"
 
+#define kItemContentViewFrame self.contentView.frame
+
 @interface YNItemCell ()
 
 @property (nonatomic, assign) BOOL didSetupConstraints;
+@property (nonatomic, strong) UIImageView *bgImageView;
 
 @end
 
@@ -35,9 +38,12 @@
     
     /*** imageview ***/
     self.iv = [[UIImageView alloc]initForAutoLayout];
-    self.iv.frame = kItemImageRect;
+    
+    //CGRect contentFrame = kItemContentViewFrame;
+    //contentFrame.size.width *= 0.8;
+    self.iv.frame = kItemContentViewFrame;
     self.iv.contentMode = UIViewContentModeScaleAspectFill;
-    self.iv.contentMode = UIViewContentModeLeft;
+    self.iv.contentMode = UIViewContentModeCenter;
     
     self.contentView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
     
@@ -79,6 +85,7 @@
         
         //  Fixed Size
         [self.memoLabel autoSetDimension:ALDimensionHeight toSize:kMemoLabelHeightToSize];
+        [self.iv autoSetDimension:ALDimensionWidth toSize: kItemContentViewFrame.size.width * 0.4];
         
         //  To Other View Edge
         [self.memoLabel autoPinEdge:ALEdgeTrailing toEdge:ALEdgeLeading ofView:self.iv withOffset:-kLabelHorizontalInsets relation:NSLayoutRelationLessThanOrEqual];
@@ -108,7 +115,7 @@
 
 - (void)updateFonts {
     self.collectionNameLabel.font = [UIFont systemFontOfSize:kCaptionFontSize];
-    self.memoLabel.font = [UIFont systemFontOfSize:kBodyFontSize];
+    self.memoLabel.font = [UIFont systemFontOfSize:kHeaderFontSize];
     self.tagLabel.font = [UIFont systemFontOfSize:kCaptionFontSize];
 }
 

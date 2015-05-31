@@ -115,16 +115,20 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     cell.memoLabel.text = item.memo;
     
     NSSet *tagsSet = [item tags];
-    NSArray *tags  = [self setToArray:tagsSet];
-    cell.tagLabel.text = [tags componentsJoinedByString:@","];
-    cell.iv.image = item.thumbnaiil;
+    NSArray *tags  = [self tagsSetToArray:tagsSet];
+    cell.tagLabel.text = [tags componentsJoinedByString:@", "];
     
+    NSString *imageName = [[self imagesSetToArray:[item images]]firstObject];
+    UIImage *image = [[YNImageStore sharedStore]imageForKey:imageName];
+    cell.iv.image = [[YNImageStore sharedStore]setThumbnailFromImage:image newRect:kItemImageViewRect];;
+    
+    cell.clipsToBounds = YES;
     cell.separatorInset = ALEdgeInsetsZero; // make separator below imageview visible
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     [cell updateFonts];
     [cell setNeedsUpdateConstraints];
-    //[cell updateConstraintsIfNeeded];
+    [cell updateConstraintsIfNeeded];
     [cell setNeedsLayout];
     
     return cell;
@@ -185,19 +189,14 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
             // Set navigation bar's tint color
             picker.childNavigationController.navigationBar.tintColor = [UIColor whiteColor];
             
-            // iPad
-            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            if([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0)
             {
-                self.popover = [[UIPopoverController alloc] initWithContentViewController:picker];
-                self.popover.delegate = self;
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    
+                    [self presentViewController:picker animated:NO completion:nil];
+                }];
                 
-                [self.popover
-                 presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem
-                 permittedArrowDirections:UIPopoverArrowDirectionAny
-                 animated:YES];
-            }
-            else
-            {
+            } else {
                 [self presentViewController:picker animated:YES completion:nil];
             }
 
@@ -246,10 +245,18 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
 #pragma mark - Private Methods
 
-- (NSArray *)setToArray:(NSSet *)set {
+- (NSArray *)tagsSetToArray:(NSSet *)set {
     NSMutableArray *array = [NSMutableArray array];
     for (YNTag *element in set) {
         [array addObject:element.tag];
+    }
+    return array;
+}
+
+- (NSArray *)imagesSetToArray:(NSSet *)set {
+    NSMutableArray *array = [NSMutableArray array];
+    for (YNImage *element in set) {
+        [array addObject:element.imageName];
     }
     return array;
 }

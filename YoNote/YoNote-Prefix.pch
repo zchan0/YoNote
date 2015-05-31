@@ -33,7 +33,8 @@
 #define kImageViewWidthToSize       140.0f
 #define kImageViewHeightToSize      110.0f
 
-#define kItemImageRect              CGRectMake(0, 0, 140, 110)
+#define kItemImageRect              CGRectMake(0, 0, 100, 110)
+#define kItemImageViewRect          CGRectMake(0, 0, 140, 110)
 #define kItemTableCellHeight        120.0
 
 /*** autolayout ***/
@@ -41,7 +42,7 @@
 #define kLabelVerticalInsets        5.0f
 
 /*** Font ***/
-#define kHeaderFontSize 24.0
+#define kHeaderFontSize 20.0
 #define kTitleFontSize 18.0
 #define kBodyFontSize  16.0
 #define kCaptionFontSize 14.0
