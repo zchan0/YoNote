@@ -11,5 +11,5 @@
 @interface YNImagesViewController : UIViewController
 
 @property (assign, nonatomic) NSInteger index;
-
+@property (strong, nonatomic) UIImage *image;
 @end

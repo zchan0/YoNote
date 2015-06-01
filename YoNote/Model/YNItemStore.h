@@ -44,4 +44,6 @@
 - (YNImage *)getImageByName: (NSString *)imageName;
 - (NSArray *)getImagesByItem:(YNItem *)item;
 - (NSArray *)getSameNameImages:(YNImage *)image;
+- (NSArray *)getImageNamesByItem:(YNItem *)item;
+
 @end

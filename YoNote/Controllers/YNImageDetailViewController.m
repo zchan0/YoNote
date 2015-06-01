@@ -8,24 +8,16 @@
 
 #import "YNImageDetailViewController.h"
 #import "YNImagesViewController.h"
-
-@interface YNImageDetailViewController ()
-
-@end
+#import "YNItemStore.h"
+#import "YNImageStore.h"
 
 @implementation YNImageDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     self.view.backgroundColor = [UIColor blackColor];
-    
     [self initPageViewController];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,6 +34,7 @@
     YNImagesViewController *initialViewController = [self viewControllerAtIndex:0];
     
     NSArray *viewControllers = [NSArray arrayWithObject:initialViewController];
+    
     
     [self.pageController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     
@@ -72,26 +65,26 @@
     
     index++;
     
-    if (index == 4) {
+    if (index == _images.count) {
         return nil;
     }
     
     return [self viewControllerAtIndex:index];
-    
 }
 
 - (YNImagesViewController *)viewControllerAtIndex:(NSUInteger)index {
     
     YNImagesViewController *imageViewController = [[YNImagesViewController alloc] initWithNibName:@"YNImagesViewController" bundle:nil];
     imageViewController.index = index;
-    
+    UIImage *image = [[YNImageStore sharedStore]imageForKey:[_images[index] imageName]];
+    imageViewController.image = image;
     return imageViewController;
     
 }
 
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController {
     // The number of items reflected in the page indicator.
-    return 4;
+    return _images.count;
 }
 
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController {

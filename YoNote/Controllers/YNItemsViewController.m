@@ -231,22 +231,15 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
             if([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0)
             {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    
                     [self presentViewController:picker animated:NO completion:nil];
                 }];
                 
             } else {
                 [self presentViewController:picker animated:YES completion:nil];
             }
-
-            
-            
             break;
         }
-        case 3:
-        {
-            break;
-        }
+        
         default:
             break;
     }

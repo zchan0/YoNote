@@ -324,6 +324,16 @@
     return results;
 }
 
+- (NSArray *)getImageNamesByItem:(YNItem *)item {
+    NSMutableArray *imageNames = [NSMutableArray array];
+    
+    for (YNImage * image in item.images) {
+        [imageNames addObject:image.imageName];
+    }
+    
+    return imageNames;
+}
+
 #pragma mark - Private Methods
 
 - (NSString *)itemArchivePath

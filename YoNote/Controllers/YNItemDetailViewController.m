@@ -11,11 +11,6 @@
 #import "YNImageDetailViewController.h"
 #import "RDVTabBarController.h"
 
-
-#define kFrameHeight self.view.frame.size.height
-#define kFrameWidth  self.view.frame.size.width
-#define kTestString  @"概念模型，从用户角度建模，有利于实现数据库的, 概念模型，从用户角度建模，有利于实现数据库的"
-
 @interface YNItemDetailViewController ()
 
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
@@ -47,7 +42,6 @@
     [self customNaviBar];
     [self customImageView];
     [self customTextArea];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -88,8 +82,8 @@
 
 - (void)customImageView {
     
-    NSArray *images = [[YNItemStore sharedStore]getImagesByItem:_item];
-    UIImage *image = [[YNImageStore sharedStore]imageForKey:[[images firstObject] imageName]];
+    _images = [[YNItemStore sharedStore]getImagesByItem:_item];
+    UIImage *image = [[YNImageStore sharedStore]imageForKey:[[_images firstObject] imageName]];
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.imageView.image = image;
     
@@ -120,7 +114,7 @@
 
 - (IBAction)tapImage:(id)sender {
     YNImageDetailViewController *imageDetailViewController = [[YNImageDetailViewController alloc]initWithNibName:@"YNImageDetailViewController" bundle:nil];
-    
+    imageDetailViewController.images = _images;
     imageDetailViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
     [self presentViewController:imageDetailViewController animated:YES completion:nil];
     

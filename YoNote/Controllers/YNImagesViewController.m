@@ -54,9 +54,7 @@
 }
 
 - (void)displayImage {
-    NSString *path = [NSString stringWithFormat:@"img_%d.jpg", (int)self.index + 1];
-    UIImage  *image= [[YNImageStore sharedStore]imageForKey:path];
-    self.imageView.image = image;
+    self.imageView.image = _image;
     
     //  Add aciton to imageView
     self.imageView.userInteractionEnabled = YES;

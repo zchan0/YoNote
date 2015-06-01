@@ -25,7 +25,7 @@
 @property (nonatomic) BOOL isNew;
 @property (nonatomic, strong) NSMutableArray *editedImages;
 @property (nonatomic, strong) NSMutableArray *selectedImages;
-@property (nonatomic, strong) NSMutableArray *selectedImagesNames;
+@property (nonatomic, strong) NSArray *selectedImagesNames;
 
 @end
 
@@ -63,10 +63,9 @@
         self.toolbar.collection  = _item.collection.collectionName;
         self.toolbar.tags        = [self tagsSetToArray:_item.tags];
         self.toolbar.images      = [self imagesSetToArray:_item.images];
-        self.editedImages        = [NSMutableArray array];
         self.editedImages        = [NSMutableArray arrayWithArray:self.toolbar.images];
-        NSLog(@"%@", self.toolbar.images);
-        NSLog(@"%@", self.editedImages);
+        self.selectedImagesNames = [[YNItemStore sharedStore]getImageNamesByItem:_item];
+        NSLog(@"初始状态%@", self.selectedImagesNames);
     }
     
     [self setupTextView];
@@ -142,7 +141,11 @@
     
     if (!_isNew) {
         [self addImagesOnButton];
-        [self addNumberOnButton:self.toolbar.dateAlarmedButton withDate:self.toolbar.dateAlarmed];
+        
+        if (self.toolbar.dateAlarmed) {
+            [self addNumberOnButton:self.toolbar.dateAlarmedButton withDate:self.toolbar.dateAlarmed];
+        }
+        
     }
     
     [self.view addSubview:self.editTextView];
@@ -150,15 +153,17 @@
 }
 
 - (void)addImagesOnButton {
-    CGRect frame = self.toolbar.imageButton.frame;
-    UIImageView *iv = [[UIImageView alloc]initWithFrame:frame];
-    iv.image = [self.editedImages firstObject];
-    [self.toolbar.imageButton addSubview:iv];
+    YNImage *YNImgae = [self.editedImages firstObject];
+    UIImage *image = [[YNImageStore sharedStore]imageForKey:YNImgae.imageName];
+    CGRect frame = self.toolbar.dateAlarmedButton.frame;
+    UIImage *thumbnail = [[YNImageStore sharedStore]setThumbnailFromImage:image newRect:frame];
+    [self.toolbar.dateAlarmedButton setBackgroundImage:thumbnail forState:UIControlStateNormal];
     
+    /*
     UILabel *label = [[UILabel alloc]initWithFrame:frame];
     label.text = [NSString stringWithFormat:@"%d", (int)self.editedImages.count];
     label.tintColor = [UIColor grayColor];
-    [self.toolbar.imageButton addSubview:label];
+    [self.toolbar.imageButton addSubview:label];*/
     
 }
 
@@ -184,15 +189,26 @@
     item.memo        = self.editTextView.text;
     
     // Save image to Documents
-    [[YNImageStore sharedStore]saveImages:self.editedImages];
+    if (!_selectedImages) {
+        [[YNImageStore sharedStore]saveImages:self.editedImages];
+        NSLog(@"保存%@", self.editedImages);
+    } else {
+        [[YNImageStore sharedStore] saveImages:self.selectedImages];
+        
+        // delete old ones
+        for (YNImage *image in self.editedImages) {
+            NSLog(@"删掉原来的:%@", image.imageName);
+            [[YNItemStore sharedStore]removeImage:image];
+        }
     
+    }
+
     // Save image and item in Coredata
     for (NSString *imageName in self.selectedImagesNames) {
         [[YNItemStore sharedStore] createImage:imageName];
     }
     NSSet *imageNameSet = [NSSet setWithArray:self.selectedImagesNames];
     [[YNItemStore sharedStore]addImagesForItem:imageNameSet forItem:item];
-    
     
     //  Save
     BOOL success = [[YNItemStore sharedStore] saveChanges];
@@ -246,11 +262,16 @@
 
 - (void)pickImages {
     
+    if (!_selectedImages) {
+        _selectedImages = [[NSMutableArray alloc]init];
+    }
+    
     CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
     picker.delegate = self;
     picker.showsCancelButton    = (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad);
     picker.delegate             = self;
-    picker.selectedAssets       = [NSMutableArray arrayWithArray:self.editedImages];
+    
+    picker.selectedAssets       = [NSMutableArray arrayWithArray:_selectedImages];
     // Set navigation bar's tint color
     picker.childNavigationController.navigationBar.tintColor = [UIColor whiteColor];
     
@@ -280,9 +301,9 @@
     else
         [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     
-    [[YNImageStore sharedStore] saveImages:assets];
-    
+    self.selectedImages = [NSMutableArray arrayWithArray:assets];
     self.selectedImagesNames = [NSMutableArray arrayWithArray:[[YNImageStore sharedStore] getImageNames:assets]];
+    NSLog(@"选择之后：%@", self.selectedImagesNames);
 
 }
 
@@ -350,7 +371,7 @@
 - (NSArray *)imagesSetToArray:(NSSet *)set {
     NSMutableArray *array = [NSMutableArray array];
     for (YNImage *element in set) {
-        [array addObject:element.imageName];
+        [array addObject:element];
     }
     return array;
 }

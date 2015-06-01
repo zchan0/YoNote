@@ -11,5 +11,6 @@
 @interface YNImageDetailViewController : UIViewController<UIPageViewControllerDataSource>
 
 @property (strong, nonatomic) UIPageViewController *pageController;
+@property (strong, nonatomic) NSArray *images;
 
 @end
