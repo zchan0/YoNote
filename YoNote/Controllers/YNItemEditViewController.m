@@ -139,15 +139,15 @@
     self.toolbar.delegate = self;
     self.editTextView.inputAccessoryView = self.toolbar.YNItemEditToolbar;
     
+    
     if (!_isNew) {
         [self addImagesOnButton];
-        
-        if (self.toolbar.dateAlarmed) {
-            [self addNumberOnButton:self.toolbar.dateAlarmedButton withDate:self.toolbar.dateAlarmed];
-        }
-        
     }
     
+    if (self.toolbar.dateAlarmed != nil) {
+        [self addNumberOnButton:self.toolbar.dateAlarmedButton withDate:self.toolbar.dateAlarmed];
+    }
+  
     [self.view addSubview:self.editTextView];
     
 }
@@ -155,23 +155,15 @@
 - (void)addImagesOnButton {
     YNImage *YNImgae = [self.editedImages firstObject];
     UIImage *image = [[YNImageStore sharedStore]imageForKey:YNImgae.imageName];
-    CGRect frame = self.toolbar.dateAlarmedButton.frame;
-    UIImage *thumbnail = [[YNImageStore sharedStore]setThumbnailFromImage:image newRect:frame];
-    [self.toolbar.dateAlarmedButton setBackgroundImage:thumbnail forState:UIControlStateNormal];
-    
-    /*
-    UILabel *label = [[UILabel alloc]initWithFrame:frame];
-    label.text = [NSString stringWithFormat:@"%d", (int)self.editedImages.count];
-    label.tintColor = [UIColor grayColor];
-    [self.toolbar.imageButton addSubview:label];*/
+    [self.toolbar.imageButton setBackgroundImage:image forState:UIControlStateNormal];
     
 }
 
 - (void)addNumberOnButton:(UIButton *)onButton withDate: (NSDate *)date {
     [onButton setBackgroundImage:[UIImage imageNamed:@"ButtonBackground"] forState:UIControlStateNormal];
     _formatter.dateFormat = kDayFormat;
-    onButton.tintColor = UIColorFromRGB(0x3CA9D2);
     [onButton setTitle:[_formatter stringFromDate:date] forState:UIControlStateNormal];
+    //[onButton setTitleColor:UIColorFromRGB(0x3CA9D2) forState:UIControlStateNormal];
     _formatter.dateFormat = kDateFormat;
 }
 

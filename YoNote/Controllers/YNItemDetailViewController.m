@@ -98,7 +98,7 @@
 
     self.memoLabel.text = _item.memo;
     self.dateCreatedLabel.text = [_formatter stringFromDate:_item.dateCreated];
-    //self.visualEffectView.backgroundColor = UIColorFromRGB(0x3CA9D2);
+    self.visualEffectView.backgroundColor = UIColorFromRGB(0x3CA9D2);
     
 }
 

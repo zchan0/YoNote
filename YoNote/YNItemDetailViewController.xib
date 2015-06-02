@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HYz-qB-LXK">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="360"/>
                 </imageView>
                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vKS-Es-BTc">
                     <rect key="frame" x="0.0" y="360" width="600" height="240"/>
@@ -105,7 +105,7 @@
                 <constraint firstItem="HYz-qB-LXK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Puz-hK-2Xc"/>
                 <constraint firstItem="HYz-qB-LXK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YSa-RD-J4s"/>
                 <constraint firstItem="NbV-4N-q2F" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cj4-Qq-LcC"/>
-                <constraint firstAttribute="bottom" secondItem="HYz-qB-LXK" secondAttribute="bottom" id="fFo-Fg-FaP"/>
+                <constraint firstAttribute="bottom" secondItem="HYz-qB-LXK" secondAttribute="bottom" constant="240" id="fFo-Fg-FaP"/>
                 <constraint firstItem="NbV-4N-q2F" firstAttribute="top" secondItem="vKS-Es-BTc" secondAttribute="top" constant="-20" id="feh-dM-Usu"/>
                 <constraint firstAttribute="trailing" secondItem="HYz-qB-LXK" secondAttribute="trailing" id="z6H-Ym-Mig"/>
             </constraints>
