@@ -27,7 +27,7 @@
 }
 
 - (void)setupViewControllers {
-    YNItemsViewController *homeViewController = [[YNItemsViewController alloc]init];
+    YNItemsViewController *homeViewController = [[YNItemsViewController alloc]initWithTitle:@"首页"];
     UINavigationController *navHome = [[YNBaseNavigationController alloc]initWithRootViewController:homeViewController];
 
     YNCollectionsViewController *collectionsViewController = [[YNCollectionsViewController alloc]init];

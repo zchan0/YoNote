@@ -22,12 +22,19 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 @property (nonatomic, strong) UIPopoverController *popover;
 @property (nonatomic, strong) NSMutableArray *selectedImages;
 @property (nonatomic, strong) NSMutableArray *selectedImagesNames;
-@property (nonatomic, strong) NSMutableArray *items;
 @property (nonatomic) BOOL isHome;
 
 @end
 
 @implementation YNItemsViewController
+
+- (instancetype)initWithTitle:(NSString *)title {
+    self = [super init];
+    if (self) {
+        self.navigationItem.title = title;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,10 +42,29 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     self.view.backgroundColor = [UIColor whiteColor];
     self.selectedImagesNames  = [NSMutableArray array];
     
+    [self isHomePage];
+    if (_isHome) {
+        [self customNavBar];
+        self.datasource = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allItems]];
+    } else {
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        NSString *name = self.navigationItem.title;
+        YNCollection *collection = [[YNItemStore sharedStore]getCollectionByName:name];
+        YNTag *tag = [[YNItemStore sharedStore]getTagByName:name];
+        if (collection != nil) {
+            NSSet *items = collection.items;
+            self.datasource = [NSMutableArray array];
+            for (YNItem *item in items)
+                [self.datasource addObject:item];
+        }
+        if (tag != nil) {
+            
+        }
+        
+    }
+    
     [self customTableView];
-    [self customNavBar];
-    //self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.datasource = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allItems]];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -47,8 +73,13 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     //put the bar back to default
     [self.navigationController.navigationBar setBackgroundImage:nil
                                                   forBarMetrics:UIBarMetricsDefault];
-    [[self rdv_tabBarController] setTabBarHidden:NO animated:YES];
-    [self refreshTableView];
+    if (_isHome) {
+        [[self rdv_tabBarController] setTabBarHidden:NO animated:YES];
+        [self refreshTableView];
+    }
+    else
+        [[self rdv_tabBarController] setTabBarHidden:YES animated:YES];
+    
 }
 
 #pragma mark - Views
@@ -101,7 +132,6 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 #pragma mark - Table
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //return self.items.count;
     return self.datasource.count;
 }
 
@@ -152,7 +182,6 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
         }
         
         [[YNItemStore sharedStore] removeItem: item];
-        //[self.items removeObjectIdenticalTo:item];
         [self.datasource removeObjectIdenticalTo:item];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];

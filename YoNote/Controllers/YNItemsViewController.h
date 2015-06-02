@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSMutableArray *datasource;
 
+- (instancetype)initWithTitle:(NSString *)title;
+
 @end

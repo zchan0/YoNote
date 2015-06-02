@@ -83,12 +83,8 @@ static NSString *YNCollectionCellIndentifier = @"YNCollectionCellIndentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     YNCollection *collection = self.collections[indexPath.row];
-    NSSet *itemsSet = collection.items;
-    NSArray *items = [self itemSettoArray:itemsSet];
-    for (YNItem *item in items) {
-        NSLog(@"%@", item.collection.collectionName);
-    }
-    
+    YNItemsViewController *itemsViewController = [[YNItemsViewController alloc]initWithTitle:collection.collectionName];
+    [self.navigationController pushViewController:itemsViewController animated:YES];    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -115,13 +111,5 @@ static NSString *YNCollectionCellIndentifier = @"YNCollectionCellIndentifier";
     }
 }
 
-#pragma mark - Private Methods
-- (NSArray *)itemSettoArray:(NSSet *)set {
-    NSMutableArray *array = [NSMutableArray array];
-    for (YNItem *item in set) {
-        [array addObject:item];
-    }
-    return array;
-}
 
 @end
