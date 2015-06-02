@@ -51,20 +51,18 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
         NSString *name = self.navigationItem.title;
         YNCollection *collection = [[YNItemStore sharedStore]getCollectionByName:name];
         YNTag *tag = [[YNItemStore sharedStore]getTagByName:name];
-        if (collection != nil) {
-            NSSet *items = collection.items;
-            self.datasource = [NSMutableArray array];
-            for (YNItem *item in items)
-                [self.datasource addObject:item];
-        }
-        if (tag != nil) {
-            
-        }
+        NSSet *items;
+        if (collection != nil)
+            items = collection.items;
+        if (tag != nil)
+            items = tag.items;
         
+        self.datasource = [NSMutableArray array];
+        for (YNItem *item in items)
+            [self.datasource addObject:item];
     }
     
     [self customTableView];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -82,7 +82,7 @@ static NSString *YNCollectionCellIndentifier = @"YNCollectionCellIndentifier";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    YNCollection *collection = self.collections[indexPath.row];
+    YNCollection *collection = self.datasource[indexPath.row];
     YNItemsViewController *itemsViewController = [[YNItemsViewController alloc]initWithTitle:collection.collectionName];
     [self.navigationController pushViewController:itemsViewController animated:YES];    
 }
