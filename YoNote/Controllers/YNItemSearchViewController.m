@@ -228,19 +228,19 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         if (_isCollection) {
-            YNCollection *collection = self.dataSource[indexPath.row];
+            YNCollection *collection = [[YNItemStore sharedStore]getCollectionByName:self.dataSource[indexPath.row]];
             NSSet *items = collection.items;
-            [collection removeItems:items];
             [[YNItemStore sharedStore]removeCollection:collection];
+            [[YNItemStore sharedStore]createCollection:@"未分类"];
+            for (YNItem *item in items)
+                [[YNItemStore sharedStore]addCollectionForItem:@"未分类" forItem:item];
+            [self.dataSource removeObjectIdenticalTo:self.dataSource[indexPath.row]];
         }
         
         if (_isTags) {
-            YNTag *tag = self.dataSource[indexPath.row];
-            NSSet *items = tag.items;
-            for (YNItem *item in items) {
-                [item removeTagsObject:tag];
-            }
+            YNTag *tag = [[YNItemStore sharedStore]getTagByName:self.dataSource[indexPath.row]];
             [[YNItemStore sharedStore]removeTag:tag];
+            [self.dataSource removeObjectIdenticalTo:self.dataSource[indexPath.row]];
         }
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];

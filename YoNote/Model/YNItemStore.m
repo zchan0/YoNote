@@ -132,7 +132,6 @@
     YNCollection *collection = [NSEntityDescription insertNewObjectForEntityForName:@"YNCollection" inManagedObjectContext:self.context];
     
     [collection setValue:collectionName forKey:@"collectionName"];
-    
     [self.privateCollections addObject:collection];
 }
 
@@ -144,7 +143,6 @@
 - (void)addCollectionForItem:(NSString *)collectionName forItem:(YNItem *)item {
     YNCollection *collection = [self getCollectionByName:collectionName];
     [collection addItemsObject:item];
-    
 }
 
 - (YNCollection *)getCollectionByName:(NSString *)collectionName {

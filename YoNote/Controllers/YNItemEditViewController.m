@@ -65,7 +65,6 @@
         self.toolbar.images      = [self imagesSetToArray:_item.images];
         self.editedImages        = [NSMutableArray arrayWithArray:self.toolbar.images];
         self.selectedImagesNames = [[YNItemStore sharedStore]getImageNamesByItem:_item];
-        NSLog(@"viewDidLoad, selectedImages: %@", self.selectedImagesNames);
     }
     
     [self setupTextView];
