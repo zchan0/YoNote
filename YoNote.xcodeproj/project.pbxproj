@@ -40,6 +40,7 @@
 		95E63F4D1B1AD70A004E45B9 /* YNCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E63F4C1B1AD70A004E45B9 /* YNCollection.m */; };
 		95E63F501B1AD70A004E45B9 /* YNTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E63F4F1B1AD70A004E45B9 /* YNTag.m */; };
 		95E63F531B1AD70A004E45B9 /* YNImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E63F521B1AD70A004E45B9 /* YNImage.m */; };
+		95E63F5D1B1DE265004E45B9 /* YNAlarmDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E63F5C1B1DE265004E45B9 /* YNAlarmDetailViewController.m */; };
 		95EC8A911AFF69CE00C68D2B /* YNItemEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95EC8A901AFF69CE00C68D2B /* YNItemEditViewController.m */; };
 		F2CB2153EA955B4A6DE64B1F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DDD64A8A14D25B75D9393C88 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -118,6 +119,8 @@
 		95E63F4F1B1AD70A004E45B9 /* YNTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNTag.m; path = Model/YNTag.m; sourceTree = "<group>"; };
 		95E63F511B1AD70A004E45B9 /* YNImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNImage.h; path = Model/YNImage.h; sourceTree = "<group>"; };
 		95E63F521B1AD70A004E45B9 /* YNImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNImage.m; path = Model/YNImage.m; sourceTree = "<group>"; };
+		95E63F5B1B1DE265004E45B9 /* YNAlarmDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNAlarmDetailViewController.h; path = Controllers/YNAlarmDetailViewController.h; sourceTree = "<group>"; };
+		95E63F5C1B1DE265004E45B9 /* YNAlarmDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNAlarmDetailViewController.m; path = Controllers/YNAlarmDetailViewController.m; sourceTree = "<group>"; };
 		95EC8A8F1AFF69CE00C68D2B /* YNItemEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNItemEditViewController.h; path = Controllers/YNItemEditViewController.h; sourceTree = "<group>"; };
 		95EC8A901AFF69CE00C68D2B /* YNItemEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemEditViewController.m; path = Controllers/YNItemEditViewController.m; sourceTree = "<group>"; };
 		B6329A7AD74C3302441CEFCA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -188,6 +191,7 @@
 			children = (
 				95EC8A8E1AFF697A00C68D2B /* TabBar */,
 				953438441B04C966001859D7 /* Items */,
+				95E63F571B1DE188004E45B9 /* Settings */,
 				95255F871B16FF6800B1DAE3 /* TestViewController.h */,
 				95255F881B16FF6800B1DAE3 /* TestViewController.m */,
 			);
@@ -323,6 +327,15 @@
 				9534383F1B01EF74001859D7 /* YNItemEditToolbar.xib */,
 			);
 			name = toolbar;
+			sourceTree = "<group>";
+		};
+		95E63F571B1DE188004E45B9 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				95E63F5B1B1DE265004E45B9 /* YNAlarmDetailViewController.h */,
+				95E63F5C1B1DE265004E45B9 /* YNAlarmDetailViewController.m */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		95EC8A8E1AFF697A00C68D2B /* TabBar */ = {
@@ -514,6 +527,7 @@
 				95EC8A911AFF69CE00C68D2B /* YNItemEditViewController.m in Sources */,
 				95AEE8671B06CD0E00C477EB /* YNItemSearchViewController.m in Sources */,
 				957DC3121AF99FF600DA8D6A /* main.m in Sources */,
+				95E63F5D1B1DE265004E45B9 /* YNAlarmDetailViewController.m in Sources */,
 				95895D271AFB0F6100BE7D2E /* YNImageStore.m in Sources */,
 				95E63F531B1AD70A004E45B9 /* YNImage.m in Sources */,
 				95A6E55D1AFDBBC500071561 /* YNCollectionCell.m in Sources */,

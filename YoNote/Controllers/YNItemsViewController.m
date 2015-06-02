@@ -48,6 +48,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
         self.datasource = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allItems]];
     } else {
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        
         NSString *name = self.navigationItem.title;
         YNCollection *collection = [[YNItemStore sharedStore]getCollectionByName:name];
         YNTag *tag = [[YNItemStore sharedStore]getTagByName:name];

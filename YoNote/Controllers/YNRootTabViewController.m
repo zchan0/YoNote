@@ -36,7 +36,7 @@
     YNTagsViewController *tagsViewController = [[YNTagsViewController alloc]init];
     UINavigationController *navTag = [[YNBaseNavigationController alloc]initWithRootViewController:tagsViewController];
     
-    YNSettingsViewController *settingsViewController = [[YNSettingsViewController alloc]init];
+    YNSettingsViewController *settingsViewController = [[YNSettingsViewController alloc]initWithStyle:UITableViewStyleGrouped];
     UINavigationController *navSettings = [[YNBaseNavigationController alloc]initWithRootViewController:settingsViewController];
         
     [self setViewControllers:@[navHome, navCollection, navTag, navSettings]];
