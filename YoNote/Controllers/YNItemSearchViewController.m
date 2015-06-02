@@ -38,7 +38,9 @@
         [self isCollectionOrTags];
         if (_isCollection) {
             for (YNCollection *collection in [[YNItemStore sharedStore] allCollections]) {
-                [self.dataSource addObject:collection.collectionName];
+                if (![self.dataSource containsObject:collection.collectionName]) {
+                    [self.dataSource addObject:collection.collectionName];
+                }
             }
         }
         if (_isTags) {
@@ -62,9 +64,8 @@
     if (!_isNew) {
         if (_isTags) {
             self.tags = [NSMutableArray array];
-            for (YNTag *tag in _item.tags) {
+            for (YNTag *tag in _item.tags)
                 [self.tags addObject:tag.tag];
-            }
         }
     }
 }
@@ -184,7 +185,7 @@
 
     cell.textLabel.text = self.dataSource[indexPath.row];
     
-    if ([self.cellSelected containsObject:indexPath]) {
+    if (([self.cellSelected containsObject:indexPath]) || ([cell.textLabel.text isEqualToString:_item.collection.collectionName])){
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -202,6 +203,7 @@
             _item.collection.collectionName = self.collectionResult;
         
         _searchItemToolbar.collection = self.collectionResult;
+        
         [self.presentingViewController
                 dismissViewControllerAnimated:YES
                 completion:^{

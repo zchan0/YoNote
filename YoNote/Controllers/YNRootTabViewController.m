@@ -14,10 +14,6 @@
 #import "YNBaseNavigationController.h"
 #import "RDVTabBarItem.h"
 
-@interface YNRootTabViewController ()
-
-@end
-
 @implementation YNRootTabViewController
 
 - (void)viewDidLoad {
@@ -42,8 +38,7 @@
     
     YNSettingsViewController *settingsViewController = [[YNSettingsViewController alloc]init];
     UINavigationController *navSettings = [[YNBaseNavigationController alloc]initWithRootViewController:settingsViewController];
-    
-    
+        
     [self setViewControllers:@[navHome, navCollection, navTag, navSettings]];
     
     [self customizeTabBarForController];

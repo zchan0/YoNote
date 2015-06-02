@@ -10,4 +10,6 @@
 
 @interface YNItemsViewController : YNBaseViewController
 
+@property (nonatomic, strong) NSMutableArray *datasource;
+
 @end

@@ -22,8 +22,8 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 @property (nonatomic, strong) UIPopoverController *popover;
 @property (nonatomic, strong) NSMutableArray *selectedImages;
 @property (nonatomic, strong) NSMutableArray *selectedImagesNames;
-
 @property (nonatomic, strong) NSMutableArray *items;
+@property (nonatomic) BOOL isHome;
 
 @end
 
@@ -32,13 +32,13 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self customNavBar];
-    [self customTableView];
-    
     self.view.backgroundColor = [UIColor whiteColor];
     self.selectedImagesNames  = [NSMutableArray array];
-    self.items = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allItems]];
-
+    
+    [self customTableView];
+    [self customNavBar];
+    //self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.datasource = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allItems]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -47,10 +47,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     //put the bar back to default
     [self.navigationController.navigationBar setBackgroundImage:nil
                                                   forBarMetrics:UIBarMetricsDefault];
-    
     [[self rdv_tabBarController] setTabBarHidden:NO animated:YES];
-    
-    //[self.tableView reloadData];
     [self refreshTableView];
 }
 
@@ -64,7 +61,6 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 - (void)customNavBar {
     
     UINavigationItem *navItem = self.navigationItem;
-    // custom title attributes
     navItem.title = @"首页";
     
     UIImage *leftImage = [UIImage imageNamed:@"navi_search"];
@@ -85,7 +81,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 }
 
 - (void)refreshTableView {
-    self.items = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allItems]];
+    self.datasource = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allItems]];
     [self.tableView reloadData];
 }
 
@@ -96,7 +92,6 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"相册",nil];
     actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
     [actionSheet showFromRect:self.view.bounds inView:self.view animated:YES]; // actionSheet弹出位置
-    
 }
 
 - (IBAction)searchItem:(id)sender {
@@ -106,7 +101,8 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 #pragma mark - Table
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.items.count;
+    //return self.items.count;
+    return self.datasource.count;
 }
 
 
@@ -114,7 +110,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     
     YNItemCell *cell = [tableView dequeueReusableCellWithIdentifier:YNItemCellIndentifier];
     
-    YNItem *item = self.items[indexPath.row];
+    YNItem *item = self.datasource[indexPath.row];
     
     //configure cell with YNItem
     cell.collectionNameLabel.text = item.collection.collectionName;
@@ -143,7 +139,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //delete YNItem
-        YNItem *item = self.items[indexPath.row];
+        YNItem *item = self.datasource[indexPath.row];
         NSArray *images = [[YNItemStore sharedStore]getImagesByItem:item];
         for (YNImage *image in images) {
             NSString *imageName = image.imageName;
@@ -156,7 +152,8 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
         }
         
         [[YNItemStore sharedStore] removeItem: item];
-        [self.items removeObjectIdenticalTo:item];
+        //[self.items removeObjectIdenticalTo:item];
+        [self.datasource removeObjectIdenticalTo:item];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
@@ -173,8 +170,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     YNItemDetailViewController *detailViewController = [[YNItemDetailViewController alloc]init];
-    
-    detailViewController.item = self.items[indexPath.row];
+    detailViewController.item = self.datasource[indexPath.row];
     
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
@@ -276,6 +272,13 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 }
 
 #pragma mark - Private Methods
+
+- (void)isHomePage {
+    if ([self.navigationItem.title isEqualToString:@"首页"])
+        _isHome = YES;
+    else
+        _isHome = NO;
+}
 
 - (NSArray *)tagsSetToArray:(NSSet *)set {
     NSMutableArray *array = [NSMutableArray array];
