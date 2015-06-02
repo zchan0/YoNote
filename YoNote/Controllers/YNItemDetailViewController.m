@@ -10,6 +10,7 @@
 #import "YNItemEditViewController.h"
 #import "YNImageDetailViewController.h"
 #import "RDVTabBarController.h"
+#import "YNItemStore.h"
 
 @interface YNItemDetailViewController ()
 
@@ -48,11 +49,6 @@
     [super viewWillAppear:animated];
     [self makeNaviBarTransparent];
     [[self rdv_tabBarController] setTabBarHidden:YES animated:YES];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-
 }
 
 - (void)didReceiveMemoryWarning {

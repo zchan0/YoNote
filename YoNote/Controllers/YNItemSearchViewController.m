@@ -8,8 +8,6 @@
 
 #import "YNItemSearchViewController.h"
 #import "YNItemStore.h"
-#import "YNCollection.h"
-#import "YNTag.h"
 
 @interface YNItemSearchViewController ()
 
@@ -18,6 +16,12 @@
 @property (nonatomic, strong) UIView      *backgroundView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSMutableArray *cellSelected; // for multiple selection
+
+@property (nonatomic, strong) NSMutableArray *collections;
+@property (nonatomic, strong) NSMutableArray *tags;
+
+@property (nonatomic) BOOL  isCollection;
+@property (nonatomic) BOOL  isTags;
 
 @end
 
@@ -31,12 +35,13 @@
         self.navTitle = title;
         self.navigationItem.title = title;
         self.dataSource = [NSMutableArray array];
-        if ([title isEqualToString:@"图片集"]) {
+        [self isCollectionOrTags];
+        if (_isCollection) {
             for (YNCollection *collection in [[YNItemStore sharedStore] allCollections]) {
                 [self.dataSource addObject:collection.collectionName];
             }
         }
-        if ([title isEqualToString:@"标签"]) {
+        if (_isTags) {
             for (YNTag *tag in [[YNItemStore sharedStore] allTags]) {
                 [self.dataSource addObject:tag.tag];
             }
@@ -54,6 +59,14 @@
     self.tagResults = [NSMutableArray array];
     self.cellSelected = [NSMutableArray array];
     
+    self.collections = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allCollections]];
+    self.tags = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allTags]];
+   
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    //[self refreshTableView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,7 +106,7 @@
 
 - (IBAction)Done:(id)sender {
     
-    if ([self.navTitle isEqualToString:@"标签"]) {
+    if (_isTags) {
         //handle tagsResult
         for (NSIndexPath *selectedPath in self.cellSelected) {
             NSString *selectedTag = self.dataSource[selectedPath.row];
@@ -126,10 +139,10 @@
         [self.dataSource addObject:self.inputTextField.text];
         [self.tableView reloadData];
         
-        if ([self.navTitle isEqualToString:@"图片集"]) {
+        if (_isCollection) {
             [[YNItemStore sharedStore]createCollection:self.inputTextField.text];
         }
-        if ([self.navTitle isEqualToString:@"标签"]) {
+        if (_isTags) {
             [[YNItemStore sharedStore]createTag:self.inputTextField.text];
         }
         self.inputTextField.text = nil;
@@ -171,7 +184,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.navTitle isEqualToString:@"图片集"]) {
+    if (_isCollection) {
         self.collectionResult = self.dataSource[indexPath.row];
         
         [[YNItemStore sharedStore]addCollectionForItem:self.collectionResult forItem:self.item];
@@ -188,9 +201,10 @@
                         NSLog(@"添加collection失败.");
                     }
          }];
+        //[self refreshTableView];
     }
     
-    if ([self.navTitle isEqualToString:@"标签"]) {
+    if (_isTags) {
         
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         
@@ -202,7 +216,70 @@
         
         [tableView reloadData];
     }
+}
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        if (_isCollection) {
+            YNCollection *collection = self.dataSource[indexPath.row];
+            NSLog(@"%@", collection);
+            NSSet *items = collection.items;
+            [collection removeItems:items];
+            [[YNItemStore sharedStore]removeCollection:collection];
+        }
+        
+        if (_isTags) {
+            YNTag *tag = self.dataSource[indexPath.row];
+            NSSet *items = tag.items;
+            for (YNItem *item in items) {
+                [item removeTagsObject:tag];
+            }
+            [[YNItemStore sharedStore]removeTag:tag];
+        }
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        BOOL success = [[YNItemStore sharedStore] saveChanges];
+        if (success) {
+            NSLog(@"Saved coredata changes!");
+        } else {
+            NSLog(@"Could not save coredata changes");
+        }
+    }
+}
+
+#pragma mark - Private Methods
+- (void)refreshTableView {
+    if (_isCollection) {
+        self.collections = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allCollections]];
+        self.dataSource  = self.collections;
+    }
+    
+    if (_isTags) {
+        self.tags = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allTags]];
+        self.dataSource = self.tags;
+    }
+    
+    [self.tableView reloadData];
+}
+
+- (void)isCollectionOrTags {
+    if ([self.navTitle isEqualToString:@"图片集"]) {
+        self.isCollection = YES;
+        self.isTags = NO;
+    }
+    if ([self.navTitle isEqualToString:@"标签"]) {
+        self.isTags = YES;
+        self.isCollection = NO;
+    }
+}
+
+- (NSArray *)tagsSetToArray:(NSSet *)set {
+    NSMutableArray *array = [NSMutableArray array];
+    for (YNTag *element in set) {
+        [array addObject:element];
+    }
+    return array;
 }
 
 @end

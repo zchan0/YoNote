@@ -24,7 +24,7 @@
 
 @property (nonatomic) BOOL isNew;
 @property (nonatomic, strong) NSMutableArray *editedImages;
-@property (nonatomic, strong) NSMutableArray *selectedImages;
+@property (nonatomic, strong) NSMutableArray *selectedImages;   // to select new images
 @property (nonatomic, strong) NSArray *selectedImagesNames;
 
 @end
@@ -65,7 +65,7 @@
         self.toolbar.images      = [self imagesSetToArray:_item.images];
         self.editedImages        = [NSMutableArray arrayWithArray:self.toolbar.images];
         self.selectedImagesNames = [[YNItemStore sharedStore]getImageNamesByItem:_item];
-        NSLog(@"初始状态%@", self.selectedImagesNames);
+        NSLog(@"viewDidLoad, selectedImages: %@", self.selectedImagesNames);
     }
     
     [self setupTextView];
@@ -88,10 +88,9 @@
 
 - (instancetype)initForNewItem:(BOOL)isNew
 {
-    self   = [super initWithNibName:nil bundle:nil];
+    self = [super initWithNibName:nil bundle:nil];
     if (self) {
         _isNew = isNew;
-        
     }
     
     return self;
@@ -139,10 +138,7 @@
     self.toolbar.delegate = self;
     self.editTextView.inputAccessoryView = self.toolbar.YNItemEditToolbar;
     
-    
-    if (!_isNew) {
-        [self addImagesOnButton];
-    }
+    [self addImagesOnButton];
     
     if (self.toolbar.dateAlarmed != nil) {
         [self addNumberOnButton:self.toolbar.dateAlarmedButton withDate:self.toolbar.dateAlarmed];
@@ -153,8 +149,16 @@
 }
 
 - (void)addImagesOnButton {
-    YNImage *YNImgae = [self.editedImages firstObject];
-    UIImage *image = [[YNImageStore sharedStore]imageForKey:YNImgae.imageName];
+    UIImage *image;
+    
+    if (!_isNew) {
+        YNImage *YNImgae = [self.editedImages firstObject];
+        image = [[YNImageStore sharedStore]imageForKey:YNImgae.imageName];
+    } else {
+        ALAsset *asset = [self.editedImages firstObject];
+        image = [[YNImageStore sharedStore]getfullResolutionImage:asset];
+    }
+    
     [self.toolbar.imageButton setBackgroundImage:image forState:UIControlStateNormal];
     
 }
@@ -181,20 +185,22 @@
     item.memo        = self.editTextView.text;
     
     // Save image to Documents
-    if (!_selectedImages) {
-        [[YNImageStore sharedStore]saveImages:self.editedImages];
-        NSLog(@"保存%@", self.editedImages);
+    if (_isNew) {
+        if (self.selectedImages)
+            [[YNImageStore sharedStore] saveImages:self.selectedImages];
+        else
+            [[YNImageStore sharedStore] saveImages:self.editedImages];
     } else {
-        [[YNImageStore sharedStore] saveImages:self.selectedImages];
-        
-        // delete old ones
-        for (YNImage *image in self.editedImages) {
-            NSLog(@"删掉原来的:%@", image.imageName);
-            [[YNItemStore sharedStore]removeImage:image];
+        if (self.selectedImages) {
+            [[YNImageStore sharedStore] saveImages:self.selectedImages];
+            // delete old ones
+            for (YNImage *image in self.editedImages) {
+                NSLog(@"删掉原来的:%@", image.imageName);
+                [[YNItemStore sharedStore]removeImage:image];
+            }
         }
-    
     }
-
+    
     // Save image and item in Coredata
     for (NSString *imageName in self.selectedImagesNames) {
         [[YNItemStore sharedStore] createImage:imageName];
