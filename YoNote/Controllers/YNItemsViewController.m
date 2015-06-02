@@ -15,10 +15,11 @@
 #import "YNImageStore.h"
 #import <CTAssetsPickerController.h>
 
+#define iPad  UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+
 static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
 @interface YNItemsViewController ()<UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CTAssetsPickerControllerDelegate, UIPopoverControllerDelegate>
-
 @property (nonatomic, strong) UIPopoverController *popover;
 @property (nonatomic, strong) NSMutableArray *selectedImages;
 @property (nonatomic, strong) NSMutableArray *selectedImagesNames;
@@ -102,7 +103,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
     navItem.leftBarButtonItem = leftBarItem;
     
-    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
+    UIButton * rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
     [rightButton setBackgroundImage:rightImage forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(addNewItem:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
@@ -119,9 +120,15 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
 - (IBAction)addNewItem:(id)sender {
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"相册",nil];
-    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-    [actionSheet showFromRect:self.view.bounds inView:self.view animated:YES]; // actionSheet弹出位置
+    if (iPad) {
+        [self pickAssets];
+    } else {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"相册",nil];
+        actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+        // actionSheet弹出位置
+        [actionSheet showFromRect:self.view.bounds inView:self.view animated:YES];
+    }
+    
 }
 
 - (IBAction)searchItem:(id)sender {
@@ -150,8 +157,8 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     cell.tagLabel.text = [tags componentsJoinedByString:@", "];
     
     NSString *imageName = [[self imagesSetToArray:[item images]]firstObject];
-    UIImage *image = [[YNImageStore sharedStore]imageForKey:imageName];
-    cell.iv.image = [[YNImageStore sharedStore]setThumbnailFromImage:image newRect:kItemImageViewRect];;
+    UIImage  *image = [[YNImageStore sharedStore]imageForKey:imageName];
+    cell.iv.image = [[YNImageStore sharedStore]setThumbnailFromImage:image newRect:kItemImageRect];
     
     cell.clipsToBounds = YES;
     cell.separatorInset = ALEdgeInsetsZero; // make separator below imageview visible
@@ -240,30 +247,9 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
         }
         case 1:
         {
-            if (!_selectedImages) {
-                _selectedImages = [[NSMutableArray alloc]init];
-            }
-            
-            CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
-            picker.delegate = self;
-            picker.showsCancelButton    = (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad);
-            picker.delegate             = self;
-            picker.selectedAssets       = [NSMutableArray arrayWithArray:self.selectedImages];
-            // Set navigation bar's tint color
-            picker.childNavigationController.navigationBar.tintColor = [UIColor whiteColor];
-            
-            if([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0)
-            {
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    [self presentViewController:picker animated:NO completion:nil];
-                }];
-                
-            } else {
-                [self presentViewController:picker animated:YES completion:nil];
-            }
+            [self pickAssets];
             break;
         }
-        
         default:
             break;
     }
@@ -285,10 +271,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:itemEditViewController];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     
-    if (self.popover != nil)
-        [self.popover dismissPopoverAnimated:YES];
-    else
-        [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     
     [self presentViewController:navController animated:YES completion:nil];
 }
@@ -323,5 +306,32 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     }
     return array;
 }
+
+- (void)pickAssets
+{
+    if (!_selectedImages) {
+        _selectedImages = [[NSMutableArray alloc]init];
+    }
+    
+    CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
+    picker.assetsFilter         = [ALAssetsFilter allAssets];
+    picker.showsCancelButton    = !iPad;
+    picker.delegate             = self;
+    picker.selectedAssets       = [NSMutableArray arrayWithArray:self.selectedImages];
+    // Set navigation bar's tint color
+    picker.childNavigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    // iPad
+    if (iPad) {
+        self.popover = [[UIPopoverController alloc] initWithContentViewController:picker];
+        self.popover.delegate = self;
+        [self.popover presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem
+                      permittedArrowDirections:UIPopoverArrowDirectionAny
+                                             animated:YES];
+    } else {
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+}
+
 
 @end
