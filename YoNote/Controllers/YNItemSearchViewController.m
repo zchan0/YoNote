@@ -16,9 +16,9 @@
 @property (nonatomic, strong) UIView      *backgroundView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSMutableArray *cellSelected; // for multiple selection
-
-@property (nonatomic, strong) NSMutableArray *collections;
-@property (nonatomic, strong) NSMutableArray *tags;
+@property (nonatomic, strong) NSMutableArray *tags; // already chosen tags' name
+@property (nonatomic, strong) NSString *collectionResult;
+@property (nonatomic, strong) NSMutableArray  *tagResults;
 
 @property (nonatomic) BOOL  isCollection;
 @property (nonatomic) BOOL  isTags;
@@ -59,9 +59,14 @@
     self.tagResults = [NSMutableArray array];
     self.cellSelected = [NSMutableArray array];
     
-    self.collections = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allCollections]];
-    self.tags = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allTags]];
-   
+    if (!_isNew) {
+        if (_isTags) {
+            self.tags = [NSMutableArray array];
+            for (YNTag *tag in _item.tags) {
+                [self.tags addObject:tag.tag];
+            }
+        }
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -113,6 +118,11 @@
             [self.tagResults addObject:selectedTag];
         }
         _searchItemToolbar.tags = [NSArray arrayWithArray:self.tagResults];
+        
+        if (!_isNew) {
+            NSSet *oldTags = _item.tags;
+            [_item removeTags:oldTags];
+        }
         
         NSSet *tagsSet = [NSSet setWithArray:self.tagResults];
         [[YNItemStore sharedStore]addTagsForItem:tagsSet forItem:_item];
@@ -186,11 +196,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (_isCollection) {
         self.collectionResult = self.dataSource[indexPath.row];
-        
-        [[YNItemStore sharedStore]addCollectionForItem:self.collectionResult forItem:self.item];
+        if (_isNew)
+            [[YNItemStore sharedStore]addCollectionForItem:self.collectionResult forItem:self.item];
+        else
+            _item.collection.collectionName = self.collectionResult;
         
         _searchItemToolbar.collection = self.collectionResult;
-        
         [self.presentingViewController
                 dismissViewControllerAnimated:YES
                 completion:^{
@@ -201,11 +212,8 @@
                         NSLog(@"添加collection失败.");
                     }
          }];
-        //[self refreshTableView];
     }
-    
     if (_isTags) {
-        
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         
         if ([self.cellSelected containsObject:indexPath]) {
@@ -213,7 +221,6 @@
         } else {
             [self.cellSelected addObject:indexPath];
         }
-        
         [tableView reloadData];
     }
 }
@@ -222,7 +229,6 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         if (_isCollection) {
             YNCollection *collection = self.dataSource[indexPath.row];
-            NSLog(@"%@", collection);
             NSSet *items = collection.items;
             [collection removeItems:items];
             [[YNItemStore sharedStore]removeCollection:collection];
@@ -249,19 +255,6 @@
 }
 
 #pragma mark - Private Methods
-- (void)refreshTableView {
-    if (_isCollection) {
-        self.collections = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allCollections]];
-        self.dataSource  = self.collections;
-    }
-    
-    if (_isTags) {
-        self.tags = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allTags]];
-        self.dataSource = self.tags;
-    }
-    
-    [self.tableView reloadData];
-}
 
 - (void)isCollectionOrTags {
     if ([self.navTitle isEqualToString:@"图片集"]) {

@@ -77,7 +77,6 @@
 }
 
 - (void)customImageView {
-    
     _images = [[YNItemStore sharedStore]getImagesByItem:_item];
     UIImage *image = [[YNImageStore sharedStore]imageForKey:[[_images firstObject] imageName]];
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -91,11 +90,12 @@
 }
 
 - (void)customTextArea {
-
+    NSSet *tagsSet = _item.tags;
+    NSArray *tags  = [self tagsSetToArray:tagsSet];
+    self.tagLabel.text = [tags componentsJoinedByString:@", "];
     self.memoLabel.text = _item.memo;
     self.dateCreatedLabel.text = [_formatter stringFromDate:_item.dateCreated];
     self.visualEffectView.backgroundColor = UIColorFromRGB(0x3CA9D2);
-    
 }
 
 #pragma mark - IBActions
@@ -114,6 +114,15 @@
     imageDetailViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
     [self presentViewController:imageDetailViewController animated:YES completion:nil];
     
+}
+
+#pragma mark - Private Methods
+- (NSArray *)tagsSetToArray:(NSSet *)set {
+    NSMutableArray *array = [NSMutableArray array];
+    for (YNTag *element in set) {
+        [array addObject:element.tag];
+    }
+    return array;
 }
 
 

@@ -12,10 +12,9 @@
 
 @interface YNItemSearchViewController : UITableViewController<UITextFieldDelegate>
 
-@property (nonatomic, strong) NSString *collectionResult;
-@property (nonatomic, strong) NSMutableArray  *tagResults;
 @property (nonatomic, strong) YNItem  *item;
 @property (nonatomic, strong) YNItemEditToolbar *searchItemToolbar;
+@property (nonatomic) BOOL isNew;
 
 - (instancetype)initWithNavTitle:(NSString *)title;
 

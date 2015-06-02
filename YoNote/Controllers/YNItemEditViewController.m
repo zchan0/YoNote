@@ -242,6 +242,7 @@
     YNItemSearchViewController *collectionSearchViewController = [[YNItemSearchViewController alloc]initWithNavTitle:@"图片集"];
     collectionSearchViewController.searchItemToolbar = self.toolbar;
     collectionSearchViewController.item = _item;
+    collectionSearchViewController.isNew = _isNew;
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:collectionSearchViewController];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navController animated:YES completion:nil];
@@ -252,6 +253,7 @@
     YNItemSearchViewController *tagsSearchViewController = [[YNItemSearchViewController alloc]initWithNavTitle:@"标签"];
     tagsSearchViewController.searchItemToolbar = self.toolbar;
     tagsSearchViewController.item = _item;
+    tagsSearchViewController.isNew = _isNew;
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:tagsSearchViewController];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navController animated:YES completion:nil];
