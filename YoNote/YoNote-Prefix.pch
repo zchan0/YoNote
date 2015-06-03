@@ -33,7 +33,6 @@
 #define kImageViewWidthToSize       140.0f
 #define kImageViewHeightToSize      110.0f
 
-#define kItemImageRect              CGRectMake(0, 0, 100, 110)
 #define kItemImageViewRect          CGRectMake(0, 0, 140, 110)
 #define kItemTableCellHeight        120.0
 

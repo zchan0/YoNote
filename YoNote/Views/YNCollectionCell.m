@@ -27,6 +27,8 @@
     [self.collectionNameLabel setNumberOfLines:0];
     [self.collectionNameLabel setTextColor:[UIColor whiteColor]];
     self.collectionNameLabel.textAlignment = NSTextAlignmentCenter;
+    self.collectionNameLabel.shadowColor = [UIColor blackColor];
+    self.collectionNameLabel.shadowOffset = CGSizeMake(0.0, 2.0);;
     
     /*** imageview ***/
     self.iv = [[UIImageView alloc]initForAutoLayout];
@@ -34,7 +36,7 @@
     self.iv.contentMode = UIViewContentModeScaleToFill;
     
     self.fxView = [[FXBlurView alloc]init];
-    self.fxView.blurRadius = 8;
+    self.fxView.blurRadius = 7;
     self.fxView.tintColor = [UIColor blackColor];
     
     self.contentView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0];

@@ -215,7 +215,8 @@
         NSLog(@"Could not save coredata changes");
     }
     
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [self.presentingViewController dismissViewControllerAnimated:YES
+                                   completion:^{[_delegate refreshData];}];
 }
 
 

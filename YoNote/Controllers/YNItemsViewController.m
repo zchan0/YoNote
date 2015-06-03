@@ -7,10 +7,10 @@
 //
 
 #import "YNItemsViewController.h"
-#import "YNItemCell.h"
 #import "RDVTabBarController.h"
 #import "YNItemDetailViewController.h"
 #import "YNItemEditViewController.h"
+#import "YNItemCell.h"
 #import "YNItemStore.h"
 #import "YNImageStore.h"
 #import <CTAssetsPickerController.h>
@@ -19,7 +19,7 @@
 
 static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
-@interface YNItemsViewController ()<UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CTAssetsPickerControllerDelegate, UIPopoverControllerDelegate>
+@interface YNItemsViewController ()<UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CTAssetsPickerControllerDelegate, UIPopoverControllerDelegate, YNItemEditViewDelegate>
 @property (nonatomic, strong) UIPopoverController *popover;
 @property (nonatomic, strong) NSMutableArray *selectedImages;
 @property (nonatomic, strong) NSMutableArray *selectedImagesNames;
@@ -75,7 +75,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
                                                   forBarMetrics:UIBarMetricsDefault];
     if (_isHome) {
         [[self rdv_tabBarController] setTabBarHidden:NO animated:YES];
-        [self refreshTableView];
+        [self refreshData];
     }
     else
         [[self rdv_tabBarController] setTabBarHidden:YES animated:YES];
@@ -111,7 +111,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
         
 }
 
-- (void)refreshTableView {
+- (void)refreshData {
     self.datasource = [NSMutableArray arrayWithArray:[[YNItemStore sharedStore]allItems]];
     [self.tableView reloadData];
 }
@@ -158,7 +158,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     
     NSString *imageName = [[self imagesSetToArray:[item images]]firstObject];
     UIImage  *image = [[YNImageStore sharedStore]imageForKey:imageName];
-    cell.iv.image = [[YNImageStore sharedStore]setThumbnailFromImage:image newRect:kItemImageRect];
+    cell.iv.image = [[YNImageStore sharedStore]setThumbnailFromImage:image newRect:kItemImageViewRect];
     
     cell.clipsToBounds = YES;
     cell.separatorInset = ALEdgeInsetsZero; // make separator below imageview visible
@@ -265,6 +265,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     self.selectedImages = [NSMutableArray arrayWithArray:assets];
     itemEditViewController.images = [NSArray arrayWithArray:self.selectedImages];
     itemEditViewController.imagesNames = [NSArray arrayWithArray:self.selectedImagesNames];
+    itemEditViewController.delegate = self;
     
     YNItem *newItem = [[YNItemStore sharedStore]createItem];
     itemEditViewController.item = newItem;

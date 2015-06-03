@@ -8,11 +8,6 @@
 
 #import "YNItemEditToolbar.h"
 
-@interface YNItemEditToolbar ()
-
-
-@end
-
 @implementation YNItemEditToolbar
 
 - (void)setupViews {
