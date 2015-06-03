@@ -142,7 +142,6 @@
     if (self.toolbar.dateAlarmed != nil) {
         [self addNumberOnButton:self.toolbar.dateAlarmedButton withDate:self.toolbar.dateAlarmed];
     }
-  
     [self.view addSubview:self.editTextView];
     
 }
@@ -154,12 +153,14 @@
         YNImage *YNImgae = [self.editedImages firstObject];
         image = [[YNImageStore sharedStore]imageForKey:YNImgae.imageName];
     } else {
-        ALAsset *asset = [self.editedImages firstObject];
-        image = [[YNImageStore sharedStore]getfullResolutionImage:asset];
+        if (_isCamera) 
+            image = [self.editedImages firstObject];
+        else {
+            ALAsset *asset = [self.editedImages firstObject];
+            image = [[YNImageStore sharedStore]getfullResolutionImage:asset];
+        }
     }
-    
     [self.toolbar.imageButton setBackgroundImage:image forState:UIControlStateNormal];
-    
 }
 
 - (void)addNumberOnButton:(UIButton *)onButton withDate: (NSDate *)date {
@@ -178,17 +179,21 @@
     }
     
     // "Save" changes to item
-    YNItem *item = _item;
+    YNItem *item     = _item;
     item.dateCreated = self.toolbar.dateCreated;
     item.dateAlarmed = self.toolbar.dateAlarmed;
     item.memo        = self.editTextView.text;
     
     // Save image to Documents
     if (_isNew) {
-        if (self.selectedImages)
-            [[YNImageStore sharedStore] saveImages:self.selectedImages];
-        else
-            [[YNImageStore sharedStore] saveImages:self.editedImages];
+        if (_isCamera)
+            [[YNImageStore sharedStore]setImage:[self.editedImages firstObject] forKey:[self.selectedImagesNames firstObject]];
+        else {
+            if (self.selectedImages)
+                [[YNImageStore sharedStore] saveImages:self.selectedImages];
+            else
+                [[YNImageStore sharedStore] saveImages:self.editedImages];
+        }
     } else {
         if (self.selectedImages) {
             [[YNImageStore sharedStore] saveImages:self.selectedImages];

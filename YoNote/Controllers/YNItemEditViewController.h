@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSArray *imagesNames;
 @property (nonatomic, strong) YNItem *item;
 @property (nonatomic) id<YNItemEditViewDelegate> delegate;
+@property (nonatomic) BOOL isCamera;
 
 - (instancetype)initForNewItem:(BOOL)isNew;
 

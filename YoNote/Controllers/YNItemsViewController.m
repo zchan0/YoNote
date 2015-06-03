@@ -7,13 +7,13 @@
 //
 
 #import "YNItemsViewController.h"
-#import "RDVTabBarController.h"
 #import "YNItemDetailViewController.h"
 #import "YNItemEditViewController.h"
 #import "YNItemCell.h"
 #import "YNItemStore.h"
 #import "YNImageStore.h"
-#import <CTAssetsPickerController.h>
+#import "RDVTabBarController.h"
+#import "CTAssetsPickerController.h"
 
 #define iPad  UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 
@@ -94,21 +94,27 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     UINavigationItem *navItem = self.navigationItem;
     navItem.title = @"首页";
     
-    UIImage *leftImage = [UIImage imageNamed:@"navi_search"];
+    //UIImage *leftImage = [UIImage imageNamed:@"navi_search"];
     UIImage *rightImage = [UIImage imageNamed:@"navi_add"];
-    
+    /*
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
     [leftButton setBackgroundImage:leftImage forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(searchItem:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
-    navItem.leftBarButtonItem = leftBarItem;
+    navItem.leftBarButtonItem = leftBarItem;*/
     
     UIButton * rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
     [rightButton setBackgroundImage:rightImage forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(addNewItem:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
     navItem.rightBarButtonItem = rightBarItem;
-        
+    
+    if (iPad) {
+        UIBarButtonItem *camaraButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(openCamera)];
+        camaraButton.tintColor = [UIColor whiteColor];
+        navItem.leftBarButtonItem = camaraButton;
+    }
+    
 }
 
 - (void)refreshData {
@@ -128,7 +134,6 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
         // actionSheet弹出位置
         [actionSheet showFromRect:self.view.bounds inView:self.view animated:YES];
     }
-    
 }
 
 - (IBAction)searchItem:(id)sender {
@@ -201,7 +206,6 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     }
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     YNItemDetailViewController *detailViewController = [[YNItemDetailViewController alloc]init];
@@ -215,34 +219,14 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     return kItemTableCellHeight;
 }
 
-#pragma mark - Camera
+#pragma mark - Take Pictures
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     switch (buttonIndex) {
         case 0:
         {
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-                picker.delegate = self;
-                picker.allowsEditing = YES;
-                picker.sourceType = UIImagePickerControllerSourceTypeCamera;//UIImagePicker选择器的类型，UIImagePickerControllerSourceTypeCamera调用系统相机
-                //[self presentViewController:picker animated:YES completion:nil];
-                if([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0)
-                {
-                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                        
-                        [self presentViewController:picker animated:NO completion:nil];
-                    }];
-                }
-                else{
-                    [self presentViewController:picker animated:NO completion:nil];
-                }
-            }
-            else{
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"哎呀，当前设备没有摄像头。" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alertView show];
-            }
+            [self openCamera];
             break;
         }
         case 1:
@@ -253,59 +237,6 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
         default:
             break;
     }
-}
-
-- (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets {
-    
-    for (ALAsset *asset in assets) {
-        [self.selectedImagesNames addObject:[[asset defaultRepresentation] filename]];
-    }
-    
-    YNItemEditViewController *itemEditViewController = [[YNItemEditViewController alloc]initForNewItem:YES];
-    self.selectedImages = [NSMutableArray arrayWithArray:assets];
-    itemEditViewController.images = [NSArray arrayWithArray:self.selectedImages];
-    itemEditViewController.imagesNames = [NSArray arrayWithArray:self.selectedImagesNames];
-    itemEditViewController.delegate = self;
-    
-    YNItem *newItem = [[YNItemStore sharedStore]createItem];
-    itemEditViewController.item = newItem;
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:itemEditViewController];
-    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-    
-    [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    
-    [self presentViewController:navController animated:YES completion:nil];
-}
-
-- (BOOL)assetsPickerController:(CTAssetsPickerController *)picker isDefaultAssetsGroup:(ALAssetsGroup *)group
-{
-    // Set All Photos as default album and it will be shown initially.
-    return ([[group valueForProperty:ALAssetsGroupPropertyType] integerValue] == ALAssetsGroupSavedPhotos);
-}
-
-#pragma mark - Private Methods
-
-- (void)isHomePage {
-    if ([self.navigationItem.title isEqualToString:@"首页"])
-        _isHome = YES;
-    else
-        _isHome = NO;
-}
-
-- (NSArray *)tagsSetToArray:(NSSet *)set {
-    NSMutableArray *array = [NSMutableArray array];
-    for (YNTag *element in set) {
-        [array addObject:element.tag];
-    }
-    return array;
-}
-
-- (NSArray *)imagesSetToArray:(NSSet *)set {
-    NSMutableArray *array = [NSMutableArray array];
-    for (YNImage *element in set) {
-        [array addObject:element.imageName];
-    }
-    return array;
 }
 
 - (void)pickAssets
@@ -333,6 +264,119 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
         [self presentViewController:picker animated:YES completion:nil];
     }
 }
+
+- (void)openCamera {
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        
+        if([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0)
+        {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                
+                [self presentViewController:picker animated:NO completion:nil];
+            }];
+        }
+        else{
+            [self presentViewController:picker animated:NO completion:nil];
+        }
+    }
+    else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"哎呀，当前设备没有摄像头。" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alertView show];
+    }
+    
+}
+
+- (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets {
+    
+    for (ALAsset *asset in assets) {
+        [self.selectedImagesNames addObject:[[asset defaultRepresentation] filename]];
+    }
+    self.selectedImages = [NSMutableArray arrayWithArray:assets];
+    
+    YNItemEditViewController *itemEditViewController = [self getItemEditViewController:NO];
+    
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:itemEditViewController];
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    
+    [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    
+    [self presentViewController:navController animated:YES completion:nil];
+}
+
+- (BOOL)assetsPickerController:(CTAssetsPickerController *)picker isDefaultAssetsGroup:(ALAssetsGroup *)group {
+    // Set All Photos as default album and it will be shown initially.
+    return ([[group valueForProperty:ALAssetsGroupPropertyType] integerValue] == ALAssetsGroupSavedPhotos);
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    // Get picked image from info dictionary
+    UIImage *image  = info[UIImagePickerControllerEditedImage];
+    self.selectedImages = [NSMutableArray arrayWithArray:@[image]];
+    self.selectedImagesNames = [NSMutableArray arrayWithArray:@[[self getUUID]]];
+    YNItemEditViewController *itemEditViewController = [self getItemEditViewController:YES];
+    
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:itemEditViewController];
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    
+    [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    
+    [self presentViewController:navController animated:YES completion:nil];
+}
+
+- (YNItemEditViewController *)getItemEditViewController: (BOOL)isCamera {
+    
+    YNItemEditViewController *itemEditViewController = [[YNItemEditViewController alloc]initForNewItem:YES];
+    itemEditViewController.images = [NSArray arrayWithArray:self.selectedImages];
+    itemEditViewController.imagesNames = [NSArray arrayWithArray:self.selectedImagesNames];
+    itemEditViewController.delegate = self;
+    itemEditViewController.isCamera = isCamera;
+    
+    YNItem *newItem = [[YNItemStore sharedStore]createItem];
+    itemEditViewController.item = newItem;
+    
+    return itemEditViewController;
+}
+
+#pragma mark - Private Methods
+
+- (void)isHomePage {
+    if ([self.navigationItem.title isEqualToString:@"首页"])
+        _isHome = YES;
+    else
+        _isHome = NO;
+}
+
+- (NSArray *)tagsSetToArray:(NSSet *)set {
+    NSMutableArray *array = [NSMutableArray array];
+    for (YNTag *element in set) {
+        [array addObject:element.tag];
+    }
+    return array;
+}
+
+- (NSArray *)imagesSetToArray:(NSSet *)set {
+    NSMutableArray *array = [NSMutableArray array];
+    for (YNImage *element in set) {
+        [array addObject:element.imageName];
+    }
+    return array;
+}
+
+- (NSString *)getUUID
+{
+    // Create an NSUUID object - and get its string representation
+    NSUUID *uuid = [[NSUUID alloc] init];
+    NSString *key = [uuid UUIDString];
+    return key;
+}
+
+
 
 
 @end
