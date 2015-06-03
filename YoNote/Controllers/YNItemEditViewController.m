@@ -74,6 +74,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [self registerForKeyboardNotifications];
     [self.editTextView becomeFirstResponder];
+    [self addBadges];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -142,8 +143,7 @@
     if (self.toolbar.dateAlarmed != nil)
         [self addNumberOnButton:self.toolbar.dateAlarmedButton withDate:self.toolbar.dateAlarmed];
     
-    if (self.toolbar.tags.count > 0)
-        [self.toolbar addBadges:self.toolbar.tagsButton withNumber:self.toolbar.tags.count];
+    [self addBadges];
     
     [self.view addSubview:self.editTextView];
     
@@ -163,7 +163,6 @@
             image = [[YNImageStore sharedStore]getfullResolutionImage:asset];
         }
     }
-    [self.toolbar addBadges:self.toolbar.imageButton withNumber:self.editedImages.count];
     [self.toolbar.imageButton setBackgroundImage:image forState:UIControlStateNormal];
 }
 
@@ -173,6 +172,18 @@
     [onButton setTitle:[_formatter stringFromDate:date] forState:UIControlStateNormal];
     //[onButton setTitleColor:UIColorFromRGB(0x3CA9D2) forState:UIControlStateNormal];
     _formatter.dateFormat = kDateFormat;
+}
+
+- (void)addBadges {
+    if (self.toolbar.tags.count > 0)
+        [self.toolbar addBadges:self.toolbar.tagsButton withNumber:self.toolbar.tags.count];
+    NSUInteger imageCount;
+    if (self.selectedImages)
+        imageCount = self.selectedImages.count;
+    else if (self.editedImages)
+        imageCount = self.editedImages.count;
+    [self.toolbar addBadges:self.toolbar.imageButton withNumber:imageCount];
+        
 }
 
 #pragma mark - IBActions

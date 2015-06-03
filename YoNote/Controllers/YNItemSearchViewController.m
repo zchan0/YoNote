@@ -138,6 +138,7 @@
                 } else {
                     NSLog(@"添加tags失败");
                 }
+                self.searchItemToolbar.tags = self.tagResults;
      }];
 }
 

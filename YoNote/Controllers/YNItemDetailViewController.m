@@ -12,7 +12,7 @@
 #import "RDVTabBarController.h"
 #import "YNItemStore.h"
 
-@interface YNItemDetailViewController ()
+@interface YNItemDetailViewController ()<YNItemEditViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak)   IBOutlet UIVisualEffectView *visualEffectView;
@@ -103,6 +103,7 @@
 - (IBAction)Edit:(id)sender {
     YNItemEditViewController *editViewController = [[YNItemEditViewController alloc]initForNewItem:NO];
     editViewController.item = _item;
+    editViewController.delegate = self;
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:editViewController];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navController animated:YES completion:nil];
@@ -125,5 +126,12 @@
     return array;
 }
 
+- (void)refreshData {
+    _images = [[YNItemStore sharedStore]getImagesByItem:_item];
+    UIImage *image = [[YNImageStore sharedStore]imageForKey:[[_images firstObject] imageName]];
+    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.imageView.image = image;
+    [self customTextArea];
+}
 
 @end
