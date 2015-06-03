@@ -36,4 +36,6 @@
 
 @property (nonatomic) id<YNItemEditToolbarDelegate> delegate;
 
+- (void)addBadges:(UIButton *)onButton withNumber:(NSUInteger)number;
+
 @end

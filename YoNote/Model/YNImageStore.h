@@ -16,7 +16,6 @@
 
 + (instancetype)sharedStore;
 
-
 - (void)saveImages:(NSArray *)assets;
 - (void)setImage:(UIImage *)image forKey:(NSString *)key;
 - (void)deleteImageForKey:(NSString *)key;
@@ -25,7 +24,6 @@
 - (UIImage *)imageForKey:(NSString *)key;
 - (UIImage *)setThumbnailFromImage:(UIImage *)image newRect:(CGRect)newRect;
 - (UIImage *)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
-
 - (NSArray *)getImageNames:(NSArray *)assets;
 
 

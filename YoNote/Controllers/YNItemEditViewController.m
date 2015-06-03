@@ -139,9 +139,12 @@
     
     [self addImagesOnButton];
     
-    if (self.toolbar.dateAlarmed != nil) {
+    if (self.toolbar.dateAlarmed != nil)
         [self addNumberOnButton:self.toolbar.dateAlarmedButton withDate:self.toolbar.dateAlarmed];
-    }
+    
+    if (self.toolbar.tags.count > 0)
+        [self.toolbar addBadges:self.toolbar.tagsButton withNumber:self.toolbar.tags.count];
+    
     [self.view addSubview:self.editTextView];
     
 }
@@ -160,6 +163,7 @@
             image = [[YNImageStore sharedStore]getfullResolutionImage:asset];
         }
     }
+    [self.toolbar addBadges:self.toolbar.imageButton withNumber:self.editedImages.count];
     [self.toolbar.imageButton setBackgroundImage:image forState:UIControlStateNormal];
 }
 
@@ -415,7 +419,7 @@
     localNotif.alertTitle = @"Yo";
     
     localNotif.soundName = UILocalNotificationDefaultSoundName;
-    localNotif.applicationIconBadgeNumber = 1;
+    localNotif.applicationIconBadgeNumber += 1;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
 }
