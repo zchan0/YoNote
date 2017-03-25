@@ -293,7 +293,7 @@
     
     picker.selectedAssets       = [NSMutableArray arrayWithArray:_selectedImages];
     // Set navigation bar's tint color
-    picker.childNavigationController.navigationBar.tintColor = [UIColor whiteColor];
+    picker.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     // iPad
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
