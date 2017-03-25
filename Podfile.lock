@@ -1,22 +1,25 @@
 PODS:
-  - CTAssetsPickerController (2.9.3)
-  - FXBlurViewConvertToARGB8888 (2.0.1)
-  - HSDatePickerViewController (1.0.1)
-  - PureLayout (2.0.6)
+  - CTAssetsPickerController (3.3.1):
+    - PureLayout (~> 3.0.0)
+  - FXBlurView (1.6.4)
+  - HSDatePickerViewController (1.0.4)
+  - PureLayout (3.0.2)
   - RDVTabBarController (1.1.9)
 
 DEPENDENCIES:
-  - CTAssetsPickerController (~> 2.9.0)
-  - FXBlurViewConvertToARGB8888 (~> 2.0.1)
-  - HSDatePickerViewController (~> 1.0)
-  - PureLayout (~> 2.0.6)
-  - RDVTabBarController (~> 1.1.9)
+  - CTAssetsPickerController (~> 3.3.0)
+  - FXBlurView
+  - HSDatePickerViewController (~> 1.0.1)
+  - PureLayout
+  - RDVTabBarController
 
 SPEC CHECKSUMS:
-  CTAssetsPickerController: 56a4a228dcb48a9375ab8d4922e82ac74af74aa1
-  FXBlurViewConvertToARGB8888: 566c4e7955ee835976b9c25a8d9e5fc0bb0bac8a
-  HSDatePickerViewController: b292f2a53b2644a68aa5e1343053d2f3554de64c
-  PureLayout: f25f0bb904d5ccfe6e31da3cb869185259f02e0d
+  CTAssetsPickerController: b1d1d50ab87cf6b8b13531de5f4530482e7e53ed
+  FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
+  HSDatePickerViewController: 5a72b71f8c3b10e76f2c28a898f8572b551432a6
+  PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   RDVTabBarController: 67794f7a7a37f8e32f046f85ac67d06ab92d624a
 
-COCOAPODS: 0.37.0
+PODFILE CHECKSUM: 8f4f9fdce5a281278386d70922445affd8acd63e
+
+COCOAPODS: 1.2.0

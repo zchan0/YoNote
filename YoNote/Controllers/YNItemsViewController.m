@@ -15,7 +15,7 @@
 #import "RDVTabBarController.h"
 #import "CTAssetsPickerController.h"
 
-#define iPad  UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+#define isIPad  UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 
 static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
@@ -109,7 +109,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
     navItem.rightBarButtonItem = rightBarItem;
     
-    if (iPad) {
+    if (isIPad) {
         UIBarButtonItem *camaraButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(openCamera)];
         camaraButton.tintColor = [UIColor whiteColor];
         navItem.leftBarButtonItem = camaraButton;
@@ -126,7 +126,7 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
 
 - (IBAction)addNewItem:(id)sender {
     
-    if (iPad) {
+    if (isIPad) {
         [self pickAssets];
     } else {
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"相册",nil];
@@ -246,15 +246,15 @@ static NSString *YNItemCellIndentifier = @"YNItemCellIdentifier";
     }
     
     CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
-    picker.assetsFilter         = [ALAssetsFilter allAssets];
-    picker.showsCancelButton    = !iPad;
+    picker.defaultAssetCollection = PHAssetCollectionSubtypeSmartAlbumUserLibrary;
+    picker.showsCancelButton    = !(isIPad);
     picker.delegate             = self;
     picker.selectedAssets       = [NSMutableArray arrayWithArray:self.selectedImages];
     // Set navigation bar's tint color
-    picker.childNavigationController.navigationBar.tintColor = [UIColor whiteColor];
+    picker.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     // iPad
-    if (iPad) {
+    if (isIPad) {
         self.popover = [[UIPopoverController alloc] initWithContentViewController:picker];
         self.popover.delegate = self;
         [self.popover presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem
