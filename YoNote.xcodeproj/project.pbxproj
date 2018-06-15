@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1279A17EEC1D9D239AFC2FEE /* libPods-YoNoteTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5DEF72E2D4EF9232004F93 /* libPods-YoNoteTests.a */; };
+		4FBE2BD9D192E7D4249FD627 /* libPods-YoNoteTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD21F82DD4DA7D6144ABF7F /* libPods-YoNoteTests.a */; };
+		8F055BEE2EE756EFA39C7D29 /* libPods-YoNote.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43922CD376FC3037ABB3659B /* libPods-YoNote.a */; };
 		950CEBFD1B1038C400B00945 /* YoNote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 950CEBFB1B1038C400B00945 /* YoNote.xcdatamodeld */; };
 		95255F891B16FF6800B1DAE3 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95255F881B16FF6800B1DAE3 /* TestViewController.m */; };
 		95255F8B1B18B5BF00B1DAE3 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95255F8A1B18B5BF00B1DAE3 /* AssetsLibrary.framework */; };
@@ -46,7 +47,6 @@
 		95E63F601B1DF1EF004E45B9 /* YNAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E63F5F1B1DF1EF004E45B9 /* YNAboutViewController.m */; };
 		95E63F621B1DF36C004E45B9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E63F611B1DF36C004E45B9 /* MessageUI.framework */; };
 		95EC8A911AFF69CE00C68D2B /* YNItemEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95EC8A901AFF69CE00C68D2B /* YNItemEditViewController.m */; };
-		9EF1735671B09E7B3902AE05 /* libPods-YoNote.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C4F69914B2D1D6C196E64BC /* libPods-YoNote.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,12 +60,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0C4F69914B2D1D6C196E64BC /* libPods-YoNote.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YoNote.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		23F2DA40AC6178DE684E09C8 /* Pods-YoNoteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YoNoteTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YoNoteTests/Pods-YoNoteTests.release.xcconfig"; sourceTree = "<group>"; };
-		3F5DEF72E2D4EF9232004F93 /* libPods-YoNoteTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YoNoteTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		43A9234ECD57DAB9146FC995 /* Pods-YoNoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YoNoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YoNoteTests/Pods-YoNoteTests.debug.xcconfig"; sourceTree = "<group>"; };
-		82459D06C4480A3F2462BFB6 /* Pods-YoNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YoNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-YoNote/Pods-YoNote.release.xcconfig"; sourceTree = "<group>"; };
-		919B1184521300CC0FEEA766 /* Pods-YoNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YoNote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YoNote/Pods-YoNote.debug.xcconfig"; sourceTree = "<group>"; };
+		18DA2D0DB99CCBC756B0BB51 /* Pods-YoNoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YoNoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YoNoteTests/Pods-YoNoteTests.debug.xcconfig"; sourceTree = "<group>"; };
+		43922CD376FC3037ABB3659B /* libPods-YoNote.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YoNote.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8409DC2A0721E093A3DE78C4 /* Pods-YoNoteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YoNoteTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YoNoteTests/Pods-YoNoteTests.release.xcconfig"; sourceTree = "<group>"; };
+		92611CA11C0874DF6AF150EE /* Pods-YoNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YoNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-YoNote/Pods-YoNote.release.xcconfig"; sourceTree = "<group>"; };
 		950CEBFC1B1038C400B00945 /* YoNote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YoNote.xcdatamodel; sourceTree = "<group>"; };
 		95255F871B16FF6800B1DAE3 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestViewController.h; path = Controllers/TestViewController.h; sourceTree = "<group>"; };
 		95255F881B16FF6800B1DAE3 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestViewController.m; path = Controllers/TestViewController.m; sourceTree = "<group>"; };
@@ -137,6 +135,8 @@
 		95E63F611B1DF36C004E45B9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		95EC8A8F1AFF69CE00C68D2B /* YNItemEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YNItemEditViewController.h; path = Controllers/YNItemEditViewController.h; sourceTree = "<group>"; };
 		95EC8A901AFF69CE00C68D2B /* YNItemEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YNItemEditViewController.m; path = Controllers/YNItemEditViewController.m; sourceTree = "<group>"; };
+		A78145C9F40FFD44C8BD81C1 /* Pods-YoNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YoNote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YoNote/Pods-YoNote.debug.xcconfig"; sourceTree = "<group>"; };
+		BDD21F82DD4DA7D6144ABF7F /* libPods-YoNoteTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YoNoteTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +147,7 @@
 				9572372B1B1EAD00000DD843 /* CoreText.framework in Frameworks */,
 				95E63F621B1DF36C004E45B9 /* MessageUI.framework in Frameworks */,
 				95255F8B1B18B5BF00B1DAE3 /* AssetsLibrary.framework in Frameworks */,
-				9EF1735671B09E7B3902AE05 /* libPods-YoNote.a in Frameworks */,
+				8F055BEE2EE756EFA39C7D29 /* libPods-YoNote.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,24 +155,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1279A17EEC1D9D239AFC2FEE /* libPods-YoNoteTests.a in Frameworks */,
+				4FBE2BD9D192E7D4249FD627 /* libPods-YoNoteTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2162E9165391CE76E767C02B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				919B1184521300CC0FEEA766 /* Pods-YoNote.debug.xcconfig */,
-				82459D06C4480A3F2462BFB6 /* Pods-YoNote.release.xcconfig */,
-				43A9234ECD57DAB9146FC995 /* Pods-YoNoteTests.debug.xcconfig */,
-				23F2DA40AC6178DE684E09C8 /* Pods-YoNoteTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		923D414B370563984C9B8FC4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,8 +170,8 @@
 				95255F8E1B19E76200B1DAE3 /* MobileCoreServices.framework */,
 				95255F8C1B19E75900B1DAE3 /* ImageIO.framework */,
 				95255F8A1B18B5BF00B1DAE3 /* AssetsLibrary.framework */,
-				0C4F69914B2D1D6C196E64BC /* libPods-YoNote.a */,
-				3F5DEF72E2D4EF9232004F93 /* libPods-YoNoteTests.a */,
+				43922CD376FC3037ABB3659B /* libPods-YoNote.a */,
+				BDD21F82DD4DA7D6144ABF7F /* libPods-YoNoteTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -250,7 +239,7 @@
 				957DC3281AF99FF600DA8D6A /* YoNoteTests */,
 				957DC30D1AF99FF600DA8D6A /* Products */,
 				923D414B370563984C9B8FC4 /* Frameworks */,
-				2162E9165391CE76E767C02B /* Pods */,
+				EA9292944D3D69F115A30212 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -389,6 +378,17 @@
 			name = TabBar;
 			sourceTree = "<group>";
 		};
+		EA9292944D3D69F115A30212 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A78145C9F40FFD44C8BD81C1 /* Pods-YoNote.debug.xcconfig */,
+				92611CA11C0874DF6AF150EE /* Pods-YoNote.release.xcconfig */,
+				18DA2D0DB99CCBC756B0BB51 /* Pods-YoNoteTests.debug.xcconfig */,
+				8409DC2A0721E093A3DE78C4 /* Pods-YoNoteTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -396,12 +396,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 957DC32F1AF99FF600DA8D6A /* Build configuration list for PBXNativeTarget "YoNote" */;
 			buildPhases = (
-				3F4B68E425A407FE9FDBD53F /* [CP] Check Pods Manifest.lock */,
+				17CAABAFDE7F31D88078CAAE /* [CP] Check Pods Manifest.lock */,
 				957DC3081AF99FF600DA8D6A /* Sources */,
 				957DC3091AF99FF600DA8D6A /* Frameworks */,
 				957DC30A1AF99FF600DA8D6A /* Resources */,
-				11D4BFBC112AE1B2385DF526 /* [CP] Embed Pods Frameworks */,
-				2151E12E426C3BB317EBD97A /* [CP] Copy Pods Resources */,
+				BC87B243F5C70F1F760B476E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -416,12 +415,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 957DC3321AF99FF600DA8D6A /* Build configuration list for PBXNativeTarget "YoNoteTests" */;
 			buildPhases = (
-				00EFF5776CF594FAB746281A /* [CP] Check Pods Manifest.lock */,
+				06039E41CC193D9A6306A942 /* [CP] Check Pods Manifest.lock */,
 				957DC3211AF99FF600DA8D6A /* Sources */,
 				957DC3221AF99FF600DA8D6A /* Frameworks */,
 				957DC3231AF99FF600DA8D6A /* Resources */,
-				FE3C12AD30910898D76A1573 /* [CP] Embed Pods Frameworks */,
-				23A756D27AD5A73597FC4DCE /* [CP] Copy Pods Resources */,
+				98CDFF715505E9391739BC02 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -439,7 +437,7 @@
 		957DC3041AF99FF600DA8D6A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = Zchan;
 				TargetAttributes = {
 					957DC30B1AF99FF600DA8D6A = {
@@ -494,94 +492,80 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		00EFF5776CF594FAB746281A /* [CP] Check Pods Manifest.lock */ = {
+		06039E41CC193D9A6306A942 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YoNoteTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		11D4BFBC112AE1B2385DF526 /* [CP] Embed Pods Frameworks */ = {
+		17CAABAFDE7F31D88078CAAE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YoNote-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YoNote/Pods-YoNote-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2151E12E426C3BB317EBD97A /* [CP] Copy Pods Resources */ = {
+		98CDFF715505E9391739BC02 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-YoNoteTests/Pods-YoNoteTests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/CTAssetsPickerController/CTAssetsPickerController.bundle",
+				"${PODS_ROOT}/HSDatePickerViewController/HSDatePickerViewControllerDemo/HSDatePickerViewController/HSDatePickerViewController.xib",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YoNote/Pods-YoNote-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		23A756D27AD5A73597FC4DCE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CTAssetsPickerController.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HSDatePickerViewController.nib",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YoNoteTests/Pods-YoNoteTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3F4B68E425A407FE9FDBD53F /* [CP] Check Pods Manifest.lock */ = {
+		BC87B243F5C70F1F760B476E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-YoNote/Pods-YoNote-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/CTAssetsPickerController/CTAssetsPickerController.bundle",
+				"${PODS_ROOT}/HSDatePickerViewController/HSDatePickerViewControllerDemo/HSDatePickerViewController/HSDatePickerViewController.xib",
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CTAssetsPickerController.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HSDatePickerViewController.nib",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		FE3C12AD30910898D76A1573 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YoNoteTests/Pods-YoNoteTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YoNote/Pods-YoNote-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -660,14 +644,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -707,14 +699,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -741,7 +741,7 @@
 		};
 		957DC3301AF99FF600DA8D6A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 919B1184521300CC0FEEA766 /* Pods-YoNote.debug.xcconfig */;
+			baseConfigurationReference = A78145C9F40FFD44C8BD81C1 /* Pods-YoNote.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "YoNote/YoNote-Prefix.pch";
@@ -754,7 +754,7 @@
 		};
 		957DC3311AF99FF600DA8D6A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82459D06C4480A3F2462BFB6 /* Pods-YoNote.release.xcconfig */;
+			baseConfigurationReference = 92611CA11C0874DF6AF150EE /* Pods-YoNote.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "YoNote/YoNote-Prefix.pch";
@@ -767,7 +767,7 @@
 		};
 		957DC3331AF99FF600DA8D6A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43A9234ECD57DAB9146FC995 /* Pods-YoNoteTests.debug.xcconfig */;
+			baseConfigurationReference = 18DA2D0DB99CCBC756B0BB51 /* Pods-YoNoteTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -788,7 +788,7 @@
 		};
 		957DC3341AF99FF600DA8D6A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 23F2DA40AC6178DE684E09C8 /* Pods-YoNoteTests.release.xcconfig */;
+			baseConfigurationReference = 8409DC2A0721E093A3DE78C4 /* Pods-YoNoteTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

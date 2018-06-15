@@ -7,11 +7,19 @@ PODS:
   - RDVTabBarController (1.1.9)
 
 DEPENDENCIES:
-  - CTAssetsPickerController (~> 3.3.0)
+  - CTAssetsPickerController
   - FXBlurView
   - HSDatePickerViewController (~> 1.0.1)
   - PureLayout
   - RDVTabBarController
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CTAssetsPickerController
+    - FXBlurView
+    - HSDatePickerViewController
+    - PureLayout
+    - RDVTabBarController
 
 SPEC CHECKSUMS:
   CTAssetsPickerController: b1d1d50ab87cf6b8b13531de5f4530482e7e53ed
@@ -20,6 +28,6 @@ SPEC CHECKSUMS:
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   RDVTabBarController: 67794f7a7a37f8e32f046f85ac67d06ab92d624a
 
-PODFILE CHECKSUM: 8f4f9fdce5a281278386d70922445affd8acd63e
+PODFILE CHECKSUM: 8782814d8f21adfa56ac4b90c9ce4e9633000b43
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.5.3
